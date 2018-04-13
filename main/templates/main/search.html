@@ -1,0 +1,896 @@
+{% extends 'main/base.html' %}
+
+{% block inlinestyle %}
+	<style>
+
+    div.affix {
+        top: 0px;
+        position: fixed !important ;
+       }
+
+      .slick-prev:before, .slick-next:before{
+        color:black;
+      }
+
+      .overlay {
+          position: absolute;
+          bottom: 20px;
+          left: 0;
+          right: 0;
+          background-color: #000;
+          opacity: 0.7;
+          overflow: hidden;
+          width: 100%;
+          height: 0;
+          transition: .5s ease;
+        }
+
+.swiper-slide:hover .overlay{
+  height: 80%;
+}
+
+.text {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+    
+   
+
+       @media (max-width:1700px) and (min-width:1200px) {
+        .col-lg-7{
+          width:50%;
+        }
+
+        .col-lg-5{
+          width:50%;
+        }
+
+      }
+</style>
+{% endblock %}
+{% block styles %}
+	 <link rel="stylesheet" type="text/css" href="http://test.sagecapitals.com/css/property.css">
+{% endblock %}
+{% block content %}
+<section class="mapSection">
+	 <div class="container-fluid" style="">
+	<div class="row">
+	<div class=" col-md-7 col-lg-7 col-sm-7 col-xs-12  hidden-xs hidden-xs" style="padding-right: 0px; padding-left: 0px;">
+		<div data-spy="affix"  data-offset-bottom="1300" class="mapstuff" id="map" style="height: 1000px; "></div>
+	</div>
+
+	<div class=" col-md-5  col-lg-5 col-sm-5 col-xs-12 listings" style="min-height: 1000px;">
+
+  <div class="fixedBar">
+    <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8 col-xs-8"><h2 class="areaName">Central Business District </h2></div>
+      <div class="col-md-4 col-xs-4"><p class="propsFound">14 Homes For Sale.</p></div>
+    </div>
+    <div class="row fixedBarFormRow">
+      <div class="col-lg-12 col-md-12">
+        <form class="form-inline">
+        <label for="price">Price</label>
+        <select class="form-control">
+          <option selected="selected">No Min</option>
+          <option value="">₦100K</option>
+          <option>₦200K</option>
+          <option>₦300K</option>
+          <option>₦400K</option>
+          <option>₦500K</option>
+        </select>
+        <span class="hidden-xs">to</span>
+
+        <select class="form-control">
+          <option selected="selected">No Max</option>
+          <option value="">₦100K</option>
+          <option>₦500K</option>
+          <option>₦600K</option>
+          <option>₦700K</option>
+          <option>₦800K+</option>
+        </select>
+
+      </form>
+      </div> 
+
+    </div>
+    <div class="container-fluid">
+      <div class="row tabRow text-justify">
+      <div class="col-md-12">
+        <div class="row">
+          <span class="span-active"><a href="#">Homes for you</a></span> <span style="float:right"><a class="js_filter" href="#" style="color:blue">More Filter</a></span>
+        </div>
+      </div>
+      <div class="col-md-3">
+      </div>
+          </div>
+    </div>
+    <div class="form-section" >
+      <form class="form" id="filterform" action="/search/", method="post">
+        {% csrf_token %}
+      <div class="row">
+          <div class="col-md-3 col-lg-3">
+              <div class="form-group">
+                <label class="bed">Bed</label>
+               <select name="min-bedroom" id="min_bedroom" placeholder="No Min" operator=">"  class="form-control js_filter_item">
+                <option value="" >No min</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+              </div>
+          </div>
+
+          <div class="col-md-3 col-lg-3">
+              <div class="form-group">
+                <label class="bed">&nbsp;</label>
+               <select name="max-bedroom" operator="<" class="form-control js_filter_item">
+
+                <option value='' selected="selected">No max</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+              </div>
+          </div>
+      
+
+      <div class="col-md-3 col-lg-3">
+              <div class="form-group">
+                <label class="bed">Bath</label>
+               <select class="js_filter_item form-control" name="min-bathroom" operator=">" >
+               <option value='' selected="selected">No min</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+              </div>
+          </div>
+
+          <div class="col-md-3 col-lg-3">
+              <div class="form-group">
+                 <label class="bed">&nbsp;</label>
+               <select class="js_filter_item form-control" name="max-bathroom" operator="<" >
+                
+               <option value='' selected="selected">No max</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+              </div>
+          </div>
+    
+
+    </div>
+    
+    <div class="row" style="margin-bottom:20px;">
+      <div class="col-lg-12 col-md-12">
+        <label class="listing">Property Type</label><br>
+      </div>
+      <div class="col-md-3 col-lg-3">
+              <div class="form-group">
+                 <label class="bed">&nbsp;</label>
+               <select class="js_filter_item form-control" name="type-property_type" operator=":" >
+                <option value='' selected="selected">Property Type</option>
+                <option value="land">Land</option>
+                <option value="house">House</option>
+                
+              </select>
+              </div>
+          </div>
+    </div>
+
+    <!--div class="row">
+      <div class="col-lg-12 col-md-12">
+        <label class="listing">Listing Status</label>
+        <br>
+        <label class="bed" style="position: relative; top: -15px; margin-right: 30px;">For Sale</label>
+
+        <label class="switch">
+          <input type="checkbox" checked>
+          <span class="slider round"></span>
+        </label>
+        <br>
+        <label class="bed" style="position: relative; top: -15px; margin-right: 55px;">Sold</label>
+
+        <label class="switch">
+          <input type="checkbox">
+          <span class="slider round"></span>
+        </label>
+
+        <select class="form-control " style="float:right; width:120px; position: relative; top: 15px;">
+          <option selected="selected">Last 3 Month</option>
+          <option value="">1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+        <hr>
+      </div>
+
+    </div-->
+
+    <div class="row">
+      <div class="col-lg-12">
+        <label class="listing" >Property Facts</label>
+        <br>
+      </div>
+
+           <div class="col-md-3 col-lg-3">
+              <div class="form-group">
+                <label class="bed">Lot Size</label>
+               <select name="min-lot_size" class="form-control js_filter_item" operator=">">
+                <option value='' selected="selected">No min</option>
+                <option value="1">1 Acres</option>
+                <option value="2">2 Acres</option>
+                <option value="3">3 Acres</option>
+                <option value="4">4 Acres</option>
+                <option value="5">5 Acres</option>
+              </select>
+              </div>
+          </div>
+
+          <div class="col-md-3 col-lg-3">
+              <div class="form-group">
+                 <label class="bed">&nbsp;</label>
+               <select name="max-lot_size" class="form-control js_filter_item" operator="<">
+                <option value='' selected="selected">No max</option>
+                <option value="1">1 Acres</option>
+                <option value="2">2 Acres</option>
+                <option value="3">3 Acres</option>
+                <option value="4">4 Acres</option>
+                <option value="5">5 Acres</option>
+              </select>
+              </div>
+          </div>
+
+
+          <div class="col-md-3 col-lg-3">
+              <div class="form-group">
+                <label class="">Square Feet</label>
+               <select name="min-area" class="form-control js_filter_item" operator=">">
+                <option value='' selected="selected">No min</option>
+                <option value="500">500</option>
+                <option value="1000">1000</option>
+                <option value="2000">2000</option>
+                <option value="3000">3000</option>
+                <option value="4000">4000</option>
+              </select>
+              </div>
+          </div>
+
+          <div class="col-md-3 col-lg-3">
+              <div class="form-group">
+                <label class="bed">&nbsp;</label>
+               <select name="max-area" class="form-control js_filter_item" operator="<">
+
+                <option selected="selected">No min</option>
+                <option value="500">500</option>
+                <option value="1000">1000</option>
+                <option value="2000">2000</option>
+                <option value="3000">3000</option>
+                <option value="4000">4000</option>
+              </select>
+              </div>
+          </div>
+      
+
+         
+
+    </div>
+    <div class="row" style="margin-top: 50px;">
+
+          <div class="col-md-3 col-lg-3">
+              <div class="form-group">
+                <label class="bed">Year Built</label>
+               <select name="min-year_built" class="form-control js_filter_item" operator=">">
+                <option value='' selected="selected">No min</option>
+                
+                <option value="2018">2018</option>
+                <option value="2017">2017</option>
+                <option value="2016">2016</option>
+                <option value="2015">2015</option>
+              </select>
+              </div>
+          </div>
+
+          <div class="col-md-3 col-lg-3">
+              <div class="form-group">
+                <label class="bed">&nbsp;</label>
+               <select name="max-year_built" class="form-control js_filter_item" operator="<">
+
+                <option value='' selected="selected">No min</option>
+                
+                <option value="2018">2018</option>
+                <option value="2017">2017</option>
+                <option value="2016">2016</option>
+                <option value="2015">2015</option>
+              </select>
+              </div>
+          </div>
+      
+
+          <!--div class="col-md-6 col-md-6">
+              <div class="form-group">
+                <label class="bed">Max HOA Fees</label>
+               <select class="form-control">
+                <option selected="selected">No max</option>
+                <option value="">1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+              </div>
+          </div-->
+
+          <div class="col-lg-12 col-md-12">
+            <hr>
+          </div>
+
+    </div>
+    
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <label class="listing" >Home Amenities</label>
+      </div>
+        <br>
+        <div class="col-lg-3 col-md-3">
+            <div class="form-group">
+              <label class="bed">Parking Spaces</label>
+             <select name="max-parking_space" class="form-control">
+              <option value='' selected="selected">No max</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-3">
+            <div class="form-group">
+              <label class="bed">&nbsp;</label>
+             <select name="min-parking_space" class="form-control">
+              <option value='' selected="selected">No min</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+            </div>
+        </div>
+
+        <div class="col-lg-12 col-md-12">
+          <a data-toggle="collapse" href="#demo">Show More</a>
+            <div id="demo" class="collapse">
+              <div class="checkbox checkbox-primary">
+                  <input id="checkbox2" class="styled" type="checkbox" >
+                  <label for="checkbox2">
+                      Waterfront Only
+                  </label>
+              </div>
+              <div class="checkbox checkbox-primary">
+                  <input id="checkbox2" class="styled" type="checkbox" >
+                  <label for="checkbox2">
+                      Must Have Pool
+                  </label>
+              </div>
+              <div class="checkbox checkbox-primary">
+                  <input id="checkbox2" class="styled" type="checkbox" >
+                  <label for="checkbox2">
+                      Accesible Homes Only
+                  </label>
+              </div>
+              <div class="checkbox checkbox-primary">
+                  <input id="checkbox2" class="styled" type="checkbox" >
+                  <label for="checkbox2">
+                      Green Homes Only
+                  </label>
+              </div>
+            </div>
+        </div>
+
+     
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <button class="btn btn-primary" type="submit" style="float: right; background-color: #c82021; border:0px;">Apply Filter</button>
+      </div>
+    </div>
+  </form>
+  </div>
+
+  <div class=" lister sectionactive">
+  	
+
+  <div id="result">
+   {% include 'main/includes/result.html' %}
+ </div>
+    
+
+      
+      <div id="pagination">
+      
+         {% include 'main/includes/navigation.html' %}
+     </div>
+
+     <section class="whyavetiz container-fluid">
+      <hr>
+
+      <h4>Central Area Real Estate Facts</h4>
+      <div class="row">
+        <div class="col-md-6"><p>Total Properties for Sale: </p></div> <div class="col-md-6"><strong>{{no_of_properties_for_sales}}</strong></div>
+      </div>
+      <div class="row">
+        <div class="col-md-6"><p>Median Property Value Estimate: </p></div> <div class="col-md-6"><strong>₦{{median}}</strong></div>
+      </div>
+      <div class="row">
+        <!--div class="col-md-6"><p>Property Value Forecast: </p></div> <div class="col-md-6"><strong>0.1%</strong></div-->
+      </div>
+
+      <hr>
+      <h4>Average Home Value By City</h4>
+       {% for value in state_average %} 
+      <div class="row">
+        <div class="col-md-6"><p>{{value.city}} </p></div> <div class="col-md-6"><strong>₦{{value.price__avg|floatformat:"0"}}</strong></div>
+      </div>
+      {% endfor %}
+
+     
+      <hr>
+
+      <h4>Average Home Value By City in {{country}}</h4>
+      {% for value in country_average %} 
+      <div class="row">
+        <div class="col-md-6"><p>{{value.state}} </p></div> <div class="col-md-6"><strong>₦{{value.price__avg|floatformat:"0"}}</strong></div>
+      </div>
+      {% endfor %}
+
+    </section>
+
+      </div>
+     
+      
+
+   
+
+</div>
+  </div>
+
+  </div>
+  </div>
+  </section>
+
+  <section class="homePrices text-center">
+    <div class="container">
+      <div class="row">
+      <div class="col-sm-12">
+               <h2>Overview of Central Area Real Estate Trends</h2>
+      <small>Calculated using the past 30 days</small>
+            </div>
+          </div>
+    <div class="row">
+     <div class="col-md-12 ">
+      
+      <div class="row">
+        <div class="col-md-4 col-sm-6">
+          <!--h2>Home Prices in Central Area, Abuja</h2-->
+          <div class="slickshit">
+            <div class="cardBox ">
+             <div class="col-xs-10 text-left">
+              <span class="cpropertyType">1 Bedroom Homes</span>
+             </div>
+              <div class="col-xs-2 text-right"><i class="fa fa-info-circle fa-2x" aria-hidden="true"></i></div>
+              <div class="col-xs-12 text-left">
+               <span class="cListed">Listed Around:</span>
+              </div>
+              <div class="col-xs-12 priceBlock">
+              <span class="cpropertyPrice">₦{{one_bedroom_avergae_price.price__avg|default:'0'}}</span>
+              <button class="btn btn-default btn-block">See {{one_bedroom_count|default:'0'}} Homes</button>
+              </div>
+            </div>
+
+            <div class="cardBox">
+                <div class="col-xs-10 text-left">
+                <span class="cpropertyType">2 Bedroom Homes</span>
+               </div>
+                <div class="col-xs-2 text-right"><i class="fa fa-info-circle fa-2x" aria-hidden="true"></i></div>
+                <div class="col-xs-12 text-left">
+                 <span class="cListed">Listed Around:</span>
+                </div>
+                <div class="col-xs-12 priceBlock">
+                <span class="cpropertyPrice">₦{{two_bedroom_avergae_price.price__avg|default:'0'}}</span>
+                <button class="btn btn-default btn-block">See {{two_bedroom_count|default:'0'}} Homes</button>
+                </div>
+          </div>
+           <div class="cardBox">
+            <div class="col-xs-10 text-left">
+            <span class="cpropertyType">3+ Bedroom Homes</span>
+           </div>
+            <div class="col-xs-2 text-right"><i class="fa fa-info-circle fa-2x" aria-hidden="true"></i></div>
+            <div class="col-xs-12 text-left">
+             <span class="cListed">Listed Around:</span>
+            </div>
+            <div class="col-xs-12 priceBlock">
+            <span class="cpropertyPrice">₦{{three_bedroom_avergae_price.price__avg|default:'0'}}</span>
+            <button class="btn btn-default btn-block">See {{three_bedroom_count|default:'0'}} Homes</button>
+            </div>
+          </div>
+
+
+          </div>
+          
+        </div>
+        <div class="col-sm-1">
+        </div>
+        <div class="col-sm-7">
+          <div class="row">
+            
+
+          </div>
+        <div class="row">
+        <div class="col-sm-6">
+           <table class="table  stat text-justify">
+            <tbody>
+              <tr>
+                <td class="noborderTop">Median List Price</td>
+                <td class="text-right noborderTop"><strong>₦{{median}}</strong></td>
+              </tr>
+              <!--tr>
+                <td>Median List ₦/Sq Ft</td>
+                <td class="text-right"><strong>₦18K</strong></td>
+              </tr-->
+              <tr>
+                <td>Median Sale Price</td>
+                <td class="text-right"><strong>₦0</strong></td>
+              </tr>
+              <tr>
+                <td>Median Sale Price ₦/Sq Ft</td>
+                <td class="text-right"><strong>₦0</strong></td>
+              </tr>
+            </tbody>
+          </table>
+       </div>
+
+        <div class="col-sm-6">
+         <table class="table text-justify">
+            <tbody>
+              <!--tr>
+                <td class="noborderTop">Median Sale/List</td>
+                <td class="text-right noborderTop"><strong>95.5%</strong></td>
+              </tr-->
+              <!--tr>
+                <td>Avg. Number of Offers</td>
+                <td class="text-right"><strong>8</strong></td>
+              </tr-->
+              <!--tr>
+                <td>Avg. Down Payment</td>
+                <td class="text-right"><strong>49.5%</strong></td>
+              </tr-->
+              <!--tr>
+                <td>Number of Homes Sold</td>
+                <td class="text-right"><strong>0</strong></td>
+              </tr-->
+            </tbody>
+          </table>
+       </div>
+      </div>
+    </div>
+        
+      </div>
+
+      <!--div class="col-sm-10 col-sm-push-1">
+        <p class="cmoreInfo">The asking price of homes for sale in Central Area has increased 9.5% since June last year, while the number of homes for sale has increased 36.4%. <a href="">See more.</a></p>
+      </div-->
+
+
+      </div>
+      </div>
+    </div>  
+  </section>
+
+  
+
+<!--section class="jumbotron realEAgentsJumbo">
+  <div class="container-fluid">
+    <div class="row">
+     <div class="col-sm-5 col-sm-offset-2 eAgentsOverlay">
+      <div class="">
+      <div class="col-sm-12">
+        <h2>AvetiZ Real Estate Agents in Abuja</h2>
+        </div>
+        <div class="col-sm-11 col-sm-offset-1">
+         <div class="col-sm-4 colF">
+            <span class="boldNum">100</span><br><span class="recentD">Recent Deals in the Last Year</span>
+         </div>
+         <div class="col-sm-4 colF">
+           <span class="boldNum">4.9</span><br><span class="recentD">Avg. Customer Satisfaction</span>
+         </div>
+         <div class="col-sm-4">
+           <span class="boldNum">230</span><br><span class="recentD">Total Homes Closed</span>
+         </div>
+ 
+        </div>
+
+        <div class="col-sm-10 col-sm-offset-2">
+          <button class="btn btn-default btn-lg">Find an AvetiZ Real Estate Agent</button>
+        </div>
+        <div class="col-sm-12">
+          <p class="agentsnum">5 active AvetiZ agents in Abuja.</p>
+        </div>
+      </div>
+      </div>
+    </div>
+      </div>
+    </section-->
+
+    
+
+    <section class="placePhotos text-center">
+      <div class="container">
+       
+
+        <div class="row">
+        <div class="col-sm-12 ">
+          <div class="row">
+            <div class="col-sm-6">
+               <h3>Photos of Central Business District</h3>
+              <div class="touris swiper-container">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <img class="img-responsive" src="https://pp3.walk.sc/w640h460/production/103105_robert_f_wagner_junior_park_new_york.jpg">
+                    <div class="overlay">
+                      <div class="text"><h3>Aso Rock </h3><br><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu</p></div>
+                    </div>
+                </div>
+                
+                  <div class="swiper-slide">
+                    <img class="img-responsive" src="https://pp3.walk.sc/w640h460/production/88505_brass_monkey_new_york.jpg">
+                    <div class="overlay">
+                      <div class="text"><h3>Wonderland </h3><br><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu</p> </div>
+                    </div>
+                </div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <!-- Add Arrows -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+              </div>
+            </div>
+            
+            <div class="col-sm-6" style="padding-left: 40px;">
+               <h3>Our Developer</h3>
+              <div class=" developer" style="background-image: url(https://ssl.cdn-redfin.com/vLATEST/corvstatic/customer-pages/e2e050825592a2b5b786391fe6cae159.jpg);position: relative;padding: 20px;padding-bottom: 80px; background-position: 50%; background-repeat: none; background-size: cover;">
+                
+                <!-- position: relative; top: 60px; left: 30px; -->
+                 <div class="row"> 
+        
+                <div class="col-sm-8">
+                  <h2 style="text-align: left;">AvetiZ Real Estate Agents in Abuja</h2>
+                  </div>
+                </div>
+
+                <div class="row"> 
+        
+                <div class="col-sm-8">
+                   <div class="row">
+                      <div class="col-sm-3">
+                        <h2 style="text-align: left; margin-top: 0px;" >100</h2>
+                      </div>
+                      <div class="col-sm-9">
+                        <p  class="stat_desc" style="position: relative;top:10px;">Recent Deals in the Last Year</p>
+                      </div>
+                    </div>
+                </div>
+                </div> 
+
+                <div class="row"> 
+        
+                <div class="col-sm-8">
+                   <div class="row">
+                      <div class="col-sm-3">
+                        <h2 style="text-align: left; margin-top: 0px;" >4.7</h2>
+                      </div>
+                      <div class="col-sm-9">
+                        <p class="stat_desc" style="position: relative;top:10px;">Avg Customer Satisfaction</p>
+                      </div>
+                    </div>
+                </div>
+                </div> 
+
+                <div class="row"> 
+        
+                <div class="col-sm-8">
+                   <div class="row">
+                      <div class="col-sm-3">
+                        <h2 style="text-align: left; margin-top: 0px;" >816</h2>
+                      </div>
+                      <div class="col-sm-9">
+                        <p  style="position: relative;top:10px;">Total Homes Closed</p>
+                      </div>
+                    </div>
+                </div>
+                </div> 
+                  
+                 
+                <div class="row">
+                  <div class="col-sm-8 ">
+                    <button class="btn btn-default btn-lg">Find an AvetiZ Real Estate Agent</button>
+                  </div>
+                  <div class="col-sm-8">
+                    <p class="agentsnum">5 active AvetiZ agents in Abuja.</p>
+                  </div>
+               
+                </div>
+              </div>
+          </div>
+            </div>
+              
+           
+          </div>
+
+         
+          </div>
+        </div>
+      </div>
+      
+    </section>
+
+
+
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+    $('.slickshit').slick();
+    $('.tourist').slick();
+     var swiper = new Swiper('.swiper-container', {
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+        $(function(){
+          
+          $('.js_filter').click(function(){
+              console.log('jjg');
+              $('.lister, .form-section').toggleClass('sectionactive');
+              if ($(this).text()=='More Filter'){
+              $(this).text('Less Filter')
+            }
+            else{
+              $(this).text('More Filter');
+            }
+              return false;
+            })
+         })
+</script>
+
+
+<script type="text/javascript">
+          var locations = [
+    {% for property in property_list %}
+        {% if not forloop.first %},{% endif %}
+        [
+            "<strong>Title: </strong>{{ property.title}}<br> <strong>Price:</strong>₦{{property.value}}<br><strong>Bed no:</strong>{{property.bedroom}}, <strong>Bath No:</strong>{{property.bathroom}} <br><strong>Area:</strong> {{property.area}}sqft<br><strong>Address:</strong>{{property.street}} <br> <img src='https://photos.zillowstatic.com/p_a/IS2b9hk80mskqv0000000000.jpg'/>",
+            "{{ property.latitude}}",
+            "{{ property.longitude }}",
+            "{{property.id}}",
+
+
+        ]
+    {% endfor %}
+]
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 13,
+          center: new google.maps.LatLng(47.071876, 15.441456),
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+          
+        });
+
+        var infowindow = new google.maps.InfoWindow();
+
+        var marker, i;
+
+        for (i = 0; i < locations.length; i++) {
+          marker = new google.maps.Marker({
+            position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+            map: map
+          });
+
+          google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+              infowindow.setContent(locations[i][0]);
+              infowindow.open(map, marker);
+            }
+          })(marker, i));
+        }
+      </script>
+
+      <script>
+        
+        var filter= function(){
+          /**
+          value=$(this).val();
+          operator=$(this).attr('operator');
+          name=$(this).attr('name');
+          $.get('', {'name':name, 'operator':operator, 'value':value }, function(){
+
+          }).done(function(data){
+            
+          }
+          ).fail(function(data){
+            console.log('error')
+          })
+          **/
+
+          $.ajax({
+           type: "POST",
+           url: "/search/",
+           data: $("filterform").serialize(), // serializes the form's elements.
+           success: function(data)
+           {
+               alert(data); // show response from the php script.
+           }
+         });
+        }
+      
+
+        $('.js_filter_tem').change(filter)
+
+   $('.js_page').click(function(event){
+    console.log('fuck you');
+    event.preventDefault();
+    if (sessionStorage.filter_string){
+      data={'page':$(this).attr('page_no'), 'filter_string':sessionStorage.filter_string};
+    }
+    else{
+      data={'page':$(this).attr('page_no')}
+    }
+    $.post('/search/', data)
+    .done(function(response){
+      $('#result').html(response.result); // do what you like with the response
+      $('#pagination').html(response.pagination);
+    });
+    
+   });       
+   $("#filterform").submit(function(e){
+    var form = $(this);
+    $.ajax({ 
+         url   : form.attr('action'),
+         type  : form.attr('method'),
+         data  : form.serialize(), // data to be submitted
+         success: function(response){
+            $('#result').html(response.result); // do what you like with the response
+            $('#pagination').html(response.pagination);
+            sessionStorage.filter_string=response.filter_string;
+
+         }
+    });
+    return false;
+ });
+
+      </script>
+
+
+{% endblock %}

@@ -1,0 +1,410 @@
+nav{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding:5px;
+}
+
+.bullshit .dropdown{
+  margin-left:20px;
+}
+
+.dropdown-menu {
+    margin-right:-1000px;
+}
+
+.dropdown-menu > li {
+    display: inline-block;
+}
+
+.filterTitle {
+    padding: 0 0 8px;
+    color: #333;
+    font-size: 16px;
+}
+
+
+@media only screen and (min-width:1200px ){
+  div.affix{
+    width:66.6666667%;
+  }
+}
+
+@media only screen and (max-width:1200px ){
+  div.affix{
+    width:58.33333333%;
+  }
+}
+
+.paddingtop{
+  padding-top: 120px;
+}
+
+.money{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.address{
+  font-size: 13px;
+}
+
+.city{
+  font-size: 10px;
+}
+
+
+
+.propertybutton {
+    cursor: pointer;
+    background: none;
+    border: none;
+    border-radius: 0;
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    width: 15.0%;
+    margin-left: 1px;
+    margin-bottom: 1px;
+    outline-style: solid;
+    outline-color: #ccc;
+    outline-width: 1px;
+    position: relative;
+    z-index: 90;
+    height: 60px;
+}
+
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  margin-top: 20px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
+/** copied for dropdown checkbox **/
+ 
+.checkbox{
+  margin-bottom: 30px;
+}
+
+.bed{
+  padding: 0 0 8px;
+    color: #333;
+    font-size: 16px;
+}
+
+.listing{
+  margin-bottom: 25px;
+    color: #333;
+    line-height: 40px;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.form-section{
+  height: 600px;
+  /**overflow-y: scroll; 
+  overflow-x: hidden; **/
+}
+
+
+.lister, .form-section{
+  display: none;
+}
+
+.sectionactive{
+  display:block;
+}
+
+.homePrices{
+  /**margin-top: 200px; **/
+}
+
+
+.brandtext h2{
+  font-size: 3.125rem;
+  letter-spacing: -.03em;
+  line-height: 2em;
+}
+
+
+.stat>tbody>tr>td, .stat>tbody>tr>th, ..stat>tfoot>tr>td, .stat>tfoot>tr>th, .stat>thead>tr>td, .stat>thead>tr>th {
+    padding: 15px;
+
+
+}
+
+.stat_desc{
+  width: auto;
+    vertical-align: middle;
+    font-size: 13px;
+    margin-top: 3px;
+}
+
+.developer{
+  color:#fff;
+}
+
+.homePrices h2 {
+    margin-bottom: 10px;
+}
+.placePhotos h2 {
+    margin-bottom: 10px;
+}
+
+.placePhotos {
+    margin-top: 10px;
+}
+
+.agentcard{
+text-align: left;
+    display: inline-block;
+    vertical-align: top;
+    width: 320px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #e2e2e2;
+    background-color: #fff;
+    box-shadow: 0 2px 2px -1px #aaa;
+    color: #333;
+    height: 370px;
+    
+  }
+
+  a{
+    text-decoration: none
+  }
+
+.fa{
+  font-weight: solid;
+}
+
+  .agentimg{
+    background-image: url(https://ssl.cdn-redfin.com/system_files/images/70/370/1111370_517_0.jpg);
+    height:250px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .circle{
+    float: right;
+
+  }
+
+   .rec {
+    background-color: #c82021;
+    color:#fff;
+    padding: 4px 7px 2px;
+    text-transform: uppercase;
+   position: relative;
+   top:20px;
+}
+
+.recentDeals {
+    position: relative;
+    right:20px;
+    top:10px;
+    float: right;
+    width: 66px;
+    height: 66px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 35px;
+    border: 1px solid #e2e2e2;
+    font-size: 11px;
+    line-height: 120%;
+}
+
+.dealCount {
+    font-weight: 700;
+    font-size: 18px;
+    display: block;
+    margin-top: 13px;
+    margin-bottom: 5px;
+}
+
+
+.agentTypeBadge {
+    position: relative;
+    top:215px;
+    text-align: right;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 700;
+    width: 49%;
+    left:50%;
+
+}
+.agentTypeBadge .sellside {
+    background-color: #fff;
+    color: #c82021;
+}
+
+.basicinfo {
+    
+    padding: 15px 0 15px 15px;
+
+}
+
+.agentname {
+    display: block;
+    text-decoration: none;
+    font-size: 18px;
+    margin-bottom: 2px;
+    text-transform: capitalize;
+}
+
+
+a {
+    color: #0c82a5;
+    text-decoration: none;
+}
+
+.navbar-brand img {
+    max-width: 100px;
+    position: relative;
+    left: -17px;
+    top: -15px;
+}
+
+.agentform{
+ max-width: 700px;
+ margin-right: auto;
+ margin-left: auto;
+ padding: 70px;
+background-color: rgba(0,0,0,.7);
+color:#fff;
+ 
+}
+
+.agentform input{
+  border-radius: 0px;
+  height:40px;
+}
+
+.contactus{
+  background-image: url(https://ssl.cdn-redfin.com/v199.1.1/images/why-redfin/getstartedbanner6-1440x864.jpg);
+  background-repeat: none;
+  background-size: cover;
+}
+
+.btncontact{
+  color: #fff;
+  background-color: #c82021;
+  border-color: #c82021;
+  border-radius: 0px;
+}
+
+
+
+.introform p{
+  font-size: 15px;
+}
+
+.smallcard{
+  height:220px;
+}
+
+.smallcard .agentimg{
+  height: 150px;
+  border-color: 
+}
+
+.smallcard p{
+  font-size: 12px;
+}
+
+.partner{
+  background-color: #727272;
+    color: #fff;
+        padding: 5px 9px;
+        float:right;
+        position: relative;
+        top:120px;
+
+}
+
+.mapSection .listings .property {
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url(http://mallorcapropertyhouse.co.uk/wp-content/uploads/2014/10/Beautiful_Luxury_House_with_Swiming_Pool_Wallpapers_for_Desktop.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    padding: 26px 10px 3px 10px;
+    color: #fff;
+    box-shadow: -3px 3px 10px 1px #aaaaaa;
+    margin-bottom: 10px;
+}
+
+.bottomright{
+  border-right:solid 1px #fff; padding-right: 20px;
+}
+
+.numbershit{
+  margin-left: 8px;
+
+}
+
+.dontwantpadding {
+    
+   
+}
+
+.dontwantpadding {
+    padding-left:  15px !important;
+    padding-right: 15px !important;
+    
+}
