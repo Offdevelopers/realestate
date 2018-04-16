@@ -55,6 +55,15 @@ class Property(models.Model):
 		return self.name
 
 
+class Picture(models.Model):
+	picture_for=models.ForeignKey(Property)
+	picture=models.ImageField(upload_to='media')
+	description=models.TextField()
+
+
+
+
+
 
 
 

@@ -858,8 +858,10 @@
 
         $('.js_filter_tem').change(filter)
 
-   $('.js_page').click(function(event){
-    console.log('fuck you');
+   //$('.pagination .js_page').click(function(event){
+
+     $("#pagination").on("click", ".js_page", function(event){;
+   
     event.preventDefault();
     if (sessionStorage.filter_string){
       data={'page':$(this).attr('page_no'), 'filter_string':sessionStorage.filter_string};
@@ -869,11 +871,13 @@
     }
     $.post('/search/', data)
     .done(function(response){
+       console.log('fuck you');
       $('#result').html(response.result); // do what you like with the response
       $('#pagination').html(response.pagination);
     });
     
-   });       
+   }); 
+
    $("#filterform").submit(function(e){
     var form = $(this);
     $.ajax({ 

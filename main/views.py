@@ -16,11 +16,24 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 from django.template.loader import render_to_string
+from django.views.generic import DetailView
+
 
 
 
 class HomeView(TemplateView):
 	template_name='main/index.html'
+
+
+class PropertyDetail(DetailView):
+	model=Property
+	template_name='main/detail.html'
+
+	def get_context_data(self, **kwargs):
+		context=super(PropertyDetail, self).get_context_data(**kwargs)
+		context['property_images']=Property
+
+
 
 
 class SearchView(View):
@@ -135,6 +148,7 @@ def build_params_dict(request):
 		return params_dict
 
 
+
 def get_filter_string(request, params_dict):
 	filter_string=''
 	for k, v in params_dict.items():
@@ -163,3 +177,6 @@ def median(lst):
 	            return lst[n//2]
 	    else:
 	            return sum(lst[n//2-1:n//2+1])/2.0	
+
+
+
