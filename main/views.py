@@ -10,7 +10,7 @@ from django.views import View
 from algoliasearch_django import raw_search
 from django.http import HttpResponse, JsonResponse
 import pdb
-from .models import Property
+from .models import Property, Picture
 from django.db.models import Avg,Count
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
@@ -25,15 +25,50 @@ class HomeView(TemplateView):
 	template_name='main/index.html'
 
 
+class IncreaseStat(View):
+
+
+	def get(self, request):
+		house=self.get_object(request.GET.get('id'))
+		if request.GET.get('stat')=='views':
+			house.views+=1
+			
+		if request.GET.get('stat')=='favorites':
+			house.favorites+=1
+
+		house.save()
+		return JsonResponse({'status':True})
+
+
+	def get_object(self, id):
+		return Property.objects.get(pk=id)
+
+
+
+
+
+
 class PropertyDetail(DetailView):
 	model=Property
 	template_name='main/detail.html'
 
 	def get_context_data(self, **kwargs):
 		context=super(PropertyDetail, self).get_context_data(**kwargs)
-		context['property_images']=Property
+		house=self.get_object()
 
+		context['max_range']=int(house.price)*1.2
+		context['min_range']=int(house.price)*0.8
+		context['initialdownpayt']=int(house.price)*0.4
 
+		context['principal']=(int(house.price)-context['initialdownpayt'])/60
+		context['property_images']=Picture.objects.filter(picture_for=house)
+		context['nearby_similar_homes']=Property.objects.filter(city__icontains=house.city).filter(property_type__icontains=house.property_type)
+		
+		property_list=Property.objects.filter(city__icontains=house.city)
+		values=[int(property.price) for property in property_list]
+		context['median']=median(values)
+		context['savings']=house.developer_price - house.price
+		return context
 
 
 class SearchView(View):
@@ -103,6 +138,7 @@ class SearchView(View):
 			a=raw_search(Property, query, search_params)
 			pageNo=a.get('nbPages')
 			context['property_list']=Property.objects.filter(id__in=[int(w.get('objectID')) for w in a.get('hits')  ])
+
 			pageNo=range(0, pageNo)
 			query=request.session['query']
 			pagination=render_to_string('main/includes/navigation.html', {'pageNo':pageNo})

@@ -1,179 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Search | AvetiZ</title>
-	<meta charset = "utf-8">
-    <meta http-equiv = "X-UA-Compatible" content = "IE=edge">
-    <meta name = "viewport" content = "width = device width, initial-scale = 1">
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="http://test.sagecapitals.com/css/property.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="http://test.sagecapitals.com/css/footer.css">
-    <link rel="stylesheet" type="text/css" href="http://test.sagecapitals.com/css/lightslider.css">
-    <link rel="stylesheet" href="http://test.sagecapitals.com/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="http://test.sagecapitals.com/css/owl.theme.default.min.css">
-    <link rel="shortcut icon" sizes="76x76" type="image/x-icon" href="http://test.sagecapitals.com/img/avetiz4.png" />
-    <link href="mine.css" rel="stylesheet">
-    
-</head>
-<body>
+{% extends 'main/base.html' %}
 
-
-	<!-- Second Navigation Bar -->
-	<!-- Navigation Bar Section -->
-
-	<nav class="navbar navbar-default navbar-fixed-top">
-	  <div class="container-fluid">
-	    <!-- Brand and toggle get grouped for better mobile display -->
-	    <div class="navbar-header">
-	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-	        <span class="sr-only">Toggle navigation</span>
-	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span>
-	      </button>
-	      <a class="navbar-brand" href="index.html"><img class ="img-responsive" src=""></a>
-	    </div>
-
-	    <!-- Collect the nav links, forms, and other content for toggling -->
-	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	    
-	      <ul class="nav navbar-nav navbar-right">
-	        <li><a href="#">Sign Up</a></li>
-	         <li><a href="#">Help</a></li>
-	        <li>
-	            <form class="navbar-form" id="form-buscar" wtx-context="A96EE01C-B5DB-4F36-9E87-92232CCFF9BE">
-	              <div class="form-group" style="display:inline;">
-	                <div class="input-group">
-	                  <input type="text" class="form-control" placeholder="Search" aria-describedby="basic-addon2" style="width:300px;">
-	                  <span class="input-group-addon" id="basic-addon2"><span class="glyphicon glyphicon-search"></span></span>
-	                </div>
-	              </div>
-	            </form>
-	          </li>
-	          <li style="margin-left: 50px;"><a href="#" data-toggle="modal" data-target="#search" ><i class="fa fa-map-marker fa-2x locator" aria-hidden="true"></i></a></li>
-	      </ul>
-	    </div><!-- /.navbar-collapse -->
-	  </div><!-- /.container-fluid -->
-	</nav>
-
-	<!--div class="navbar-fixed-top navbar navbar-default topnav" style="background-color: white">
-	  <div class="container-fluid">
-	  	<div class="row">
-	  	<div class="col-md-12">
-	    <div class="navbar-header">
-	      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span>
-	       </button>
-		
-		</div>
-	     
-	    <div class="navbar-collapse collapse">
-	     
-	      <ul class="nav navbar-nav navbar-left">
-	      
-	    <li>
-	    <form class="navbar-form" id ="form-buscar">
-	        <div class="form-group" style="display:inline;">
-	          <div class="input-group" style="display:table;">
-	            <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
-	            <input class="form-control" name="search" placeholder="Address, City, Neighborhood" autocomplete="off" autofocus="autofocus" type="text">
-	          </div>
-	        </div>
-	      </form>
-	      </li>
-	        <li class="dropdown-active">
-	        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Any Price <b class="caret"></b></a>
-	        <ul class="dropdown-menu">
-	        	<div class="clearfix facet-price-form">
-			        <div class="row">
-			          <div class="col-sm-12">
-			            <div class="facet-price-wrap">
-			              <div class="input-group facet-price-input">
-			                <span class="input-group-addon">₦</span>
-			                <input type="text" pattern="\d*" class="form-control" placeholder="No Min" data-role="facet-input-min" maxlength="11" size="11" id="facet-input-min" value="">
-			              </div>
-			            </div>
-			            <span class="input-range-indicator"></span>
-			            <div class="facet-price-wrap">
-			              <div class="input-group facet-price-input">
-			                <span class="input-group-addon">₦</span>
-			                <input type="text" pattern="\d*" class="form-control" placeholder="No Max" data-role="facet-input-max" maxlength="11" size="11" id="facet-input-max" value="">
-			              </div>
-			            </div>
-			          </div>
-			          <div class="col-sm-12">
-			            <div class="facet-price-list-wrap">
-			              <ul class="js-price-list-min list-unstyled facet-price-list" id="facet-price-list-min">
-			              <li data-val="0">₦0</li> <li data-val="150000">₦150k</li> <li data-val="300000">₦300k</li> <li data-val="450000">₦450k</li> <li data-val="600000">₦600k</li> <li data-val="800000">₦800k</li> <li data-val="900000">₦900k</li> <li data-val="1000000">₦1M</li> </ul>
-			              <ul class="js-price-list-max list-unstyled facet-price-list price-list-max hide" id="facet-price-list-max">
-			              <li data-val="250000">₦250k</li> <li data-val="500000">₦500k</li> <li data-val="800000">₦800k</li> <li data-val="1000000">$1M</li> <li data-val="1200000">₦1.2M</li> <li data-val="1600000">₦1.6M</li> <li data-val="1800000">₦1.8M</li> <li data-val="">Any Price</li> </ul>
-			            </div>
-			          </div>
-			        </div> 
-			      </div>
-	        </ul>
-	      </li>      
-	      <li class="dropdown">
-	        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Any Beds <b class="caret"></b></a>
-	        <ul class="dropdown-menu">
-	          <li><a href="#">Any</a></li>
-	          <li><a href="#">1+</a></li>
-	          <li><a href="#">2+</a></li>
-	          <li><a href="#">3+</a></li>
-	          <li><a href="#">4+</a></li>
-	          <li><a href="#">5+</a></li>
-	          </ul>
-	      </li>
-
-	      <li class="dropdown">
-	        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Any Baths <b class="caret"></b></a>
-	        <ul class="dropdown-menu">
-	          <li><a href="#">Any</a></li>
-	          <li><a href="#">1+</a></li>
-	          <li><a href="#">2+</a></li>
-	          <li><a href="#">3+</a></li>
-	          <li><a href="#">4+</a></li>
-	        </ul>
-	      </li>
-
-	      <li class="dropdown">
-	        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Any Property Type <b class="caret"></b></a>
-	      	<ul role="menu" class="dropdown-menu">
-				
-				<li><a href="#">
-				<input type="checkbox">
-				<span class="lbl"> Single Family</span></a></li><li class="divider"></li>
-				<li><a href="#">
-				<input type="checkbox"><span class="lbl">
-				Land</span>
-				</a></li><li class="divider"></li>
-				<li><a href="#">
-				<input type="checkbox"><span class="lbl">
-				Multi-Family</span>
-				</a></li><li class="divider"></li>
-				<li><a href="#">
-				<input type="checkbox"><span class="lbl">
-				Farms</span>
-				</a></li>
-				
-			</ul>
-	      </li>
-
-	     
-	      </ul>
-	      <ul class="nav navbar-nav navbar-right">
-	        <li><button class="btn btn-default">Save Search</button></li>
-	      </ul> 
-
-	    </div><!--/.nav-collapse -->
-	    </div>
-	    </div>
-	  </div>
-	</div--> <!--end of Second Navigation Bar -->
+{% block content %}
 
 	<section class="thirdnav" style="margin-top:20px;">
 	   <div class="container">
@@ -327,19 +154,19 @@
    								<tbody>
    									<tr>
    										<td class="noborderTop">Property Type</td>
-   										<td class="text-right noborderTop"><strong>Detached Single Family</strong></td>
+   										<td class="text-right noborderTop"><strong>{{property.property_type}}</strong></td>
    									</tr>
    									<tr>
    										<td>Stories</td>
-   										<td class="text-right"><strong>2</strong></td>
+   										<td class="text-right"><strong>{{property.stories}}</strong></td>
    									</tr>
    									<tr>
    										<td>City</td>
-   										<td class="text-right"><strong>Lugbe</strong></td>
+   										<td class="text-right"><strong>{{property.city}}</strong></td>
    									</tr>
    									<tr>
    										<td>Built</td>
-   										<td class="text-right"><strong>1982</strong></td>
+   										<td class="text-right"><strong>{{property.year_built}}</strong></td>
    									</tr>
    								</tbody>
    							</table>
@@ -353,15 +180,15 @@
    									</tr>
    									<tr>
    										<td>Community</td>
-   										<td  class="text-right"><strong>Rural Tract</strong></td>
+   										<td  class="text-right"><strong>{{property.community}}</strong></td>
    									</tr>
-   									<tr>
+   									<!--tr>
    										<td>MLS</td>
    										<td class="text-right"><strong>2017010422</strong></td>
-   									</tr>
+   									</tr-->
    									<tr>
    										<td>Lot Size</td>
-   										<td class="text-right"><strong>1 acres</strong></td>
+   										<td class="text-right"><strong>{{property.lot_size}}</strong></td>
    									</tr>
    								</tbody>
    							</table>
@@ -395,21 +222,56 @@
 
 		   					<div class="row">
 		   					   <div class="col-sm-12">
-			   					 <div id="map" class="map">
+			   					 <div id="detail_map" class="map" style="height: 300px">
+
 			   					   </div>
 				   					<div class="links">
 				   						<div class="row">
 				   						<div class="col-sm-4">
 				   						<ul class="list-inline">
-								  			<li class="list-inline-item"><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i> Map of Place Nearby</a></li>
+								  			<li class="list-inline-item"><a id="nearby" href="/search/?address={{property.full_address}}"><i class="fa fa-map-marker" aria-hidden="true"></i> Map of Place Nearby</a></li>
 								  			</ul>
 								  			</div>
 								  		<div class="col-sm-6 col-sm-offset-2">
 								  		<ul class="list-inline">
-								  		<li class="list-inline-item showBorder"><a href="#"><i class="fa fa-arrows-alt" aria-hidden="true"></i> Expand</a></li>
-								  			<li class="list-inline-item showBorder"><a href="#" id="toggleStreetView" onclick="toggleStreetView()"" value="Toggle Street View" ><i class="fa fa-street-view" aria-hidden="true"></i> Street View </a></li>
-								  			<li class="list-inline-item"><a href="#"><i class="fa fa-road" aria-hidden="true"></i> Directions</a></li>
+								  		<li class="list-inline-item showBorder"><a  data-toggle="modal" href="#modalmap"><i class="fa fa-arrows-alt" aria-hidden="true"></i>Expand</a></li>
+								  			<li class="list-inline-item showBorder"><a href="https://maps.googleapis.com/maps/api/streetview?size=600x300&location={{result.latitude}},{{result.longitude}}&heading=151.78&pitch=-0.76&key=AIzaSyC8TvKHQ-rUklU5OsD6Oq73pMG1fJO9iR8" id="toggleStreetView"  value="Toggle Street View" ><i class="fa fa-street-view" aria-hidden="true"></i> Street View </a></li>
+								  			<li class="list-inline-item"><a target="_blank" href="https://www.google.com/maps?saddr&daddr={{result.latitude}},{{result.longitude}}"><i class="fa fa-road" aria-hidden="true"></i> Directions</a></li>
 								  		</ul>
+
+
+
+								  		<div id="modalmap" class="modal fade" role="dialog">
+  											<div class="modal-dialog">
+
+    <!-- Modal content-->
+    										<div class="modal-content">
+     										 <div class="modal-header">
+        									<button type="button" class="close" data-dismiss="modal">&times;</button>
+        									<h4 class="modal-title">Quick Map</h4>
+      										</div>
+      										<div class="modal-body" id="expandmap" style="width:auto; height:500px;">
+        									<!--p>Some text in the modal.</p-->
+      										</div>
+      										<div class="modal-footer">
+      										
+								  			</div>
+								  			<ul class="list-inline">
+								  		
+								  			<li class="list-inline-item showBorder"><a href="https://maps.googleapis.com/maps/api/streetview?size=600x300&location={{result.latitude}},{{result.longitude}}&heading=151.78&pitch=-0.76&key=AIzaSyC8TvKHQ-rUklU5OsD6Oq73pMG1fJO9iR8" id="toggleStreetView"  value="Toggle Street View" ><i class="fa fa-street-view" aria-hidden="true"></i> Street View </a></li>
+								  			<li class="list-inline-item"><a target="_blank" href="https://www.google.com/maps?saddr&daddr={{result.latitude}},{{result.longitude}}"><i class="fa fa-road" aria-hidden="true"></i> Directions</a></li>
+								  		</ul>
+								  		<div class="col-sm-6 col-sm-offset-2">
+								  		
+
+       									   	 
+      										</div>
+    										</div>
+
+ 											 </div>
+										</div>
+
+
 								  		</div>
 			   					      </div>
 		   						
@@ -417,6 +279,7 @@
 		   					    </div>	
 		                   </div>
 
+		                  
 		                   <div class="row pricecalcRow">
 		                   	<div class="container-fluid">
 		                    
@@ -424,10 +287,17 @@
 		                      <div class="col-sm-12 pricecalcCol">
 		                      	<div class="row">
 		                      	  <div class="col-md-6 text-center">
-		                      	  	<h3>₦0 per month</h3>
-		                      	  	<p>30 Year Fixed, 3.940% Interest</p>
+		                      	  	<h3>₦<span id="monthpayt">{{principal}}</span> per month</h3>
+		                      	  	<p>5 Year Fixed, No Interest</p>
 		                      	  </div>
-		                      	  <div class="col-md-6"></div>
+
+		                      	  <div class="col-md-6 ">
+			                      	  	<i class="fa fa-circle" style="color:#10b6e8;margin-top:20px" aria-hidden="true"></i><span  style="margin-left: 15px; color:#999;">Principal Interest</span><span style="padding-left: 30%;">₦<span id="principal">{{principal}}</span></span>
+			                      	  	<div><i class="fa fa-circle" style="color:#ffb92e;margin-top:20px" aria-hidden="true"></i><span  style="margin-left: 15px; color:#999;">Property taxes<span  style="margin-left:140px">-</span></span></div>
+			                      	  	<div><i class="fa fa-circle" style="color:green;margin-top:20px" aria-hidden="true"></i><span  style="margin-left: 15px; color:#999;">Home Insurance</span><span style="margin-left:130px">-</span></div>
+			                      	  	<div><i class="fa fa-circle" style="color:#a22769;margin-top:20px" aria-hidden="true"></i><span  style="margin-left: 15px; color:#999;">Mortage  Insurance</span><span style="margin-left:115px">-</span></div>
+		                      	  	
+		                      	  </div>
 		                      	</div>
 		                      	<hr>
 
@@ -435,7 +305,10 @@
 		                      	<div class="col-md-6">
 										  <div class="form-group">
 										    <label for="homeprice">Home Price</label>
-										    <input type="text" class="form-control" id="homeprice" placeholder="0">
+										    <input type="number" class="form-control" id="homeprice" oninput="updateRange(this.value)" placeholder="0" onfocusout="setDefault('#homeprice','{{min_range}}')" value="{{property.price}}" />
+										  </div>
+										  <div class="form-group">
+										  	<input type="range" class="form-control" min="{{min_range}}" oninput="updateHome(this.value)"  max="{{max_range}}" step="10000" id="offerrange"  value="{{property.price}}" >
 										  </div>
 
 
@@ -443,22 +316,26 @@
 		                      	</div>
 		                      	<div class="col-md-6">
 		                      			<div class="form-group">
-										    <label for="downpayment">Down Payment</label>
-										    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="0">
+										    <label for="downpayment" style="display: block;">Down Payment</label>
+										    <input type="number" class="form-control" oninput="updateDownPayt(this.value)" style="width:70%;display:inline;" id="downpayt" onfocusout="setDown('#downpayt')" value="{{initialdownpayt}}" />
+										    <input type="input" style="width:29%;display:inline;" id='percentinput' onfocusout="setPercent('#percentinput')" value='40%' class="form-control"  oninput="upDatePercentPayt(this.value)" >
+										  </div>
+										  <div class="form-group">
+										  	<input type="range" class="form-control" min="0" oninput="updateDown(this.value)" max="{{property.price}}" id="downid" value={{initialdownpayt}} step="10000"  value="50" >
 										  </div>
 		                      		
 		                      	</div>
 		                      	</div>
 		                      	</div>
 
-		                      	<div class="row calcCustRow">
+		                      	<!--div class="row calcCustRow">
 		                      		<div class="col-md-12">
 		                      			<ul class="list-inline">
 										<li class="list-inline-item listinline1"><a href="#"><i class="fa fa-calculator" aria-hidden="true"></i> Customize Calculations</a></li>
 										<li class="list-inline-item"><a href="#"><i class="fa fa-bookmark" aria-hidden="true"></i> Compare Mortgage Rates</a></li>
 										</ul>
 		                      		</div>
-		                      	</div>
+		                      	</div-->
 		  							
 
 		                      	
@@ -473,82 +350,30 @@
 		                   </div>
 		                   	<div class="col-md-12">
 			   					<div class="owl-carousel owl-theme">
-									    <div class="hProperty" style="">
+			   						{% for property in nearby_similar_homes %}
+									    <div class="hProperty" style="background:linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ), url({{property.thumbnail.url}})"">
 										<div class="row">
 									     <div class="col-sm-5">
-									     <i class="fa fa-home" aria-hidden="true"></i> <span class="hPrice">₦150,000</span class="hAddress"><br>No 4 Lugbe, Abuja</div>
+									     <i class="fa fa-home" aria-hidden="true"></i> <span class="hPrice">₦{{property.price}}</span class="hAddress"><br>No{{property.full_address}}</div>
 									     <div class="col-sm-7">
 									     	<ul class="list-inline">
-									  			<li class="list-inline-item"><span class="hBeds">3</span><br>Beds</li>
-									  			<li class="list-inline-item"><span class="hBaths">2</span><br>Baths</li>
-									  			<li class="list-inline-item"><span class="hArea">_</span><br>Sq.Ft</li>
+									  			<li class="list-inline-item"><span class="hBeds">{{property.bedroom}}</span><br>Beds</li>
+									  			<li class="list-inline-item"><span class="hBaths">{{property.bathroom}}</span><br>Baths</li>
+									  			<li class="list-inline-item"><span class="hArea">{[property.area}}</span><br>Sq.Ft</li>
 									  		</ul>
 									     	
 									     </div>
 
 									    </div>
 								      </div>
-									    <div class="hProperty" style="">
-										<div class="row">
-									     <div class="col-sm-5">
-									     <i class="fa fa-home" aria-hidden="true"></i> <span class="hPrice">₦150,000</span class="hAddress"><br>No 4 Lugbe, Abuja</div>
-									     <div class="col-sm-7">
-									     	<ul class="list-inline">
-									  			<li class="list-inline-item"><span class="hBeds">3</span><br>Beds</li>
-									  			<li class="list-inline-item"><span class="hBaths">2</span><br>Baths</li>
-									  			<li class="list-inline-item"><span class="hArea">_</span><br>Sq.Ft</li>
-									  		</ul>
-									     	
-									     </div>
-
-									    </div>
-								      </div>
-									    <div class="hProperty" style="">
-										<div class="row">
-									     <div class="col-sm-5">
-									     <i class="fa fa-home" aria-hidden="true"></i> <span class="hPrice">₦150,000</span class="hAddress"><br>No 4 Lugbe, Abuja</div>
-									     <div class="col-sm-7">
-									     	<ul class="list-inline">
-									  			<li class="list-inline-item"><span class="hBeds">3</span><br>Beds</li>
-									  			<li class="list-inline-item"><span class="hBaths">2</span><br>Baths</li>
-									  			<li class="list-inline-item"><span class="hArea">_</span><br>Sq.Ft</li>
-									  		</ul>
-									     	
-									     </div>
-
-									    </div>
-								      </div>
-
-									    <div class="hProperty" style="">
-										<div class="row">
-									     <div class="col-sm-5">
-									     <i class="fa fa-home" aria-hidden="true"></i> <span class="hPrice">₦150,000</span class="hAddress"><br>No 4 Lugbe, Abuja</div>
-									     <div class="col-sm-7">
-									     	<ul class="list-inline">
-									  			<li class="list-inline-item"><span class="hBeds">3</span><br>Beds</li>
-									  			<li class="list-inline-item"><span class="hBaths">2</span><br>Baths</li>
-									  			<li class="list-inline-item"><span class="hArea">_</span><br>Sq.Ft</li>
-									  		</ul>
-									     	
-									     </div>
-
-									    </div>
-								      </div>
-									    <div class="hProperty" style="">
-										<div class="row">
-									     <div class="col-sm-5">
-									     <i class="fa fa-home" aria-hidden="true"></i> <span class="hPrice">₦150,000</span class="hAddress"><br>No 4 Lugbe, Abuja</div>
-									     <div class="col-sm-7">
-									     	<ul class="list-inline">
-									  			<li class="list-inline-item"><span class="hBeds">3</span><br>Beds</li>
-									  			<li class="list-inline-item"><span class="hBaths">2</span><br>Baths</li>
-									  			<li class="list-inline-item"><span class="hArea">_</span><br>Sq.Ft</li>
-									  		</ul>
-									     	
-									     </div>
-
-									    </div>
-								      </div>
+								      {% endfor %}
+									    
+									    
+									   
+									   
 								</div>
 
 								</div>
@@ -780,7 +605,6 @@
 		                   </div>
 		                   	</div>
 		                   </section>
-
 		                   <hr>
 
 		                   
@@ -791,71 +615,16 @@
 		                   <div class="container-fluid">
 		                   	<h3>Activity for House A11, Lugbe</h3>
 		                   	<div class="row">
-			                   	<div class="col-sm-3"><a href="#"><i class="fa fa-eye fa-2x" aria-hidden="true"></i></a><span class="aNumber">5600</span> <span class="aDet">Views</span></div>
-			                   	<div class="col-sm-3"><a href="#"><i class="fa fa-heart-o fa-2x" aria-hidden="true"></i></a> <span class="aNumber">39</span> <span class="aDet">Favourites</span></div>
+			                   	<div class="col-sm-3"><a href="#"><i class="fa fa-eye fa-2x" aria-hidden="true"></i></a><span class="aNumber">{{property.views}}</span> <span class="aDet">Views</span></div>
+			                   	<div class="col-sm-3"><a href="#"><i class="fa fa-heart-o fa-2x" aria-hidden="true"></i></a> <span class="aNumber">{{property.favorites}}</span> <span class="aDet">Favourites</span></div>
 			                   	
-			                   	<div class="col-sm-3"><a href="#"><i class="fa fa-home fa-2x" aria-hidden="true"></i></a><span class="aNumber">10</span> <span class="aDet">AvetiZ Tours</span></div>
+			                   	<div class="col-sm-3"><a href="#"><i class="fa fa-home fa-2x" aria-hidden="true"></i></a><span class="aNumber">{{property.tours}}</span> <span class="aDet">AvetiZ Tours</span></div>
 		                   	</div>
 		                   	</div>
 
 		                   </section>
 
-		                   <section class="nhSection">
-		                   <div class="container-fluid">
-		                   	   <h3>Neighborhood Info for House A11, Lugbe</h3>
-		                   	   
-
-		                   	   
-		                   	   <div class="row">
-		                   	   
-		                   	   
-		                   	   
-
-		                   	   <div class="col-sm-8 dontwantpadding">
-		                   	   	<div class="col-sm-6 dontwantpadding">
-		                   	   	
-			                       <table class="table table-striped">
-	   								<tbody>
-	   									<tr >
-	   										<td>Median Price</td>
-	   										<td class="text-right"><strong>1,000,000</strong></td>
-	   									</tr>
-	   									<tr>
-	   										<td>Median $ / Sq. Ft.</td>
-	   										<td class="text-right"><strong>20,000</strong></td>
-	   									</tr>
-	   									<tr>
-	   										<td>Median Sale</td>
-	   										<td class="text-right"><strong>96%</strong></td>
-	   									</tr>
-	   								
-	   								</tbody>
-	   							</table>
-		                   	
-		                   	   	</div>
-		                   	   	<div class="col-sm-6 dontwantpadding">
-		                   	   		<table class="table table-striped">
-	   								<tbody>
-	   									<tr >
-	   										<td>Avg. # Offers</td>
-	   										<td class="text-right"><strong>-</strong></td>
-	   									</tr>
-	   									<tr>
-	   										<td>Avg. Down Payment</td>
-	   										<td class="text-right"><strong>-</strong></td>
-	   									</tr>
-	   									<tr>
-	   										<td>Sold Homes</td>
-	   										<td class="text-right"><strong>56</strong></td>
-	   									</tr>
-	   								
-	   								</tbody>
-	   							</table>
-		                   	   	</div>
-		                   	   </div>
-		                   	   </div>
-		                   	</div>
-		                   </section>
+		                   
 
 		                   </div>
    					 <!-- End of Column Seven in FourthCol -->
@@ -869,7 +638,7 @@
 	   			 <button class="btn btn-block btn-danger">Schedule Tour</button>
 	   			 <p class="colorGrey">It's free, with no obligation — cancel anytime</p>
 	   			 <div class="ContactLinks" data-rf-test-name="contact-links" data-reactid="83"><div class="questions" data-reactid="84"><a  href="#askquestionmodal" data-toggle="modal" >Ask a Question</a><a href="tel:+17189253372" class="phone-number" data-rf-test-name="phone-number" data-reactid="86">(080) 313-3372</a></div></div>
-	   			 <h5><strong>Savings on this property: ₦110,983</strong></h5>
+	   			 <h5><strong>Savings on this property: ₦{{savings}}</strong></h5>
 	   			 <p>When you buy through AvetiZ </p>
 	   			 <a class="btn btn-block btn-danger" href="offer.html">Start Now</a>
 	   			 </div>
@@ -1028,396 +797,34 @@
             <!-- end:product -->
             <hr>
 
-          <h4><strong>Recently Sold Properties in Abuja</strong></h4>
-          <!-- begin:product -->
-            <div class="row container-realestate">
-              <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="property-container">
-                  <div class="property-image">
-                    <img src="http://mallorcapropertyhouse.co.uk/wp-content/uploads/2014/10/Beautiful_Luxury_House_with_Swiming_Pool_Wallpapers_for_Desktop.jpg" alt="AvetiZ">
-                    <div class="property-price">
-                      <h4>Sold</h4>
-                      <span>₦1,800,000</span>
-                    </div>
-                    <div class="property-status">
-                      <span>27/03/2017</span>
-                    </div>
-                  </div>
-                  <div class="property-features">
-                    <span><i class="fa fa-home"></i> 5,000 m<sup>2</sup></span>
-                    <span><i class="fa fa-hdd-o"></i> 2 Bed</span>
-                    <span><i class="fa fa-male"></i> 2 Bath</span>
-                  </div>
-                  <!-- <div class="property-content">
-                    <h3><a href="#">Pacta 1</a> <small>Ashford Homes</small></h3>
-                  </div> -->
-                </div>
-              </div>
-              <!-- break -->
-              <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="property-container">
-                  <div class="property-image">
-                    <img src="http://mallorcapropertyhouse.co.uk/wp-content/uploads/2014/10/Beautiful_Luxury_House_with_Swiming_Pool_Wallpapers_for_Desktop.jpg" alt="avetiz">
-                    <div class="property-price">
-                      <h4>Sold</h4>
-                      <span>₦2,300,000</span>
-                    </div>
-                    <div class="property-status">
-                      <span>27/03/2017</span>
-                    </div>
-                  </div>
-                  <div class="property-features">
-                    <span><i class="fa fa-home"></i> 5,000 m<sup>2</sup></span>
-                    <span><i class="fa fa-hdd-o"></i> 2 Bed</span>
-                    <span><i class="fa fa-male"></i> 2 Bath</span>
-                  </div>
-                  <!-- <div class="property-content">
-                    <h3><a href="#">Awesome Villa</a> <small>Ashford Homes</small></h3>
-                  </div> -->
-                </div>
-              </div>
-              <!-- break -->
-              <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="property-container">
-                  <div class="property-image">
-                    <img src="http://mallorcapropertyhouse.co.uk/wp-content/uploads/2014/10/Beautiful_Luxury_House_with_Swiming_Pool_Wallpapers_for_Desktop.jpg" alt="mikha real estate theme">
-                    <div class="property-price">
-                      <h4>Sold</h4>
-                      <span>₦3,800,000</span>
-                    </div>
-                    <div class="property-status">
-                      <span>27/03/2017</span>
-                    </div>
-                  </div>
-                  <div class="property-features">
-                    <span><i class="fa fa-home"></i> 5,000 m<sup>2</sup></span>
-                    <span><i class="fa fa-hdd-o"></i> 2 Bed</span>
-                    <span><i class="fa fa-male"></i> 2 Bath</span>
-                  </div>
-                  <!-- <div class="property-content">
-                    <h3><a href="#">Land In Central Park</a> <small>Ashford Homes</small></h3>
-                  </div> -->
-                </div>
-              </div>
-              <!-- break -->
-              <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="property-container">
-                  <div class="property-image">
-                    <img src="http://mallorcapropertyhouse.co.uk/wp-content/uploads/2014/10/Beautiful_Luxury_House_with_Swiming_Pool_Wallpapers_for_Desktop.jpg" alt="mikha real estate theme">
-                    <div class="property-price">
-                      <h4>Sold</h4>
-                      <span>₦1,600,000</span>
-                    </div>
-                    <div class="property-status">
-                      <span>27/03/2017</span>
-                    </div>
-                  </div>
-                  <div class="property-features">
-                    <span><i class="fa fa-home"></i> 5,000 m<sup>2</sup></span>
-                    <span><i class="fa fa-hdd-o"></i> 2 Bed</span>
-                    <span><i class="fa fa-male"></i> 2 Bath</span>
-                  </div>
-                  
-                </div>
-              </div>
-              <!-- break -->
-              <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="property-container">
-                  <div class="property-image">
-                    <img src="http://mallorcapropertyhouse.co.uk/wp-content/uploads/2014/10/Beautiful_Luxury_House_with_Swiming_Pool_Wallpapers_for_Desktop.jpg" alt="mikha real estate theme">
-                    <div class="property-price">
-                      <h4>Sold</h4>
-                      <span>₦10,100,000</span>
-                    </div>
-                    <div class="property-status">
-                      <span>27/03/2017</span>
-                    </div>
-                  </div>
-                  <div class="property-features">
-                    <span><i class="fa fa-home"></i> 5,000 m<sup>2</sup></span>
-                    <span><i class="fa fa-hdd-o"></i> 2 Bed</span>
-                    <span><i class="fa fa-male"></i> 2 Bath</span>
-                  </div>
-                  
-                </div>
-              </div>
-              <!-- break -->
-              <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="property-container">
-                  <div class="property-image">
-                    <img src="http://mallorcapropertyhouse.co.uk/wp-content/uploads/2014/10/Beautiful_Luxury_House_with_Swiming_Pool_Wallpapers_for_Desktop.jpg" alt="mikha real estate theme">
-                    <div class="property-price">
-                      <h4>Sold</h4>
-                      <span>₦9,100,000</span>
-                    </div>
-                    <div class="property-status">
-                      <span>27/03/2017</span>
-                    </div>
-                  </div>
-                  <div class="property-features">
-                    <span><i class="fa fa-home"></i> 5,000 m<sup>2</sup></span>
-                    <span><i class="fa fa-hdd-o"></i> 2 Bed</span>
-                    <span><i class="fa fa-male"></i> 2 Bath</span>
-                  </div>
-                  
-                </div>
-              </div>
-              <!-- break -->
-            </div>
+         
             <!-- end:product -->
 		</div>	
 	</section>
 
 
 <!-- Footer Section built by a backender -->
-<div class="divider-5"></div>
-<hr>
+{% endblock %}
 
-<div class="container"> 
-<div class="footer">
-  
-    <div class="row">
-      
-      <div class="col-sm-4 more-space"><!--  1st column begins-->
-      
-        <!--h4 class="column-header text-justify head"> AvetiZ </h2-->
-        
-        
-        <div class="more-space">
-      
-				<div class="col-md-8 mavelous ">
-					
-					
-					<div class="form-group">
-						
-						<div id="google_translate_element"></div><script type="text/javascript">
-								function googleTranslateElementInit() {
-										new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'ar,de,en,fr,zh-CN', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
-										}
-									</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-					</div>	
-			
-				</div>
-             
-        <div class="col-sm-8 mavelous currency">
-          
-          <div class="form-group">
-          
-            <select name="currency_code" class="form-control tolu">
-                <option value="NGN">NGN</option>
-                <option value="AUD">USD</option>
-                <option value="BRL">EUR </option>
-                <option value="CAD">CAD</option>
-                <option value="CZK">GBP</option>
-                
-            </select>
-          
-          </div>
-    
-        </div>
+
+
+     
+ 
+
+        {% block scripts %}
 
         
-        <div class="divider-10"></div>
-        
-        <div class="col-sm-12 ">
-        
-          <ul class="list-group text-justify  borderless list-inline">
-              <li class="list-group-item">Terms</li>
-              <li class="list-group-item">Privacy</li>
-              <li class="list-group-item">Site Map</li>
-              <li class="list-group-item"><span><i class="fa fa-facebook-official fa-1x"></i></span></li>
-              <li class="list-group-item"><i class="fa fa-linkedin fa-1x"></i></li>
-              <li class="list-group-item"><i class="fa fa-instagram fa-1x" aria-hidden="true"></i></li>
-          </ul>
-        
-        </div>
-        
-  
-        
-        
-        
-        </div><!--more space div add margin top -->
-        
-      
-      </div><!-- end of 1st column-->
-      
-      
-      <div class="col-sm-4 more-space"><!--  2nd column begins-->
-      
-         
-          
-          <div class="more-space">
-          
-           <h4 class="column-header text-justify head"> Sign Up </h4>
-          
-          <ul class="list-group text-justify mavelous borderless">
-            <li class="list-group-item">About</li>
-            <li class="list-group-item">Help</li>
-            <li class="list-group-item">Investors</li>
-            <li class="list-group-item">Partners</li>
-            <li class="list-group-item">Cities</li>
-            <li class="list-group-item">Policies</li>
-            <li class="list-group-item">Countries</li>
-            <!--li class="list-group-item">About Us</li-->
-            
-            
-            
-          </ul>
-          
-          </div>
-      
-      
-      </div><!-- end of 2nd column-->
-    
-    
-      
-      <div class="col-sm-3 more-space"><!--  3nd column begins-->
-      
-          
-          
-          
-          
-          <div class="more-space">
-			<h4 class="column-header text-justify head "> Help </h4>
-          <ul class="list-group text-justify mavelous borderless">
-            <li class="list-group-item">Safety</li>
-            <li class="list-group-item">Media</li>
-            <li class="list-group-item"><a href="how-it-works.html">How it Works</a></li>
-            <li class="list-group-item"><a href="intelligent-investing.html">Intelligent Investing</a></li>
-            <li class="list-group-item"><a href="insight.html">Insight</a></li>
-            <!--li class="list-group-item">Local Jobs</li-->
-          </ul>
-          
-          </div>
-      
-    
-      
-      </div><!-- end of 3nd column-->
-      
-      <div class="col-sm-1 ">
-		<!--div class="divider-icon"></div-->
-        <div class="col-sm-push-3" >
-		
-                                 
-        <div id="search" class="modal fade" role="dialog">
-          <div class="modal-dialog">
+ <script type="text/javascript" src="http://test.sagecapitals.com/js/owl.carousel.min.js"></script>
 
-    <!-- Modal content-->
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Lagos</h4>
-              </div>
-              <div class="modal-body">
-              
-                <p>We Use Location to customize the information you see.</p>
-                
-                <input type="text" id="pac-input" class="form-control" placeholder="Change your location"  />
-                <!--div class="pac-container"></div-->
-                
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
-            </div>
+ <script src="http://test.sagecapitals.com/js/lightslider.js"></script> 
 
-          </div>
-        </div>
-        
-        </div>
-      
-      </div>
-	</div><!--row -->
-	</div> 
-    
-  </div><!--container --> 
-  <hr>
-      
-   <div class="container">
-     <div class="row">
-      <div class="col-sm-6">
-      <span><p class="head">AvetiZ is a service mark of AvetiZ Corp &copy; 2017. All Rights Reserved.</p></span>
-      </div>
-      
-        <div class="col-sm-4 border-header"><!-- android ios download section -->
-           <ul class="list-group text-center borderless list-inline">
-            <li class="list-group-item"><img src="img/google2.png" class="img-responsive "></li>
-            <li class="list-group-item"><img src="img/ios2.png" class="img-responsive "></li> 
-          </ul>  
-       </div>
-       </div>
-     </div>
 
-     <div id="askquestionmodal" class="modal fade" role="dialog">
-		  <div class="modal-dialog">
+        <script>
 
-		    <!-- Modal content-->
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal">&times;</button>
-		        <h4 class="modal-title">Ask Redfin Agent Kris a Question</h4>
-		      </div>
-		      <div class="modal-body">
-			      	<h3>
-						Tell Us About Yourself
-					</h3>
-			       	<div class="row">
-						<div class="col-md-6">
-							
-								<div class="form-group">
-									<label>First Name</label>
-									<input class="form-control" placeholder="First Name" type="text">
-								</div>
-								<div class="form-group">
-									<label>Email</label>
-									<input class="form-control" placeholder="Email" type="email">
-								</div>
-
-							
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-									<label>Last Name</label>
-									<input class="form-control" placeholder="Last Name" type="text">
-							</div>
-							<div class="form-group">
-									<label>Phone</label>
-									<input class="form-control" placeholder="( &nbsp; &nbsp;) -" type="text">
-							</div>
-						</div>
-					</div>
-					<div class="row">
-					<div class="col-md-12">
-						<div class="form-group">
-							<label>Comment</label>
-							<textarea class="form-control"  rows="5" placeholder="Hi Kris, please help me put together an offer for 1990 Lancashire Dr." value="" style="height: 150px !important;"></textarea>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-4">
-						<div class="form-group">
-							<button class="form-control btncontact" style="font-weight: bold; background-color: #585858; border-color: #585858; color:#fff;">Start An Offer</button>
-						</div>
-					</div>
-				</div>
-		      </div>
-		      <div class="modal-footer">
-		       
-		      </div>
-		    </div>
-
-		  </div>
-		</div>
-
-<script type="text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript" src="http://test.sagecapitals.com/js/owl.carousel.min.js"></script>
-
-<script>
-
-      function initMap() {
-        var uluru = {lat: 40.729884, lng: -73.990988};
-        var map = new google.maps.Map(document.getElementById('map'), {
+         function initMap() {
+      	console.log('fhfh');
+        var uluru = {lat: {{property.latitude}}, lng: {{property.longitude}}};
+        var map = new google.maps.Map(document.getElementById('detail_map'), {
           zoom: 4,
           center: uluru,
           streetViewControl: true
@@ -1439,17 +846,12 @@
       
           
       }
- 
-</script>
 
-<script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8TvKHQ-rUklU5OsD6Oq73pMG1fJO9iR8&callback=initMap">
- </script>
-
-
-        <script src="http://test.sagecapitals.com/js/lightslider.js"></script> 
-        <script>
+        
              $(document).ready(function() {
+
+             	
+             	
              	 $(".owl-carousel").owlCarousel({
              	 	    items:2,
 					    loop:true,
@@ -1458,6 +860,9 @@
 					    autoplayTimeout:1000,
 					    autoplayHoverPause:true
              	 	});
+
+
+
 
                 $('#image-gallery').lightSlider({
                     gallery:true,
@@ -1471,15 +876,206 @@
                         $('#image-gallery').removeClass('cS-hidden');
                     }  
                 });
+
+               increase_stat('views', '{{property.pk}}');
+               
+             	
             });
 
+
+
+
+            
+
+  function updateHome(myValue){//when  range for offer changes
+  					document.getElementById("homeprice").value = myValue;
+  					document.getElementById("downid").max=myValue;
+  					var percent=document.getElementById("percentinput").value;
+  					numberpercent=getPercent(percent)
+  					if (Number(numberpercent) > 0){
+  					newhomeprice=(numberpercent/100)*myValue
+  					document.getElementById('downid').value=newhomeprice;
+  					document.getElementById('downpayt').value=newhomeprice;
+  					//console.log(newhomeprice)
+  					setPrinc(myValue,newhomeprice)
+  					}
+
+				}
+	function updateDown(myValue){
+		//when range for down payt changes
+		document.getElementById("downpayt").value=myValue;
+		var x=document.getElementById("homeprice").value;
+		percent=Math.round((myValue/x)*100);
+		stringresult=percent.toString();
+		document.getElementById('percentinput').value=stringresult.concat('%');
+		setPrinc(document.getElementById('offerrange').value,document.getElementById('downid').value)
+	}
+
+	function updateRange(myValue){
+		$('#offerrange').val(myValue);
+	}
+
+	function updateDownPayt(myValue){
+		//when input for down payt changes
+		var x=document.getElementById("offerrange").value;
+		//if downpayt is less than equal than homeprice
+		value=Number(myValue)
+		if (value <= x ){
+			document.getElementById('downid').value=myValue;
+			percent=Math.round((myValue/x)*100);
+			stringresult=percent.toString();
+			document.getElementById('percentinput').value=stringresult.concat('%');
+				}
+		//if downpayt is more than equal than homeprice
+		else if (value > x){
+			document.getElementById('percentinput').value='100%'
+			//setPrinc()
+			//reset offer input todo
+		}
+	
+		setPrinc(document.getElementById('offerrange').value,document.getElementById('downid').value)
+	
+	}
+
+	function upDatePercentPayt(myValue){
+		//when iput for percent changes
+		x=myValue;
+		var numberpercent=getPercent(x);
+		var homeprice=document.getElementById('homeprice').value
+		if (numberpercent <= 100){
+		var downpayt=(numberpercent/100)*homeprice;
+		document.getElementById('downpayt').value=downpayt;
+		document.getElementById('downid').value=downpayt;
+		setPrinc(document.getElementById('offerrange').value,document.getElementById('downid').value)
+	}
+	else{
+		document.getElementById('downpayt').value=document.getElementById('homeprice').value;
+		document.getElementById('downid').value=document.getElementById('homeprice').value;
+		setPrinc(document.getElementById('offerrange').value,document.getElementById('downid').value)
+	}
+	}
+	
+	function setPrinc(homeprice, downpayt){
+		//set the principal and other tax value
+		numhome=Number(homeprice);
+		numdown=Number(downpayt);
+		remaining=numhome-numdown;
+		if (remaining != 0){
+		principal=remaining/60
+		document.getElementById('principal').innerHTML=Math.ceil(principal);
+		document.getElementById('monthpayt').innerHTML=Math.ceil(principal);
+		//console.log(principal)
+	}
+	else{
+		principal=0
+		document.getElementById('principal').innerHTML=0;
+		document.getElementById('monthpayt').innerHTML=0;
+
+		//console.log(principal)
+	}
+	
+	}
+
+	
+	function getPercent(percentinput){
+		percent=percentinput.replace('%',' ');
+		return Number(percent);
+	}
+
+	function setDefault(id,fallback){
+		value=$(id).val();
+		if(Number(value) <= Number(fallback)){
+			$(id).val(fallback)
+			$('#downid').attr({
+   			"max" : fallback
+			});
+			$('#offerrange').val(fallback)
+			per=$('#percentinput').val()
+			percent=getPercent(per)
+			$('#downid').val((percent/100)*fallback);
+			$('#downpayt').val((percent/100)*fallback);
+		}
+		if(Number(value) >= Number('{{maxrange}}') ){
+			$(id).val('{{maxrange}}')
+			$('#downid').attr({
+   			"max" : '{{maxrange}}'
+			});
+			$('#offerrange').val(Number('{{maxrange}}'))
+			per=$('#percentinput').val()
+			percent=getPercent(per)
+			$('#downid').val((percent/100)*Number('{{maxrange}}'));
+			$('#downpayt').val((percent/100)*Number('{{maxrange}}'));
+		}
+		setPrinc($('#offerrange').val(),$('#downid').val())
+
+
+	}
+
+		function setDown(id){
+			val=$(id).val();
+			if (Number(val) >= Number($('#offerrange').val())) {
+					$(id).val($('#offerrange').val())
+					$('#downid').val($('#offerrange').val())
+			} 
+			if (val==''){
+				$(id).val('0')
+				$('#downid').val('0')
+
+			}
+			setPrinc($('#offerrange').val(),$('#downid').val())
+		}
+
+		function setPercent(id){
+			val=$(id).val()
+			percent=getPercent(val)
+			if(percent > 100){
+				$(id).val('100%')
+		}
+			else if((percent == '')||(percent < 0) ){
+				$(id).val('0%')
+			}
+			else{
+				newpercent=formatP(val)
+				$(id).val(newpercent)
+			}
+			setPrinc($('#offerrange').val(),$('#downid').val())
+
+			}
+
+			function formatP(val){
+				percent=getPercent(val)
+				stringpercent= percent.toString()
+				return stringpercent.concat('%')
+			}
+
+
+function renderMap(id) {
+       		 var point = new google.maps.LatLng({{property.latitude}}, {{property.longitude}});
+        	var map = new google.maps.Map(document.getElementById(id), {
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            zoom: 13,
+            center: point
+        });
+        var marker = new google.maps.Marker({ position: point, map: map, icon: 'http://www.google.com/intl/en_us/mapfiles/ms/icons/red-dot.png' });
+    }
+
+
+
+$('#modalmap').on('shown.bs.modal', function () {
+           		 renderMap('expandmap');
+        		});
+
+
+
+
+
+
+
+    </script>
+
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8TvKHQ-rUklU5OsD6Oq73pMG1fJO9iR8&callback=initMap">
+ </script>
+{% endblock %}
              
-        </script>	
-
-
-<script type="text/javascript" src="http://test.sagecapitals.com/js/main.js"></script>
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-</body>
-</html>
+        

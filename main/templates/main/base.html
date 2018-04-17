@@ -24,6 +24,9 @@
   <link rel="stylesheet" type="text/css" href="{% static 'css/slick-theme.css' %}"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.7/css/swiper.min.css">
   <link rel="stylesheet" type="text/css" href="http://test.sagecapitals.com/css/lightslider.css">
+   <link rel="stylesheet" type="text/css" href="http://test.sagecapitals.com/css/property.css">
+   <link rel="stylesheet" href="http://test.sagecapitals.com/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="http://test.sagecapitals.com/css/owl.theme.default.min.css">
   {% block styles %}{% endblock %}
   <link href="{% static '/css/mine.css' %}" rel="stylesheet">
   
@@ -276,29 +279,10 @@
 <script type="text/javascript" src="{% static 'js/slick.min.js' %}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.7/js/swiper.min.js"></script>
 
+<script type="text/javascript" src="{% static 'js/realestate.js' %}"></script>
 <script>
 
-      $(document).ready(function(){
-         var slider= $('#image-gallery').lightSlider({
-                    item:1,
-                    slideMargin: 0,
-                    speed:200,
-                    auto:false,
-                    loop:true,
-                    adaptiveHeight:true,
-                    controls: false,
-                    onSliderLoad: function() {
-                        $('#image-gallery').removeClass('cS-hidden');
-                    }  
-                });
-         $('#goToPrevSlide').on('click', function () {
-          slider.goToPrevSlide();
-          });
-        $('#goToNextSlide').on('click', function () {
-          slider.goToNextSlide();
-          });
-
-      })
+      
       /*
       google.maps.event.addDomListener(window, 'load', initialize);
       function initialize() {

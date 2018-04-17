@@ -792,20 +792,23 @@
     {% for property in property_list %}
         {% if not forloop.first %},{% endif %}
         [
-            "<strong>Title: </strong>{{ property.title}}<br> <strong>Price:</strong>₦{{property.value}}<br><strong>Bed no:</strong>{{property.bedroom}}, <strong>Bath No:</strong>{{property.bathroom}} <br><strong>Area:</strong> {{property.area}}sqft<br><strong>Address:</strong>{{property.street}} <br> <img src='https://photos.zillowstatic.com/p_a/IS2b9hk80mskqv0000000000.jpg'/>",
+            "<strong>Title: </strong>{{ property.name}}<br> <strong>Price:</strong>₦{{property.price}}<br><strong>Bed no:</strong>{{property.bedroom}}, <strong>Bath No:</strong>{{property.bathroom}} <br><strong>Area:</strong> {{property.area}}sqft<br><strong>Address:</strong>{{property.full_address}} <br> <img src='https://photos.zillowstatic.com/p_a/IS2b9hk80mskqv0000000000.jpg'/>",
             "{{ property.latitude}}",
             "{{ property.longitude }}",
-            "{{property.id}}",
+            "{{property.slug}}",
 
 
         ]
     {% endfor %}
 ]
+
+        //hfhf
+
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 13,
-          center: new google.maps.LatLng(47.071876, 15.441456),
-          mapTypeId: google.maps.MapTypeId.ROADMAP,
-          
+          zoom: 10,
+          center: new google.maps.LatLng(locations[0][1], locations[0][2]),
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+          //mapTypeId: google.maps.MapTypeId.SATELLITE
         });
 
         var infowindow = new google.maps.InfoWindow();
@@ -818,13 +821,21 @@
             map: map
           });
 
-          google.maps.event.addListener(marker, 'click', (function(marker, i) {
+          google.maps.event.addListener(marker, 'mouseover', (function(marker, i) {
             return function() {
               infowindow.setContent(locations[i][0]);
               infowindow.open(map, marker);
             }
           })(marker, i));
+
+          google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+              window.open('/property/'+locations[i][3])
+            }
+          })(marker, i));
         }
+
+
       </script>
 
       <script>
@@ -893,6 +904,11 @@
     });
     return false;
  });
+
+$('#result').on('click' , '.js-fovorite', function(){
+  increase_stat('favorites', $(this).attr('property_id'));
+  return false;
+});
 
       </script>
 

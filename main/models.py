@@ -1,6 +1,8 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.template.defaultfilters import slugify
+from django.core.urlresolvers import reverse
 
 
 # Create your models here.
@@ -47,18 +49,33 @@ class Property(models.Model):
 	last_updated=models.DateTimeField(auto_now=True)
 	property_type=models.CharField(max_length=200, choices=(('House', 'House'), ('Land', 'Land')), null=True)
 	description=models.TextField( null=True)
-	lot_size=models.IntegerField( default=2000)
+	lot_size=models.IntegerField(default=2000)
 	parking_space=models.IntegerField(default=0)
 	status=models.CharField(default='Sold', max_length=200)
-
+	slug=models.SlugField(null=True)
+	stories=models.IntegerField(default=2)
+	community=models.CharField(choices=(('Rural', 'Rural'), ('Urban', 'Urban')), default='Rural', max_length=50)
+	views=models.IntegerField(default=0)
+	favorites=models.IntegerField(default=0)
+	tours=models.IntegerField(default=0)
+	avetiz_agent=models.CharField(max_length=200)
+	
 	def __str__(self):
 		return self.name
+
+	def get_absolute_url(self):
+		return reverse('main:property_detail', kwargs={'slug': self.slug})
+
+	def save(self, *args, **kwargs):
+		self.slug = slugify(self.name)
+		return super(Property, self).save(*args, **kwargs)
 
 
 class Picture(models.Model):
 	picture_for=models.ForeignKey(Property)
 	picture=models.ImageField(upload_to='media')
 	description=models.TextField()
+
 
 
 
