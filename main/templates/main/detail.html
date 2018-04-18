@@ -362,7 +362,7 @@
 									     	<ul class="list-inline">
 									  			<li class="list-inline-item"><span class="hBeds">{{property.bedroom}}</span><br>Beds</li>
 									  			<li class="list-inline-item"><span class="hBaths">{{property.bathroom}}</span><br>Baths</li>
-									  			<li class="list-inline-item"><span class="hArea">{[property.area}}</span><br>Sq.Ft</li>
+									  			<li class="list-inline-item"><span class="hArea">{{property.area}}</span><br>Sq.Ft</li>
 									  		</ul>
 									     	
 									     </div>
@@ -640,7 +640,7 @@
 	   			 <div class="ContactLinks" data-rf-test-name="contact-links" data-reactid="83"><div class="questions" data-reactid="84"><a  href="#askquestionmodal" data-toggle="modal" >Ask a Question</a><a href="tel:+17189253372" class="phone-number" data-rf-test-name="phone-number" data-reactid="86">(080) 313-3372</a></div></div>
 	   			 <h5><strong>Savings on this property: ₦{{savings}}</strong></h5>
 	   			 <p>When you buy through AvetiZ </p>
-	   			 <a class="btn btn-block btn-danger" href="offer.html">Start Now</a>
+	   			 <a class="btn btn-block btn-danger" href="{% url 'main:start_now' %}">Start Now</a>
 	   			 </div>
    			</div>
    		</div>

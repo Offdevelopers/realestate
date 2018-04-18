@@ -805,7 +805,7 @@
         //hfhf
 
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 10,
+          zoom: 13,
           center: new google.maps.LatLng(locations[0][1], locations[0][2]),
           mapTypeId: google.maps.MapTypeId.ROADMAP
           //mapTypeId: google.maps.MapTypeId.SATELLITE
@@ -871,7 +871,7 @@
 
    //$('.pagination .js_page').click(function(event){
 
-     $("#pagination").on("click", ".js_page", function(event){;
+     $("#pagination").on("click", ".js_page", function(event){
    
     event.preventDefault();
     if (sessionStorage.filter_string){
@@ -883,7 +883,8 @@
     $.post('/search/', data)
     .done(function(response){
        console.log('fuck you');
-      $('#result').html(response.result); // do what you like with the response
+      $('#result').html(response.result);
+      console.log(response.result);
       $('#pagination').html(response.pagination);
     });
     

@@ -58,7 +58,8 @@ class Property(models.Model):
 	views=models.IntegerField(default=0)
 	favorites=models.IntegerField(default=0)
 	tours=models.IntegerField(default=0)
-	avetiz_agent=models.CharField(max_length=200)
+	avetiz_agent=models.CharField(max_length=200, default='Faith')
+	feature=models.BooleanField(default=False)
 	
 	def __str__(self):
 		return self.name
@@ -75,25 +76,6 @@ class Picture(models.Model):
 	picture_for=models.ForeignKey(Property)
 	picture=models.ImageField(upload_to='media')
 	description=models.TextField()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

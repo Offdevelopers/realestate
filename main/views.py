@@ -11,7 +11,7 @@ from algoliasearch_django import raw_search
 from django.http import HttpResponse, JsonResponse
 import pdb
 from .models import Property, Picture
-from django.db.models import Avg,Count
+from django.db.models import Avg,Count, Q
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
@@ -127,9 +127,9 @@ class SearchView(View):
 			if request.POST.get('page'):
 	 			
 	 			if request.POST.get('filter_string'):
-	 				search_params=build_search_string(filter_string=request.POST.get('filter_string'))
+	 				search_params=build_search_string(filter_string=request.POST.get('filter_string'), page=request.POST.get('page'))
 				else:
-					search_params=build_search_string()
+					search_params=build_search_string(page=request.POST.get('page'))
 			else:			
 				params_dict=build_params_dict(request)
 				filter_string=get_filter_string(request,params_dict)
@@ -148,14 +148,44 @@ class SearchView(View):
 
 
 
+class StartNow(TemplateView):
+	template_name='main/offer.html'
 
+
+
+def getFeature(request):
+	data=dict()
+	location=request.GET.get('location')
+	if location == None:
+		location='Lagos'
+	properties=Property.objects.filter(Q(state__icontains=location))
+	if properties.count() < 3:
+		properties=Property.objects.filter(Q(state__icontains=location)|Q(state__icontains='lagos'), feature=True)[:6]
+	#pdb.set_trace()
+	latest=Property.objects.filter(state__icontains=location).order_by('date_added')[:8]
+	#pdb.set_trace()
+	if latest.count() < 4:
+		latest=Property.objects.filter(Q(state__icontains=location)|Q(state__icontains='lagos')).order_by('date_added','-state')[:8]
+	context={'location':location, 'properties':properties, 'latest':latest, 'state':location}
+	data['featurelatest']=render_to_string('main/includes/partial-feature.html', context)
+	return JsonResponse(data)
+
+
+
+def recent(request):
+	location=request.GET.get('location')
+	if location == None:
+		location='abuja'
+	latest=Property.objects.filter(Q(state__icontains=location)|Q(state__icontains='FCT')).order_by('uploadDate','-state')
+	context={'latest':latest,'topform':topForm()}
+	return render(request,'home/recent-listing.html', context)
 
 
 
 		
 
-def build_search_string(filter_string=''):
-	params={'hitsPerPage':settings.NO_OF_ITEM , 'filters':filter_string}
+def build_search_string(filter_string='', page=1):
+	params={'hitsPerPage':settings.NO_OF_ITEM ,'page':page, 'filters':filter_string }
 	return params
 
 

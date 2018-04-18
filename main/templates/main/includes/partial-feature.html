@@ -1,0 +1,61 @@
+<div class="container"   >
+<section class="featuredPropertySection" >
+  <div class="col-md-12">
+ <div class="row">
+
+   <h4 class="temphide"  style="margin-bottom: 50px; display:none;"><strong>Featured Properties</strong></h4>
+  </div>
+</div>
+
+
+
+<div class="row">
+                       
+          <div class="col-md-12">
+            <div class="owl-carousel owl-theme">
+              {% for property in properties %}
+                {% include 'main/includes/feature_list.html' %} 
+
+        {% endfor %}           
+        
+            
+
+              
+          </div>
+         
+           </div>
+
+</div>
+
+</section>
+</div>
+
+
+<div class="container"   >
+<section class="featuredPropertySection" >
+  <div class="col-md-12">
+ <div class="row">
+   <h4 class="temphide" style="margin-bottom: 50px; display: none;"><strong>Recently Listed Properties</strong></h4>
+  </div>
+</div>
+
+
+
+<div class="row">
+                       
+          <div class="col-md-12">
+            <div class="owl-carousel owl-theme">
+              {% for property in latest %}
+                   {% include 'main/includes/feature_list.html' %} 
+
+                {% endfor %}
+            
+              
+          </div>
+         
+           </div>
+
+</div>
+
+</section>
+</div>

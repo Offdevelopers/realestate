@@ -23,16 +23,19 @@
   <link rel="stylesheet" type="text/css" href="{% static 'css/slick.css' %}"/>
   <link rel="stylesheet" type="text/css" href="{% static 'css/slick-theme.css' %}"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.7/css/swiper.min.css">
-  <link rel="stylesheet" type="text/css" href="http://test.sagecapitals.com/css/lightslider.css">
+ 
    <link rel="stylesheet" type="text/css" href="http://test.sagecapitals.com/css/property.css">
    <link rel="stylesheet" href="http://test.sagecapitals.com/css/owl.carousel.min.css">
     <link rel="stylesheet" href="http://test.sagecapitals.com/css/owl.theme.default.min.css">
+     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="http://test.sagecapitals.com/css/lightslider.css">
+
   {% block styles %}{% endblock %}
   <link href="{% static '/css/mine.css' %}" rel="stylesheet">
-  
-  <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyC8TvKHQ-rUklU5OsD6Oq73pMG1fJO9iR8" ></script>
+  <script type="text/javascript" src="{% static '/js/money.js' %}"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyC8TvKHQ-rUklU5OsD6Oq73pMG1fJO9iR8"></script>
 </head>
-<body>
+<body >
 
   {% block inlinestyle %}
   {% endblock %}
@@ -47,7 +50,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html"><img class ="img-responsive" src="http://test.sagecapitals.com/img/avetiz-solid.png"></a>
+      <a class="navbar-brand" href="{% url 'main:home' %}"><img class ="img-responsive" src="http://test.sagecapitals.com/img/avetiz-solid.png"></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -57,10 +60,10 @@
         <li><a href="#">Sign Up</a></li>
          <li><a href="#">Help</a></li>
         <li>
-            <form class="navbar-form" id="form-buscar" wtx-context="A96EE01C-B5DB-4F36-9E87-92232CCFF9BE">
+            <form class="navbar-form" id="form-buscar" action="{% url 'main:search' %}" wtx-context="A96EE01C-B5DB-4F36-9E87-92232CCFF9BE">
               <div class="form-group" style="display:inline;">
                 <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Search" aria-describedby="basic-addon2" style="width:300px;">
+                  <input type="text" name="address" class="form-control" placeholder="Search" id="base_search" aria-describedby="basic-addon2" style="width:300px;">
                   <span class="input-group-addon" id="basic-addon2"><span class="glyphicon glyphicon-search"></span></span>
                 </div>
               </div>
@@ -113,7 +116,7 @@
           
           <div class="form-group">
           
-            <select name="currency_code" class="form-control tolu">
+            <select name="currency_code" class="form-control js-curr tolu">
                 <option value="NGN">NGN</option>
                 <option value="AUD">USD</option>
                 <option value="BRL">EUR </option>
@@ -212,7 +215,7 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Lagos</h4>
+                <h4 class="modal-title" id="state">Lagos</h4>
               </div>
               <div class="modal-body">
               

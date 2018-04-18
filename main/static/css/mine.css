@@ -408,3 +408,10 @@ color:#fff;
     padding-right: 15px !important;
     
 }
+
+.mapSection .property .fa {
+    position: relative;
+    top: 0px;
+    right:initial !important;
+}
+

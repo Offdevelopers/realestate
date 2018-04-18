@@ -133,4 +133,4 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 UPLOAD_TO = os.path.join(BASE_DIR, 'media/')
 
-NO_OF_ITEM=1
+NO_OF_ITEM=3
