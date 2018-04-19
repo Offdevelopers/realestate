@@ -86,31 +86,39 @@ class SearchView(View):
 		
 		a=raw_search(Property, query, params)
 		b=raw_search(Property, query, {"hitsPerPage":2000})
+
 		property_list=Property.objects.filter(id__in=[int(w.get('objectID')) for w in a.get('hits')  ])
-		values=[int(property.price) for property in property_list]
-		context['median']=median(values)
-		pageNo=a.get('nbPages')
-		context['state_average']=Property.objects.values('city').annotate(Avg('price')).filter(state__icontains=property_list[0].state)
-		context['country']=property_list[0].country
-		context['country_average']=Property.objects.values('state').annotate(Avg('price')).filter(country__icontains=property_list[0].country)
-		two_bedroom=property_list.filter(bedroom=2)
-		context['two_bedroom_count']=two_bedroom.count()  
-		context['two_bedroom_avergae_price']=two_bedroom.aggregate(Avg('price'))
 
-		one_bedroom=property_list.filter(bedroom=1)
-		context['one_bedroom_count']=one_bedroom.count()  
-		context['one_bedroom_avergae_price']=one_bedroom.aggregate(Avg('price'))
+		if property_list.exists():
 
-		three_bedroom=property_list.filter(bedroom__gte=3)
-		context['three_bedroom_count']=one_bedroom.count()  
-		context['three_bedroom_avergae_price']=three_bedroom.aggregate(Avg('price'))
+			values=[int(property.price) for property in property_list]
+			context['median']=median(values)
+			pageNo=a.get('nbPages')
+			context['state_average']=Property.objects.values('city').annotate(Avg('price')).filter(state__icontains=property_list[0].state)
+			context['country']=property_list[0].country
+			context['country_average']=Property.objects.values('state').annotate(Avg('price')).filter(country__icontains=property_list[0].country)
+			two_bedroom=property_list.filter(bedroom=2)
+			context['two_bedroom_count']=two_bedroom.count()  
+			context['two_bedroom_avergae_price']=two_bedroom.aggregate(Avg('price'))
 
-		
-		context['last_page']=pageNo
-		context['pageNo']=range(0, pageNo)
-		context['no_of_properties_for_sales']=a.get('nbHits')
+			one_bedroom=property_list.filter(bedroom=1)
+			context['one_bedroom_count']=one_bedroom.count()  
+			context['one_bedroom_avergae_price']=one_bedroom.aggregate(Avg('price'))
 
-		context['property_list']=Property.objects.filter(id__in=[int(w.get('objectID')) for w in a.get('hits')  ])
+			three_bedroom=property_list.filter(bedroom__gte=3)
+			context['three_bedroom_count']=one_bedroom.count()  
+			context['three_bedroom_avergae_price']=three_bedroom.aggregate(Avg('price'))
+
+			
+			context['last_page']=pageNo
+			context['pageNo']=range(0, pageNo)
+			context['no_of_properties_for_sales']=a.get('nbHits')
+
+			context['property_list']=Property.objects.filter(id__in=[int(w.get('objectID')) for w in a.get('hits')  ])
+		else:
+			context['property_list']=get_feature()
+
+
 		return render(request, 'main/search.html', context)
 
 
@@ -156,12 +164,8 @@ class StartNow(TemplateView):
 def getFeature(request):
 	data=dict()
 	location=request.GET.get('location')
-	if location == None:
-		location='Lagos'
-	properties=Property.objects.filter(Q(state__icontains=location))
-	if properties.count() < 3:
-		properties=Property.objects.filter(Q(state__icontains=location)|Q(state__icontains='lagos'), feature=True)[:6]
-	#pdb.set_trace()
+	get_feature(location)
+
 	latest=Property.objects.filter(state__icontains=location).order_by('date_added')[:8]
 	#pdb.set_trace()
 	if latest.count() < 4:
@@ -170,6 +174,14 @@ def getFeature(request):
 	data['featurelatest']=render_to_string('main/includes/partial-feature.html', context)
 	return JsonResponse(data)
 
+
+def get_feature(location=None):
+	if location == None:
+		location='Lagos'
+	properties=Property.objects.filter(Q(state__icontains=location), feature=True)
+	if properties.count() < 3:
+		properties=Property.objects.filter(Q(state__icontains=location)|Q(state__icontains='lagos'), feature=True)[:6]
+	return properties
 
 
 def recent(request):

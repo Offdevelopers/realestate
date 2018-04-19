@@ -20,22 +20,23 @@ function increase_stat(stat, id){
                 }
             }
             fx.settings = { from: "NGN", to: "USD" };
+             })
+            .fail(function(){
+              console.log('fail')
+            });
+            
             if(navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(success, error, geoOptions);
             } else {
           console.log("Geolocation services are not supported by your web browser.");
-          $.get('/request/?location=abuja',function(data,status){
-              $('div.js-feature').html(data.featurelatest)
-              $('.temphide').show()
+         replace_feature('Abuja');
               $('#city').html('Abuja');
               $('#state').html('Abuja');
-          })
           }
-            })
+            
 
-            .fail(function(){
-              console.log('fail')
-            });
+            
+           
         
           
       }
@@ -50,14 +51,11 @@ function increase_stat(stat, id){
         }
 
       function error(error) {
-        $.get('/request/?location=abuja',function(data,status){
-              console.log("Unable to retrieve your location due to " + error.code + ": " + error.message)
-              $('div.js-feature').html(data.featurelatest)
-              $('.temphide').show();
+              replace_feature('Abuja');
               $('#city').html('Abuja');
               $('#state').html('Abuja');
-          })
           }
+          
       
 
       var geoOptions = {
@@ -106,18 +104,10 @@ google.maps.event.addDomListener(window, 'load', initialize);
             info2 += '<div>State: ' + item.long_name + '</div>';
             $('#state').html(item.long_name);
             $('#city').html(item.long_name);
-             $.get('/request/?location='+item.long_name,function(data,status){
-              
-          }).done(function(data){
-              $('.js-feature').html(data.featurelatest);
-              $('.temphide').show();
-               activate_owl()
-          })
+             replace_feature(item.long_name);
           }
           if (item.types.indexOf("country")> -1){
           $("#id_country").val(item.long_name)
-          //chkcurr('.js-price','#id_country')
-          //console.log('fufe')
         }
 
         });
@@ -169,17 +159,11 @@ function displayLocation(latitude,longitude){
           x.innerHTML = state;
         }
         catch(err){
-          //do nothing
+          
         }
-          //$('#id_country').val(country)
-           $.get('/request/?location='+state,function(data,status){
-              //alert('failure'+data.featurelatest);
-              $('.js-feature').html(data.featurelatest);
-              $('.temphide').show();
-              activate_owl()
-              //chkcurr('.js-price','#id_country');
-          })
-                    console.log ("city name is: " + city);
+            replace_feature(state);
+          
+                    
                 }
                 else  {
                     console.log ("address not found");
@@ -192,6 +176,16 @@ function displayLocation(latitude,longitude){
     );
 }
 
+
+
+function replace_feature(location){
+   $.get('/request/?location='+state,function(data,status){
+   }).done(function(data){
+      $('.js-feature').html(data.featurelatest);
+              $('.temphide').show();
+              activate_owl()
+   });         
+}
 
 function activate_owl(){
 	 $('.owl-carousel').owlCarousel({
