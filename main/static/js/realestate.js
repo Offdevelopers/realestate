@@ -188,7 +188,25 @@ function replace_feature(location){
 }
 
 function activate_owl(){
-	 $('.owl-carousel').owlCarousel({
+	 $('.owl-carousel1').owlCarousel({
+    loop:true,
+    margin:10,
+    nav:true,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:1
+        },
+        1000:{
+            items:4
+        }
+    }
+});
+
+
+    $('.owl-carousel2').owlCarousel({
     loop:true,
     margin:10,
     nav:true,
@@ -204,7 +222,13 @@ function activate_owl(){
         }
     }
 });
+
+
+
 }
+
+
+
 
 function getCountry(id) {
   return $(id).val()

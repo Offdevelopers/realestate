@@ -25,7 +25,7 @@ SECRET_KEY = ')@1j8orkmki**)skiql*j2om-@-nyyq0s=x8azuo4&npl7okx6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['avetiz.com','www.avetiz.com']
+ALLOWED_HOSTS = ['avetiz.com','www.avetiz.com', 'localhost']
 
 
 # Application definition
