@@ -422,22 +422,25 @@
   	
 
   <div id="result">
-
-    {% if not three_bedroom_count %}
-    <h4 style="color:red">No result found </h4>
-    <p>Please check your filter or query</p>
+    {% if noresult %}
+    <h4 style="color:red">No Result</h4>
+    <br>
+    <hr>
+    <h3>Feature Properties </h3>
+    <br>
+    <br>
     {% endif %}
    {% include 'main/includes/result.html' %}
+    
  </div>
     
 
-      {% if three_bedroom_count %}
+    {% if not noresult %}
       <div id="pagination">
       
          {% include 'main/includes/navigation.html' %}
      </div>
-
-     <section class="whyavetiz container-fluid">
+      <section class="whyavetiz container-fluid">
       <hr>
 
       <h4>Central Area Real Estate Facts</h4>
@@ -470,10 +473,10 @@
       {% endfor %}
 
     </section>
-
+{% endif %}
    
     
-    {% endif %}
+
 
 
 
@@ -489,7 +492,7 @@
   </div>
   </div>
   </section>
-{% if three_bedroom_count %}
+ {% if not noresult %}
   <section class="homePrices text-center">
     <div class="container">
       <div class="row">
@@ -730,7 +733,7 @@
          
           </div>
         </div>
-      </div>
+  
       
     </section>
 
@@ -743,7 +746,17 @@
 {% block scripts %}
 
 <script>
-    $('.slickshit').slick();
+
+  $(document).ready(function(){
+
+
+  geoFindMe();
+
+});
+
+  sessionStorage.filter_string='';
+
+       $('.slickshit').slick();
     $('.tourist').slick();
      var swiper = new Swiper('.swiper-container', {
       navigation: {

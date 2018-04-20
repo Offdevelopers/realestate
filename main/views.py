@@ -115,8 +115,10 @@ class SearchView(View):
 			context['no_of_properties_for_sales']=a.get('nbHits')
 
 			context['property_list']=Property.objects.filter(id__in=[int(w.get('objectID')) for w in a.get('hits')  ])
+			context['result']=True
 		else:
 			context['property_list']=get_feature()
+			context['noresult']=True
 
 
 		return render(request, 'main/search.html', context)
@@ -143,6 +145,7 @@ class SearchView(View):
 				filter_string=get_filter_string(request,params_dict)
 				search_params=build_search_string(filter_string )
 			query=request.session['query']
+
 			a=raw_search(Property, query, search_params)
 			pageNo=a.get('nbPages')
 			context['property_list']=Property.objects.filter(id__in=[int(w.get('objectID')) for w in a.get('hits')  ])
@@ -164,7 +167,7 @@ class StartNow(TemplateView):
 def getFeature(request):
 	data=dict()
 	location=request.GET.get('location')
-	get_feature(location)
+	properties=get_feature(location)
 
 	latest=Property.objects.filter(state__icontains=location).order_by('date_added')[:8]
 	#pdb.set_trace()
@@ -196,7 +199,7 @@ def recent(request):
 
 		
 
-def build_search_string(filter_string='', page=1):
+def build_search_string(filter_string='', page=0):
 	params={'hitsPerPage':settings.NO_OF_ITEM ,'page':page, 'filters':filter_string }
 	return params
 
@@ -210,7 +213,7 @@ def seperate_field(field):
  	
 def build_params_dict(request):
 		params_dict=dict()
-		fields=['min-bedroom','max-bedroom','min-lot_size', 
+		fields=['min-bedroom','max-bedroom','min-bathroom', 'max-bathroom','min-lot_size', 
 			'max-lot_size', 'type-property_type','min-year_built',
 			'max-year_built','max-parking_space', 'min-parking_space']
 		for a in fields :
