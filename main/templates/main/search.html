@@ -834,34 +834,7 @@
 
       <script>
         
-        var filter= function(){
-          /**
-          value=$(this).val();
-          operator=$(this).attr('operator');
-          name=$(this).attr('name');
-          $.get('', {'name':name, 'operator':operator, 'value':value }, function(){
-
-          }).done(function(data){
-            
-          }
-          ).fail(function(data){
-            console.log('error')
-          })
-          **/
-
-          $.ajax({
-           type: "POST",
-           url: "/search/",
-           data: $("filterform").serialize(), // serializes the form's elements.
-           success: function(data)
-           {
-               alert(data); // show response from the php script.
-           }
-         });
-        }
-      
-
-        $('.js_filter_tem').change(filter)
+        
 
    //$('.pagination .js_page').click(function(event){
 

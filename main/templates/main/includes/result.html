@@ -2,7 +2,7 @@
       {% for property in property_list %}
       <a href="{{property.get_absolute_url}}">
       <div class="col-md-6 dontwantpadding" style="padding-right: 3px !important;padding-left: 6px !important;" >
-        <div class="property" style="background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url({{property.thumbnail.url}}); ">
+        <div class="property" style="background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url({{property.thumbnail.url}}); height:220px; ">
         
          <a href='#' property_id="{{property.pk}}" class='js-fovorite'><i class="fa fa-heart-o fa-2x" style="float:right; position: relative;right:30px;" aria-hidden="true"></i></a>
        

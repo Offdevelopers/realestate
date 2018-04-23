@@ -1,8 +1,11 @@
 <nav aria-label="Page navigation" class="container-fluid">
+
       <ul class="pagination">
         
         {% for page in pageNo %}
         <li class="hidden-xs"><a class="js_page" page_no='{{page}}' href="#">{{page|add:'1'}}</a></li>
+        {% empty %}
+        <h4 style="color:red">No Result Found, Please remove filters to see result</h4>
         {% endfor %}
         
       </ul>

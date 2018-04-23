@@ -149,8 +149,10 @@ class SearchView(View):
 			a=raw_search(Property, query, search_params)
 			pageNo=a.get('nbPages')
 			context['property_list']=Property.objects.filter(id__in=[int(w.get('objectID')) for w in a.get('hits')  ])
-
+			if not context['property_list'].exists():
+				context['noresult']=True
 			pageNo=range(0, pageNo)
+			#pdb.set_trace()
 			query=request.session['query']
 			pagination=render_to_string('main/includes/navigation.html', {'pageNo':pageNo})
 			result=render_to_string('main/includes/result.html', context)
