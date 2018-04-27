@@ -70,30 +70,30 @@
   <div class="fixedBar">
     <div class="container-fluid">
     <div class="row">
-      <div class="col-md-8 col-xs-8"><h2 class="areaName">Central Business District </h2></div>
-      <div class="col-md-4 col-xs-4"><p class="propsFound">14 Homes For Sale.</p></div>
+      <div class="col-md-8 col-xs-8"><h2 class="areaName"> {{query}}</h2></div>
+      <div class="col-md-4 col-xs-4"><p class="propsFound">{{no_of_properties_for_sales}} Homes For Sale.</p></div>
     </div>
     <div class="row fixedBarFormRow">
       <div class="col-lg-12 col-md-12">
-        <form class="form-inline">
+        <form id="price-filter" method="post" class="form-inline ">
         <label for="price">Price</label>
-        <select class="form-control">
-          <option selected="selected">No Min</option>
-          <option value="">₦100K</option>
-          <option>₦200K</option>
-          <option>₦300K</option>
-          <option>₦400K</option>
-          <option>₦500K</option>
+        <select class="js-price-filter form-control" name='min-price' >
+          <option value='' selected="selected">No Min</option>
+          <option value="100000">₦100K</option>
+          <option value="200000">₦200K</option>
+          <option value="300000">₦300K</option>
+          <option value="400000">₦400K</option>
+          <option vale="500000">₦500K</option>
         </select>
         <span class="hidden-xs">to</span>
 
-        <select class="form-control">
-          <option selected="selected">No Max</option>
-          <option value="">₦100K</option>
-          <option>₦500K</option>
-          <option>₦600K</option>
-          <option>₦700K</option>
-          <option>₦800K+</option>
+        <select class="js-price-filter form-control" name='max-price' >
+          <option value='' selected="selected">No Max</option>
+          <option value="100000">₦100K</option>
+          <option value="200000">₦200K</option>
+          <option value="300000">₦300K</option>
+          <option value="400000">₦400K</option>
+          <option vale="500000">₦500K</option>
         </select>
 
       </form>
@@ -858,8 +858,28 @@
    }); 
 
    $("#filterform").submit(function(e){
-    var form = $(this);
-    $.ajax({ 
+    let form = $(this);
+    filter_result(form)
+    return false;
+ });
+
+$('#result').on('click' , '.js-fovorite', function(){
+  increase_stat('favorites', $(this).attr('property_id'));
+  return false;
+});
+
+$(".js-price-filter").change(function(){
+  console.log('fuc k shit is this')
+  let form =$('#price-filter');
+  filter_result(form);
+})
+
+
+
+
+
+function filter_result(form){
+   $.ajax({ 
          url   : form.attr('action'),
          type  : form.attr('method'),
          data  : form.serialize(), // data to be submitted
@@ -870,13 +890,7 @@
 
          }
     });
-    return false;
- });
-
-$('#result').on('click' , '.js-fovorite', function(){
-  increase_stat('favorites', $(this).attr('property_id'));
-  return false;
-});
+}
 
       </script>
 

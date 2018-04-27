@@ -91,40 +91,43 @@ class SearchView(View):
 
 		if property_list.exists():
 
-			values=[int(property.price) for property in property_list]
-			context['median']=median(values)
+			context=self.get_context(property_list)
 			pageNo=a.get('nbPages')
-			context['state_average']=Property.objects.values('city').annotate(Avg('price')).filter(state__icontains=property_list[0].state)
-			context['country']=property_list[0].country
-			context['country_average']=Property.objects.values('state').annotate(Avg('price')).filter(country__icontains=property_list[0].country)
-			two_bedroom=property_list.filter(bedroom=2)
-			context['two_bedroom_count']=two_bedroom.count()  
-			context['two_bedroom_avergae_price']=two_bedroom.aggregate(Avg('price'))
-
-			one_bedroom=property_list.filter(bedroom=1)
-			context['one_bedroom_count']=one_bedroom.count()  
-			context['one_bedroom_avergae_price']=one_bedroom.aggregate(Avg('price'))
-
-			three_bedroom=property_list.filter(bedroom__gte=3)
-			context['three_bedroom_count']=one_bedroom.count()  
-			context['three_bedroom_avergae_price']=three_bedroom.aggregate(Avg('price'))
-
-			
 			context['last_page']=pageNo
 			context['pageNo']=range(0, pageNo)
 			context['no_of_properties_for_sales']=a.get('nbHits')
-
-			context['property_list']=Property.objects.filter(id__in=[int(w.get('objectID')) for w in a.get('hits')  ])
+			
 			context['result']=True
+			context['query']=query
 		else:
-			context['property_list']=get_feature()
-			context['noresult']=True
+			context=self.get_context(get_feature())
+			context['result']=True
+
 
 
 		return render(request, 'main/search.html', context)
 
 
- 			
+ 	def get_context(self,property_list):
+ 		context=dict()
+ 		values=[int(property.price) for property in property_list]
+		context['median']=median(values)
+		context['state_average']=Property.objects.values('city').annotate(Avg('price')).filter(state__icontains=property_list[0].state)
+		context['country']=property_list[0].country
+		context['country_average']=Property.objects.values('state').annotate(Avg('price')).filter(country__icontains=property_list[0].country)
+		two_bedroom=property_list.filter(bedroom=2)
+		context['two_bedroom_count']=two_bedroom.count()  
+		context['two_bedroom_avergae_price']=two_bedroom.aggregate(Avg('price'))
+		
+		one_bedroom=property_list.filter(bedroom=1)
+		context['one_bedroom_count']=one_bedroom.count()  
+		context['one_bedroom_avergae_price']=one_bedroom.aggregate(Avg('price'))
+		three_bedroom=property_list.filter(bedroom__gte=3)
+		context['three_bedroom_count']=one_bedroom.count()  
+		context['three_bedroom_avergae_price']=three_bedroom.aggregate(Avg('price'))
+		context['property_list']=property_list
+		return context
+
 
  	@method_decorator(csrf_exempt)
 	def dispatch(self, request, *args, **kwargs):
@@ -150,7 +153,7 @@ class SearchView(View):
 			pageNo=a.get('nbPages')
 			context['property_list']=Property.objects.filter(id__in=[int(w.get('objectID')) for w in a.get('hits')  ])
 			if not context['property_list'].exists():
-				context['noresult']=True
+				context['result']=True
 			pageNo=range(0, pageNo)
 			#pdb.set_trace()
 			query=request.session['query']
@@ -217,13 +220,13 @@ def build_params_dict(request):
 		params_dict=dict()
 		fields=['min-bedroom','max-bedroom','min-bathroom', 'max-bathroom','min-lot_size', 
 			'max-lot_size', 'type-property_type','min-year_built',
-			'max-year_built','max-parking_space', 'min-parking_space']
+			'max-year_built','max-parking_space', 'min-parking_space', 'min-price', 'max-price']
 		for a in fields :
 			value_operator_list=seperate_field(a)
 			operator_string=value_operator_list[0]
 			field=value_operator_list[1]
 			
-			if request.POST.get(a) != '':
+			if request.POST.get(a) != '' and request.POST.get(a) != None :
 				params_dict[operator_string]=field
 			else:
 				pass
@@ -236,7 +239,9 @@ def get_filter_string(request, params_dict):
 	filter_string=''
 	for k, v in params_dict.items():
 		operator_symbol=get_operator_symbol(k)
+		
 		newfilter=v+' '+operator_symbol+' '+request.POST.get(k+'-'+v)
+
 		if filter_string== '':
 			filter_string=newfilter
 		else:
