@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'algoliasearch_django',
-    'autofixture',
+    
 ]
 
 ALGOLIA = {
