@@ -11,5 +11,6 @@ url(r'^increase_stat', views.IncreaseStat.as_view(), name='increase_stat'),
 url(r'^offer/$', views.StartNow.as_view(), name='start_now'),
 url(r'^request/', views.getFeature, name='ajaxfeature'),
 url(r'^recent_listing/$',views.recent, name='recent'),
+url(r'^agent_list/$',views.AgentView.as_view(), name='agent_list'),
 
 ]

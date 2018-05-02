@@ -11,7 +11,7 @@ class Developer(models.Model):
 	name=models.CharField(max_length=200)
 	address=models.TextField()
 	phone=models.CharField(max_length=200)
-	email=models.CharField(max_length=200)
+	email=models.EmailField(max_length=200)
 
 	def __str__(self):
 		return self.name
@@ -19,10 +19,16 @@ class Developer(models.Model):
 
 class Agent(models.Model):
 	name=models.CharField(max_length=200)
-	email=models.CharField(max_length=200)
+	email=models.EmailField(max_length=200)
 	phone=models.CharField(max_length=100)
 	developer=models.ForeignKey(Developer)
 	rating=models.DecimalField(max_digits=2, decimal_places=1)
+	city=models.CharField(max_length=200, null=True)
+	state=models.CharField(max_length=200, null=True)
+	country=models.CharField(max_length=200, null=True)
+	premium=models.BooleanField(default=False)
+	profile=models.ImageField(upload_to='media', null=True)
+
 
 	def __str__(self):
 		return self.name

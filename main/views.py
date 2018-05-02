@@ -8,9 +8,9 @@ from django.views.generic import (TemplateView,ListView,
 from django.views import View
 
 from algoliasearch_django import raw_search
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, Http404
 import pdb
-from .models import Property, Picture
+from .models import Property, Picture, Agent
 from django.db.models import Avg,Count, Q
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
@@ -114,6 +114,8 @@ class SearchView(View):
 		context['median']=median(values)
 		context['state_average']=Property.objects.values('city').annotate(Avg('price')).filter(state__icontains=property_list[0].state)
 		context['country']=property_list[0].country
+		context['city']=property_list[0].city
+		context['state']=property_list[0].state
 		context['country_average']=Property.objects.values('state').annotate(Avg('price')).filter(country__icontains=property_list[0].country)
 		two_bedroom=property_list.filter(bedroom=2)
 		context['two_bedroom_count']=two_bedroom.count()  
@@ -123,9 +125,12 @@ class SearchView(View):
 		context['one_bedroom_count']=one_bedroom.count()  
 		context['one_bedroom_avergae_price']=one_bedroom.aggregate(Avg('price'))
 		three_bedroom=property_list.filter(bedroom__gte=3)
-		context['three_bedroom_count']=one_bedroom.count()  
+		context['three_bedroom_count']=three_bedroom.count()  
 		context['three_bedroom_avergae_price']=three_bedroom.aggregate(Avg('price'))
 		context['property_list']=property_list
+		context['customer_satisfaction']=Agent.objects.filter(city__icontains=property_list[0].city).aggregate(Avg('rating'))
+		context['no_of_agent']=Agent.objects.filter(city__icontains=property_list[0].city).count()
+
 		return context
 
 
@@ -160,6 +165,31 @@ class SearchView(View):
 			pagination=render_to_string('main/includes/navigation.html', {'pageNo':pageNo})
 			result=render_to_string('main/includes/result.html', context)
 			return JsonResponse({'status':'success','result':result, 'pagination':pagination, 'filter_string':filter_string})
+
+
+class AgentView(View):
+
+	 def get(self, request,*args, **kwargs):
+	 	if request.GET.get('city') and request.GET.get('state'):
+	 		state=request.GET.get('state')
+	 		city=request.GET.get('city')
+	 		country=request.GET.get('country')
+	 		premium_agent=Agent.objects.filter(premium=True)
+	 		premium_agent_state=Agent.objects.filter(premium=True).filter(state__icontains=state)[:3]
+	 		partners=Agent.objects.filter(city__icontains=city)
+	 		partner_nearby=Agent.objects.filter(state__icontains=state).exclude(city__icontains=city)[:3]
+	 		context={
+	 		'premium_agent':premium_agent,
+	 		'premium_agent_state':premium_agent_state,
+	 		'partners':partners,
+	 		'partner_nearby':partner_nearby,
+	 		'city':city,
+	 		'state':state,
+	 		'country':country,
+	 		}
+	 		return render(request, 'main/agent.html', context)
+	 	else:
+	 		raise Http404('Invalid request')
 
 
 

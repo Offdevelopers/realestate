@@ -443,7 +443,7 @@
       <section class="whyavetiz container-fluid">
       <hr>
 
-      <h4>Central Area Real Estate Facts</h4>
+      <h4>{{query}} Estate Facts</h4>
       <div class="row">
         <div class="col-md-6"><p>Total Properties for Sale: </p></div> <div class="col-md-6"><strong>{{no_of_properties_for_sales}}</strong></div>
       </div>
@@ -455,7 +455,7 @@
       </div>
 
       <hr>
-      <h4>Average Home Value By City</h4>
+      <h4>Average Home Value By City in {{state}}</h4>
        {% for value in state_average %} 
       <div class="row">
         <div class="col-md-6"><p>{{value.city}} </p></div> <div class="col-md-6"><strong>₦{{value.price__avg|floatformat:"0"}}</strong></div>
@@ -465,7 +465,7 @@
      
       <hr>
 
-      <h4>Average Home Value By City in {{country}}</h4>
+      <h4>Average Home Value By State in {{country}}</h4>
       {% for value in country_average %} 
       <div class="row">
         <div class="col-md-6"><p>{{value.state}} </p></div> <div class="col-md-6"><strong>₦{{value.price__avg|floatformat:"0"}}</strong></div>
@@ -497,7 +497,7 @@
     <div class="container">
       <div class="row">
       <div class="col-sm-12">
-               <h2>Overview of Central Area Real Estate Trends</h2>
+               <h2>{{query}} Area Real Estate Trends</h2>
       <small>Calculated using the past 30 days</small>
             </div>
           </div>
@@ -635,10 +635,10 @@
         <div class="col-sm-12 ">
           <div class="row">
             <div class="col-sm-6">
-               <h3>Photos of Central Business District</h3>
+               <h3>Photos of {{city}} {{state}}, {{country}} </h3>
               <div class="touris swiper-container">
                 <div class="swiper-wrapper">
-                  <div class="swiper-slide">
+                  <!--div class="swiper-slide">
                     <img class="img-responsive" src="https://pp3.walk.sc/w640h460/production/103105_robert_f_wagner_junior_park_new_york.jpg">
                     <div class="overlay">
                       <div class="text"><h3>Aso Rock </h3><br><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu</p></div>
@@ -650,7 +650,7 @@
                     <div class="overlay">
                       <div class="text"><h3>Wonderland </h3><br><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu</p> </div>
                     </div>
-                </div>
+                </div-->
                 </div>
                 <div class="swiper-pagination"></div>
                 <!-- Add Arrows -->
@@ -667,7 +667,7 @@
                  <div class="row"> 
         
                 <div class="col-sm-8">
-                  <h2 style="text-align: left;">AvetiZ Real Estate Agents in Abuja</h2>
+                  <h2 style="text-align: left;">AvetiZ Real Estate Agents in {{city}}</h2>
                   </div>
                 </div>
 
@@ -676,7 +676,7 @@
                 <div class="col-sm-8">
                    <div class="row">
                       <div class="col-sm-3">
-                        <h2 style="text-align: left; margin-top: 0px;" >100</h2>
+                        <h2 style="text-align: left; margin-top: 0px;" >0</h2>
                       </div>
                       <div class="col-sm-9">
                         <p  class="stat_desc" style="position: relative;top:10px;">Recent Deals in the Last Year</p>
@@ -690,7 +690,7 @@
                 <div class="col-sm-8">
                    <div class="row">
                       <div class="col-sm-3">
-                        <h2 style="text-align: left; margin-top: 0px;" >4.7</h2>
+                        <h2 style="text-align: left; margin-top: 0px;" >{{customer_satisfaction.rating__avg|floatformat:2}}</h2>
                       </div>
                       <div class="col-sm-9">
                         <p class="stat_desc" style="position: relative;top:10px;">Avg Customer Satisfaction</p>
@@ -704,7 +704,7 @@
                 <div class="col-sm-8">
                    <div class="row">
                       <div class="col-sm-3">
-                        <h2 style="text-align: left; margin-top: 0px;" >816</h2>
+                        <h2 style="text-align: left; margin-top: 0px;" >0</h2>
                       </div>
                       <div class="col-sm-9">
                         <p  style="position: relative;top:10px;">Total Homes Closed</p>
@@ -715,11 +715,11 @@
                   
                  
                 <div class="row">
-                  <div class="col-sm-8 ">
-                    <button class="btn btn-default btn-lg">Find an AvetiZ Real Estate Agent</button>
+                  <div class="col-sm-8">
+                    <a href="{% url 'main:agent_list' %}?city={{city}}&state={{state}}&country={{country}}" class="btn btn-default btn-lg">Find an AvetiZ Real Estate Agent</a>
                   </div>
                   <div class="col-sm-8">
-                    <p class="agentsnum">5 active AvetiZ agents in Abuja.</p>
+                    <p class="agentsnum">{{no_of_agent}} active AvetiZ agents in {{city}}.</p>
                   </div>
                
                 </div>
@@ -744,6 +744,7 @@
 {% endblock %}
 
 {% block scripts %}
+<script type="text/javascript" src="http://test.sagecapitals.com/js/owl.carousel.min.js"></script>
 
 <script>
 
@@ -756,14 +757,7 @@
 
   sessionStorage.filter_string='';
 
-       $('.slickshit').slick();
-    $('.tourist').slick();
-     var swiper = new Swiper('.swiper-container', {
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-    });
+    
         $(function(){
           
           $('.js_filter').click(function(){
@@ -828,6 +822,61 @@
             }
           })(marker, i));
         }
+
+
+        var service = new google.maps.places.PlacesService(map);
+        var request={
+          location:new google.maps.LatLng(locations[0][1], locations[0][2]),
+          radius:500,
+        };
+        service.nearbySearch(request, callback)
+
+
+
+        function callback(results, status){
+            if (status == google.maps.places.PlacesServiceStatus.OK) {
+            
+              //createMarker(results[i]);
+              var request={
+                placeId:results[0].place_id
+              }
+
+              service.getDetails(request, place_detail);
+              console.log(results[0])
+          }
+        }
+
+      function place_detail(place, status){
+            if (status == google.maps.places.PlacesServiceStatus.OK) {
+              $.each(place.photos, function(i, photo){
+                url=photo.getUrl({'maxWidth': 600, 'maxHeight': 600})
+                string_slide="<div class='swiper-slide'><img style='height:400px; width:100% ' class='img-responsive' src='"+url+"'><div class='overlay'><div class='text'><h3>Aso Rock </h3><br><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu</p></div></div></div>";
+                 
+                 $('.swiper-wrapper').append(string_slide);
+                 console.log('shit how many times');
+              })
+            }
+            else{
+              console.log('why')
+            }
+
+            run_swiper()
+
+          }
+
+          function run_swiper(){
+
+              $('.slickshit').slick();
+              $('.tourist').slick();
+               var swiper = new Swiper('.swiper-container', {
+                navigation: {
+                  nextEl: '.swiper-button-next',
+                  prevEl: '.swiper-button-prev',
+                },
+              });
+          }
+
+
 
 
       </script>
@@ -896,3 +945,5 @@ function filter_result(form){
 
 
 {% endblock %}
+
+{% block title%}Search | AvetiZ {% endblock %}
