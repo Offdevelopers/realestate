@@ -178,6 +178,8 @@ function displayLocation(latitude,longitude){
 
 
 
+
+
 function replace_feature(location){
    $.get('/request/?location='+state,function(data,status){
    }).done(function(data){

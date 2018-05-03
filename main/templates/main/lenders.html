@@ -26,7 +26,7 @@
       <p>Local lenders available when you are. Talk to a lender now or schedule a time for later.</p>
       <div class="form-element">
         <div class="inputcontainer">
-          <input placeholder="" class="inputform" type="text">
+          <input placeholder="" class="inputform" id="lenderpageform" type="text">
        </div>
        <a class="alender" href="#">
           Get Started
@@ -491,6 +491,14 @@
 
 
 <script type="text/javascript">
+
+  
+  var input = document.getElementById('lenderpageform');
+let autocomplete=new google.maps.places.Autocomplete(input, {});
+autocomplete.addListener('place_changed', function () {
+      console.log('crazy')
+      $('#lenderpageform').submit();      
+      });
 
   var housePrice = document.querySelector('#housePrice');
   var hpRange = document.querySelector('#hpRange');
