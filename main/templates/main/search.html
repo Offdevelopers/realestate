@@ -4,7 +4,7 @@
 	<style>
 
     div.affix {
-        top: 0px;
+        top: 80px;
         position: fixed !important ;
        }
 
@@ -790,7 +790,14 @@
     {% endfor %}
 ]
 
-        //hfhf
+     function set_map_height(){
+        window_height=$(window).height();
+        map_height=window_height-80;
+        //console.log(map_height)
+        $('#map').css('height', map_height);
+
+      }
+        set_map_height();
 
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 11,
@@ -876,7 +883,7 @@
               });
           }
 
-
+          $(window).resize(set_map_height)
 
 
       </script>
