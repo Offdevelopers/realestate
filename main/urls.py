@@ -12,5 +12,6 @@ url(r'^offer/$', views.StartNow.as_view(), name='start_now'),
 url(r'^request/', views.getFeature, name='ajaxfeature'),
 url(r'^recent_listing/$',views.recent, name='recent'),
 url(r'^agent_list/$',views.AgentView.as_view(), name='agent_list'),
+url(r'^lenders/$', views.MortageView.as_view(), name='mortage')
 
 ]

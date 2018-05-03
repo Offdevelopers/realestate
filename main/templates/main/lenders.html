@@ -1,0 +1,545 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block styles %} <link rel="stylesheet" type="text/css" href="{% static '/css/lenders.css' %}"> {% endblock %}
+{% block content %}
+
+  <section>
+    <div class="nav-sub-wrapper">
+      <div class="container nav-width">
+        <ul class="nav-secondary">
+          <li class="nav-item"><a class="track-event">Mortage Lenders</a></li>
+          <li class="nav-item"><a class="track-event">Mortage Rates</a></li>
+          <li class="nav-item"><a class="track-event">Mortage Calculator</a></li>
+          <li class="nav-item"><a class="track-event">Lender Reviews</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+  <div class="jumbotron jumstyle">
+    <div class="darkbg ">
+
+    <div class ="container text-center">
+      <h2 class="jumh">
+        Get Your Mortage Questions Answered 
+      </h2>
+      <p>Local lenders available when you are. Talk to a lender now or schedule a time for later.</p>
+      <div class="form-element">
+        <div class="inputcontainer">
+          <input placeholder="" class="inputform" type="text">
+       </div>
+       <a class="alender" href="#">
+          Get Started
+       </a>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <header class="lendersH">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3 lhBorderRight">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search for...">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+          </span>
+        </div>
+        </div>
+        <div class="col-sm-2 lhBorderRight">
+          <div class="dropdown">
+              <span class="btn dropdown-toggle" type="button" data-toggle="dropdown">Mortgage
+              <span class="caret"></span></span>
+              <ul class="dropdown-menu">
+                <li><a href="#">Mortgage</a></li>
+                <li><a href="#">Refinance</a></li>
+                
+              </ul>
+            </div>
+          </div>
+        
+        <div class="col-sm-2 lhBorderRight">
+          <div class="dropdown">
+              <span class="btn dropdown-toggle" type="button" data-toggle="dropdown">₦<span id="hpRange">301,000</span> Home
+              <span class="caret"></span></span>
+              <ul class="dropdown-menu">
+                <li><div class="input-group"> <span class="input-group-addon">₦</span>
+                <input type="text" name="housePrice" value="301,000" id="housePrice" maxlength="10" onkeypress="return isNumber(event)" disabled>
+                </div></li>
+                <li><input id="housePriceRange" type="range" min="301000" max="10000000" step="500" name="houseRange" oninput="outputUpdate(value)"></li>   
+              </ul>
+
+            </div>
+          
+        </div>
+
+        <div class="col-sm-4">
+         <div class="dropdown">
+              <span class="btn dropdown-toggle" type="button" data-toggle="dropdown">₦<span id="dpRange">60,200</span> (<span id = "downPercent">20</span>%) Down Payment
+              <span class="caret"></span></span>
+              <ul class="dropdown-menu">
+                <li>
+                <div class="input-group">
+                <span class="input-group-addon right">₦</span>
+                <input type="text" id="downPaymentPrice" value="60,200" disabled style="width: 100%;">
+                </div>
+                <br>
+                <div class="input-group">
+                <span class="input-group-addon">%</span>
+                <input type="text" id="downPaymentPercent" value="20" disabled style="width: 100%">
+                </div>
+                </li>
+                <li><input id="downPaymentRange" type="range" min="5" max="50" step="1" name="houseRange" oninput="downPayment(value)"></li>
+                
+              </ul>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9">
+
+          <div class="row lSearchInfo">
+            <div class="col-sm-8">
+            <span class="lendSearchInfo"><span class="lSearchFirst">82 Mortgage rates</span><span class="lSearchSecond"> for 22192, Lugbe, ABJ, ₦1,000,000, 20% down</span></span>
+            <small><span class="lblack">viewing</span> : home | mortgage | <span class="lblack">rates</span></small>
+            </div>
+            <div class="col-sm-4 text-right">
+            <span class="aDisclosure aDColor">Advertising Disclosure</span>
+            </div>
+          </div>
+
+          
+          <div class="row lSortandPageRow">
+            <div class="col-sm-7 removeLeftPadding">
+              <div class="dropdown">
+                <span class="dropdown-toggle" data-toggle="dropdown">Sort By <span class="aDColor">Default</span>
+                <span class="caret"></span></span>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Interest Rate</a></li>
+                  <li><a href="#">Monthly Payment</a></li>
+                  <li><a href="#">Lender Fees</a></li>
+                  <li><a href="#">Loan Type</a></li>
+                </ul>
+              </div>
+              </div>
+            <div class="col-sm-5 text-right">
+              <ul class="pagination pagination-sm">
+                <li><a href="#">«</a></li>
+                <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">»</a></li>
+             </ul>
+            </div>
+            </div>
+       
+
+          <div class="row cardsRow">
+           <div class="col-md-12">
+
+
+             <div class="card">
+              <div class="row">
+                <div class="col-sm-6 firstCardCol">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <span class="fixedYr">15 Yr Fixed</span>
+                      <span class="apr">4.125% APR</span>
+                      <span>4.125% at 0 pts</span>
+                      <span><small>Mon Jul 31</small></span>
+                    </div>
+                    <div class="col-sm-6">
+                      <span class="fixedAmt">₦20,551/mo</span>
+                      <span class="">₦0 APR fee</span>
+                      <span class=""><a href="">More Details</a></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 secondCardCol">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <img src="http://test.sagecapitals.com/img/avetiz-solid.png" class="img-responsive" width="100">
+                      <p><small>NMLS # 67717</small></p>
+                    </div>
+                    <div class="col-sm-6">
+                      <span>Call toll free:</span>
+                      <span class="fixPhn">(877) 582-8022</span>
+                      <button class="btn btn-default btn-block cardBtn">Next</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+             </div>
+
+            <div class="card">
+              <div class="row">
+                <div class="col-sm-6 firstCardCol">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <span class="fixedYr">15 Yr Fixed</span>
+                      <span class="apr">4.125% APR</span>
+                      <span>4.125% at 0 pts</span>
+                      <span><small>Mon Jul 31</small></span>
+                    </div>
+                    <div class="col-sm-6">
+                      <span class="fixedAmt">₦20,551/mo</span>
+                      <span class="">₦0 APR fee</span>
+                      <span class=""><a href="">More Details</a></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 secondCardCol">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <img src="http://test.sagecapitals.com/img/avetiz-solid.png" class="img-responsive" width="100">
+                      <p><small>NMLS # 67717</small></p>
+                    </div>
+                    <div class="col-sm-6">
+                      <span>Call toll free:</span>
+                      <span class="fixPhn">(877) 582-8022</span>
+                      <button class="btn btn-default btn-block cardBtn">Next</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+             </div>
+
+                          <div class="card">
+              <div class="row">
+                <div class="col-sm-6 firstCardCol">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <span class="fixedYr">15 Yr Fixed</span>
+                      <span class="apr">4.125% APR</span>
+                      <span>4.125% at 0 pts</span>
+                      <span><small>Mon Jul 31</small></span>
+                    </div>
+                    <div class="col-sm-6">
+                      <span class="fixedAmt">₦20,551/mo</span>
+                      <span class="">₦0 APR fee</span>
+                      <span class=""><a href="">More Details</a></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 secondCardCol">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <img src="http://test.sagecapitals.com/img/avetiz-solid.png" class="img-responsive" width="100">
+                      <p><small>NMLS # 67717</small></p>
+                    </div>
+                    <div class="col-sm-6">
+                      <span>Call toll free:</span>
+                      <span class="fixPhn">(877) 582-8022</span>
+                      <button class="btn btn-default btn-block cardBtn">Next</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+             </div>
+
+            <div class="card">
+              <div class="row">
+                <div class="col-sm-6 firstCardCol">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <span class="fixedYr">15 Yr Fixed</span>
+                      <span class="apr">4.125% APR</span>
+                      <span>4.125% at 0 pts</span>
+                      <span><small>Mon Jul 31</small></span>
+                    </div>
+                    <div class="col-sm-6">
+                      <span class="fixedAmt">₦20,551/mo</span>
+                      <span class="">₦0 APR fee</span>
+                      <span class=""><a href="">More Details</a></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 secondCardCol">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <img src="http://test.sagecapitals.com/img/avetiz-solid.png" class="img-responsive" width="100">
+                      <p><small>NMLS # 67717</small></p>
+                    </div>
+                    <div class="col-sm-6">
+                      <span>Call toll free:</span>
+                      <span class="fixPhn">(877) 582-8022</span>
+                      <button class="btn btn-default btn-block cardBtn">Next</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+             </div>
+
+                          <div class="card">
+              <div class="row">
+                <div class="col-sm-6 firstCardCol">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <span class="fixedYr">15 Yr Fixed</span>
+                      <span class="apr">4.125% APR</span>
+                      <span>4.125% at 0 pts</span>
+                      <span><small>Mon Jul 31</small></span>
+                    </div>
+                    <div class="col-sm-6">
+                      <span class="fixedAmt">₦20,551/mo</span>
+                      <span class="">₦0 APR fee</span>
+                      <span class=""><a href="">More Details</a></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 secondCardCol">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <img src="http://test.sagecapitals.com/img/avetiz-solid.png" class="img-responsive" width="100">
+                      <p><small>NMLS # 67717</small></p>
+                    </div>
+                    <div class="col-sm-6">
+                      <span>Call toll free:</span>
+                      <span class="fixPhn">(877) 582-8022</span>
+                      <button class="btn btn-default btn-block cardBtn">Next</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+             </div>
+
+            <div class="card">
+              <div class="row">
+                <div class="col-sm-6 firstCardCol">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <span class="fixedYr">15 Yr Fixed</span>
+                      <span class="apr">4.125% APR</span>
+                      <span>4.125% at 0 pts</span>
+                      <span><small>Mon Jul 31</small></span>
+                    </div>
+                    <div class="col-sm-6">
+                      <span class="fixedAmt">₦20,551/mo</span>
+                      <span class="">₦0 APR fee</span>
+                      <span class=""><a href="">More Details</a></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 secondCardCol">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <img src="http://test.sagecapitals.com/img/avetiz-solid.png" class="img-responsive" width="100">
+                      <p><small>NMLS # 67717</small></p>
+                    </div>
+                    <div class="col-sm-6">
+                      <span>Call toll free:</span>
+                      <span class="fixPhn">(877) 582-8022</span>
+                      <button class="btn btn-default btn-block cardBtn">Next</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+             </div>
+                          <div class="card">
+              <div class="row">
+                <div class="col-sm-6 firstCardCol">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <span class="fixedYr">15 Yr Fixed</span>
+                      <span class="apr">4.125% APR</span>
+                      <span>4.125% at 0 pts</span>
+                      <span><small>Mon Jul 31</small></span>
+                    </div>
+                    <div class="col-sm-6">
+                      <span class="fixedAmt">₦20,551/mo</span>
+                      <span class="">₦0 APR fee</span>
+                      <span class=""><a href="">More Details</a></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 secondCardCol">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <img src="http://test.sagecapitals.com/img/avetiz-solid.png" class="img-responsive" width="100">
+                      <p><small>NMLS # 67717</small></p>
+                    </div>
+                    <div class="col-sm-6">
+                      <span>Call toll free:</span>
+                      <span class="fixPhn">(877) 582-8022</span>
+                      <button class="btn btn-default btn-block cardBtn">Next</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+             </div>
+
+            <div class="card">
+              <div class="row">
+                <div class="col-sm-6 firstCardCol">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <span class="fixedYr">15 Yr Fixed</span>
+                      <span class="apr">4.125% APR</span>
+                      <span>4.125% at 0 pts</span>
+                      <span><small>Mon Jul 31</small></span>
+                    </div>
+                    <div class="col-sm-6">
+                      <span class="fixedAmt">₦20,551/mo</span>
+                      <span class="">₦0 APR fee</span>
+                      <span class=""><a href="">More Details</a></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 secondCardCol">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <img src="http://test.sagecapitals.com/img/avetiz-solid.png" class="img-responsive" width="100">
+                      <p><small>NMLS # 67717</small></p>
+                    </div>
+                    <div class="col-sm-6">
+                      <span>Call toll free:</span>
+                      <span class="fixPhn">(877) 582-8022</span>
+                      <button class="btn btn-default btn-block cardBtn">Next</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+             </div>
+
+           
+
+            </div>
+          </div>
+
+          <div class="container-fluid">
+          <div class="row secondPagiRow">
+            <div class="col-sm-7"></div>
+            <div class="col-sm-5 text-right">
+                <ul class="pagination pagination-sm">
+                  <li><a href="#">«</a></li>
+                  <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                  <li><a href="#">2</a></li>
+                  <li><a href="#">»</a></li>
+               </ul>
+              </div>
+          </div>
+          </div>
+
+          <article class="advertDisclosure">
+          <h4><strong>Advertising Disclosure</strong></h4>
+          <p>The listings that appear on this page are from companies from which this website and Bankrate may receive compensation, which may impact how, where and in what order products appear. These listings do not include all companies or all available products. Neither Bankrate nor this website endorses or recommends any companies or products.</p>
+
+          <p><a href="">Important information</a> about listings/rate tables</p>
+
+          <p>Rates were collected by Bankrate.com on the dates specified. Rates are subject to change without notice and may vary from branch to branch of the same company. Any APR (annual percentage rate) and Payment examples shown do not include amounts for taxes and insurance premiums. The monthly payment obligation will be greater if taxes and insurance are included. Also, any rates and payment examples shown here typically assume a particular credit score level, which may be different from your own credit score; therefore, the rates and monthly payment amounts available to you may differ from those shown here.</p>
+
+          <p>AvetiZ.com® is a provider of information and advertising services.  <a href="">Learn more</a>.</p>
+                      
+          </article>
+
+        </div>
+
+        <div class="col-md-3">
+          <div class="mortgageTrends">
+            <span class="mortgageCity mTTrends">Abuja Mortgage Rate Trends</span>
+            <span class="mortgageDate mTTrends">As of Jul. 31, 2017</span>
+            <div class="row text-center mRow">
+              <div class="col-sm-6 mCol">
+                <span>30 Year Fixed</span>
+                <span class="mPerc">4.02%</span>
+              </div>
+              <div class="col-sm-6 mCol">
+                <span>15 Year Fixed</span>
+                <span class="mPerc">3.16%</span>
+              </div>
+            </div>
+            <hr>
+            <p class="text-center"><a href="">Change Locations &raquo;</a></p>
+          </div>
+
+          <div class="calculators">
+          <h4>Calculators</h4>
+           <p><i class="fa fa-paw fa-2x" aria-hidden="true"></i> <a href=""> Rent vs. Buy Calculator</a></p>
+            <p><i class="fa fa-home fa-2x" aria-hidden="true"></i> <a href="">Affordability Calculator</a></p>
+            <p><i class="fa fa-paw fa-2x" aria-hidden="true"></i> <a href="">Mortgage Calculator</a></p>
+          </div>
+
+          <div class="veteranHomeBuyer">
+          <h4><strong>Home </strong>Buyer Guide</h4>
+           <p><i class="fa fa-star-half-o fa-3x" aria-hidden="true"></i><a href="">Benefits of AvetiZ</a></p>
+          </div>
+
+          <div class="mortgageRateNews">
+            <h4>Mortgage Rate News</h4>
+            <p>Learn more about different mortgages, and latest news about rates.</p>
+            <p><a href="">New-Home Sales Roar to a 7-Month High 592,000 Annual Rate in February</a></p>
+            <p><a href="">Here’s How Home Prices May Respond to Rising Mortgage Rates</a></p>
+            <p><a href="">What Is a Mortgage? Your Go-To Guide to Getting a Home Loan</a></p>
+            <p><a href="">View More &raquo;</a></p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  
+
+  {% endblock %}
+
+
+{% block scripts %}
+
+
+<script type="text/javascript">
+
+  var housePrice = document.querySelector('#housePrice');
+  var hpRange = document.querySelector('#hpRange');
+  var downPercent = document.querySelector("#downPercent");
+  var dpRange = document.querySelector("#dpRange");
+
+  function isNumber(evt) {
+        var iKeyCode = (evt.which) ? evt.which : evt.keyCode
+        if (iKeyCode != 46 && iKeyCode > 31 && (iKeyCode < 48 || iKeyCode > 57))
+            return false;
+        return true;
+    }   
+
+  function outputUpdate(vol) {
+    var volOut = Number(vol).toLocaleString();
+    housePrice.value = volOut;
+    hpRange.textContent = volOut;
+    // Calculate 20% of the price
+    var percentOfHousePrice = Number(vol) * Number(downPaymentPercent.value)/100;
+    dpRange.textContent = percentOfHousePrice;
+  }    
+
+  function downPayment(vol){
+    var dpOut = Number(vol).toLocaleString();
+    var priceToPay = Number(vol)/100 * Number(housePrice.value.replace(/,/g, ""));
+    var dppOut = Math.floor(Number(downPaymentRange.value)/100 * Number(housePrice.value.replace(/,/g, "")));
+    downPercent.textContent = dpOut;
+    downPaymentPercent.value = dpOut;
+    downPaymentPrice.value = dppOut;
+    dpRange.textContent = Number(priceToPay).toLocaleString();
+  }
+
+
+  housePrice.addEventListener("focusout", function(){
+        if(Number(housePrice.value.replace(/,/g, "")) < 301000 || Number(housePrice.value.replace(/,/g, "")) > 10000000 || Number(housePrice.value.replace(/,/g, "")) == NaN){
+        housePrice.value = "301,000";
+      }
+
+      
+      else{
+        
+        housePrice.value = Number(housePrice.value).toLocaleString();
+        
+      }
+    });
+
+
+
+
+</script>
+
+  {% endblock %}

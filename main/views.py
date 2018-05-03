@@ -298,3 +298,7 @@ def median(lst):
 
 
 
+
+class MortageView(TemplateView):
+	template_name='main/lenders.html'
+	
