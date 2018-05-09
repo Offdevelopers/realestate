@@ -2,7 +2,7 @@
       {% for property in property_list %}
       <a href="{{property.get_absolute_url}}">
       <div class="col-md-6 dontwantpadding"  >
-        <div class="property pull-right" style="background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url({{property.thumbnail.url}}); height:270px; ">
+        <div class="property pull-right" style="background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url({{property.thumbnail.url}}); height:250px; ">
         
          <button href='#' property_id="{{property.pk}}" class='js-fovorite favorite' ><i class="fa fa-heart-o fa-2x" style="float:right; position: relative;right:30px; " aria-hidden="true"></i></button>
        
@@ -10,7 +10,7 @@
           <div class="row">
             <div class="col-sm-6">
               <span class="money js-price">₦{{property.price}}</span><br>
-              <span class="address">{{property.full_address}}</span><br>
+              <span class="address">{{property.city}}, {{property.state}}, <br>{{property.country}}</span><br>
                <!--span class="city" style="position: relative; top:-5px;">Mclean, VA 22101</span-->
             </div>
             <div class="col-md-2">

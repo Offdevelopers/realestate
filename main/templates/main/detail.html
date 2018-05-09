@@ -1,6 +1,11 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
+<style>
+	.affix-top{
+		top:;
+	}
+</style>
 
 	<section class="thirdnav" style="margin-top:20px;">
 	   <div class="container">
@@ -144,7 +149,7 @@
 
 		<!-- Property Details -->
     		<div class="detail-text">
-   						<p>Spacious brick home on a 1-acre lot with 4 bedrooms, huge bonus room, office/playroom downstairs & office loft upstairs. The interior features a wood-burning FP, large laundry room & plenty of storage. 
+   						<p>{{result.description}}
    						</p>
    					</div>
 
@@ -258,8 +263,8 @@
 								  			</div>
 								  			<ul class="list-inline">
 								  		
-								  			<li class="list-inline-item showBorder"><a href="https://maps.googleapis.com/maps/api/streetview?size=600x300&location={{result.latitude}},{{result.longitude}}&heading=151.78&pitch=-0.76&key=AIzaSyC8TvKHQ-rUklU5OsD6Oq73pMG1fJO9iR8" id="toggleStreetView"  value="Toggle Street View" ><i class="fa fa-street-view" aria-hidden="true"></i> Street View </a></li>
-								  			<li class="list-inline-item"><a target="_blank" href="https://www.google.com/maps?saddr&daddr={{result.latitude}},{{result.longitude}}"><i class="fa fa-road" aria-hidden="true"></i> Directions</a></li>
+								  			<li class="list-inline-item showBorder"><a href="https://maps.googleapis.com/maps/api/streetview?size=600x300&location={{property.latitude}},{{property.longitude}}&heading=151.78&pitch=-0.76&key=AIzaSyC8TvKHQ-rUklU5OsD6Oq73pMG1fJO9iR8" id="toggleStreetView"  value="Toggle Street View" ><i class="fa fa-street-view" aria-hidden="true"></i> Street View </a></li>
+								  			<li class="list-inline-item"><a target="_blank" href="https://www.google.com/maps?saddr&daddr={{property.latitude}},{{property.longitude}}"><i class="fa fa-road" aria-hidden="true"></i> Directions</a></li>
 								  		</ul>
 								  		<div class="col-sm-6 col-sm-offset-2">
 								  		
@@ -357,7 +362,7 @@
     ), url({{property.thumbnail.url}})"">
 										<div class="row">
 									     <div class="col-sm-5">
-									     <i class="fa fa-home" aria-hidden="true"></i> <span class="hPrice">₦{{property.price}}</span class="hAddress"><br>No{{property.full_address}}</div>
+									     <i class="fa fa-home" aria-hidden="true"></i> <span class="hPrice">₦{{property.price}}</span class="hAddress"><br>{{property.city}}, {{property.state}}, {{property.country}}</div>
 									     <div class="col-sm-7">
 									     	<ul class="list-inline">
 									  			<li class="list-inline-item"><span class="hBeds">{{property.bedroom}}</span><br>Beds</li>
@@ -630,7 +635,7 @@
    					 <!-- End of Column Seven in FourthCol -->
 
 
-   		<div class="col-md-5 schedTour text-center">
+   		<div class="col-md-5 schedTour affix text-center" data-offset-top="1000">
 	   			<div class="row">
 	   			<div class="col-md-8 col-md-offset-2">
 	   			 	<h3>Visit This Property</h3>

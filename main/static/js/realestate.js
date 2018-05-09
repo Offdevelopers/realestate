@@ -124,18 +124,21 @@ google.maps.event.addDomListener(window, 'load', initialize);
                         console.log(item.long_name)
 
           }
-
           if (item.types.indexOf("country")> -1){
              $('#id_pmi_country').val(item.long_name)
-             console.log(item.long_name)
         }
         if (item.types.indexOf("locality")> -1){
-             $('#id_pmi_city').val(item.long_name)
-             console.log(item.long_name)
+             $('#id_pmi_city').val(item.long_name)   
         }
         });
           })      
       }
+
+      var basesearch=document.getElementById('base_search');
+      var autocomplete4=new google.maps.places.Autocomplete(basesearch)
+      autocomplete4.addListener('place_changed', function(){
+
+      })
 function displayLocation(latitude,longitude){
     var geocoder;
     geocoder = new google.maps.Geocoder();
@@ -175,9 +178,6 @@ function displayLocation(latitude,longitude){
         }
     );
 }
-
-
-
 
 
 function replace_feature(location){
