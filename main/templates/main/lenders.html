@@ -26,7 +26,9 @@
       <p>Local lenders available when you are. Talk to a lender now or schedule a time for later.</p>
       <div class="form-element">
         <div class="inputcontainer">
-          <input placeholder="" class="inputform" id="lenderpageform" type="text">
+          <form method="post" action="{% url 'main:mortage' %}">
+            <input placeholder="" class="inputform" id="lenderpageform" type="text">
+          </form>
        </div>
        <a class="alender" href="#">
           Get Started
@@ -120,20 +122,20 @@
           <div class="row cardsRow">
            <div class="col-md-12">
 
-
+            {% for mortage in mortages %}
              <div class="card">
               <div class="row">
                 <div class="col-sm-6 firstCardCol">
                   <div class="row">
                     <div class="col-sm-6">
-                      <img src="http://test.sagecapitals.com/img/avetiz-solid.png" class="img-responsive" width="100">
+                      <img src="{{mortage.logo.url}}" class="img-responsive" width="100">
                       <br>
                      
-                      <span>Mega Mortage</span>
+                      <span>{{mortage.name}}</span>
                       
                     </div>
                     <div class="col-sm-6">
-                      <p>Jeje Powerline idi-mango, Apete,<br>Ibadan, Oyo State </p>
+                      <p>{{mortage.street_address}}<br>{{mortage.city}}, {{mortage.state}} State </p>
                     </div>
                   </div>
                 </div>
@@ -141,111 +143,21 @@
                   <div class="row">
                     <div class="col-sm-6">
                       
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor </p>
+                      <p>{{mortage.description}} </p>
                     </div>
                     <div class="col-sm-6">
                       <span></span>
-                      <span class="fixPhn">(877) 582-8022</span>
-                      <button class="btn btn-default btn-block cardBtn">Next</button>
+                      <span class="fixPhn">{{mortage.phone}}</span>
+                      <a href="{{mortage.website}}" target="_blank" class="btn btn-default btn-block cardBtn">Next</a>
                     </div>
                   </div>
                 </div>
               </div>
              </div>
-             <div class="card">
-              <div class="row">
-                <div class="col-sm-6 firstCardCol">
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <img src="http://test.sagecapitals.com/img/avetiz-solid.png" class="img-responsive" width="100">
-                      <br>
-                     
-                      <span>Mega Mortage</span>
-                      
-                    </div>
-                    <div class="col-sm-6">
-                      <p>Jeje Powerline idi-mango, Apete,<br>Ibadan, Oyo State </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-6 secondCardCol">
-                  <div class="row">
-                    <div class="col-sm-6">
-                      
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor </p>
-                    </div>
-                    <div class="col-sm-6">
-                      <span></span>
-                      <span class="fixPhn">(877) 582-8022</span>
-                      <button class="btn btn-default btn-block cardBtn">Next</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-             </div>
-             <div class="card">
-              <div class="row">
-                <div class="col-sm-6 firstCardCol">
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <img src="http://test.sagecapitals.com/img/avetiz-solid.png" class="img-responsive" width="100">
-                      <br>
-                     
-                      <span>Mega Mortage</span>
-                      
-                    </div>
-                    <div class="col-sm-6">
-                      <p>Jeje Powerline idi-mango, Apete,<br>Ibadan, Oyo State </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-6 secondCardCol">
-                  <div class="row">
-                    <div class="col-sm-6">
-                      
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor </p>
-                    </div>
-                    <div class="col-sm-6">
-                      <span></span>
-                      <span class="fixPhn">(877) 582-8022</span>
-                      <button class="btn btn-default btn-block cardBtn">Next</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-             </div>
-             <div class="card">
-              <div class="row">
-                <div class="col-sm-6 firstCardCol">
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <img src="http://test.sagecapitals.com/img/avetiz-solid.png" class="img-responsive" width="100">
-                      <br>
-                     
-                      <span>Mega Mortage</span>
-                      
-                    </div>
-                    <div class="col-sm-6">
-                      <p>Jeje Powerline idi-mango, Apete,<br>Ibadan, Oyo State </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-6 secondCardCol">
-                  <div class="row">
-                    <div class="col-sm-6">
-                      
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor </p>
-                    </div>
-                    <div class="col-sm-6">
-                      <span></span>
-                      <span class="fixPhn">(877) 582-8022</span>
-                      <button class="btn btn-default btn-block cardBtn">Next</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-             </div>
-
+             {% endfor %}
+            
+             
+            
            
 
            
@@ -253,7 +165,7 @@
             </div>
           </div>
           <div class="col-md-12">
-            <a data-toggle="collapse pull-right" href="#addlender">Add business </a>
+            <a data-toggle="collapse" class="pull-right" href="#addlender">Add business </a>
           </div>
           <div class="collapse" id="addlender">
             <div class="row" >

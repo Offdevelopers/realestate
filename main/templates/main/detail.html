@@ -1,31 +1,36 @@
 {% extends 'main/base.html' %}
-
+{% load humanize %}
 {% block content %}
 <style>
 	.affix-top{
 		top:;
+	}
+	div.affix{
+		width:41.6666667%;
+		right: 6%;
+		top:100px;
 	}
 </style>
 
 	<section class="thirdnav" style="margin-top:20px;">
 	   <div class="container">
 		<div class="row firstRow">
-		  <div class="col-sm-1 col-lg-push-1">
+		  <div class="col-sm-1 ">
 		  <i class="fa fa-home fa-3x" aria-hidden="true"></i>
 		  </div>
 
-		  <div class="col-sm-2 text-center">
-		  	<p><span class="boldBig houseAddress">House A11</span><br>Lugbe, Abuja </p>
+		  <div class="col-sm-2 ">
+		  	<p><span class="boldBig houseAddress">{{property.name}}</span><br>{{property.city}}, {{property.state}} </p>
 		  </div>
 
-		  <div class="col-sm-6 text-center"> 
+		  <div class="col-sm-7 text-center"> 
 		  	<div class="container-fluid">
 		  	<div class="row">
-		  	<div class="col-xs-4"><p class="showBorder wordBreak"><span class="boldBig">₦15,000,000</span><br>Price</p></div>
-		  	<div class="col-xs-2 dontwantpadding"><p class="showBorder wordBreak"><span class="boldBig" >₦110,000</span><br>Refund</p></div>
-		  	<div class="col-xs-2 dontwantpadding"><p class="showBorder wordBreak"><span class="boldBig">3</span><br>Beds</p></div>
-		  	<div class="col-xs-2 dontwantpadding"><p class="showBorder wordBreak"><span class="boldBig">2</span><br>Baths</p></div>
-		  	<div class="col-xs-2 dontwantpadding"><p class="wordBreak"><span class="boldBig">900</span><br>Sq.Ft.</p></div>
+		  	<div class="col-xs-3"><p class="showBorder wordBreak"><span class="boldBig">₦{{property.price|intcomma}}</span><br>Price</p></div>
+		  	<div class="col-xs-3 dontwantpadding"><p class="showBorder wordBreak"><span class="boldBig" >{{savings|intcomma}}</span><br>Savings</p></div>
+		  	<div class="col-xs-2 dontwantpadding"><p class="showBorder wordBreak"><span class="boldBig">{{property.bedroom}}</span><br>Beds</p></div>
+		  	<div class="col-xs-2 dontwantpadding"><p class="showBorder wordBreak"><span class="boldBig">{{property.bathroom}}</span><br>Baths</p></div>
+		  	<div class="col-xs-2 dontwantpadding"><p class="wordBreak"><span class="boldBig">{{property.area}}</span><br>Sq.Ft.</p></div>
 		  	</div>
 		  	</div>
 		  </div>
@@ -33,13 +38,13 @@
 		  <div class="col-lg-2 pagenaviCol">
 		  	<nav aria-label="Page navigation">
   		  <ul class="pagination dontwantpadding">
-		    <li><a href="#"><i class="fa fa-heart-o fa-2x" aria-hidden="true"></i></a></li>
+		    <li><a  property_id={{property.pk}} class="js-fovorite" href="#"><i class="fa fa-heart-o fa-2x" aria-hidden="true"></i></a></li>
 		   
 		     <li><a href="#"><i class="fa fa-share fa-2x" aria-hidden="true"></i></a></li>
  		  </ul>
           </nav>
           <ul class="list-inline text-justify">
-	  			<li class="list-inline-item"><a href="#">Favourite</a></li>
+	  			<li class="list-inline-item"><a  href="#">Favourite</a></li>
 	  			
 	  			<li class="list-inline-item"><a href="#">Share</a></li>
 	  			</ul>
@@ -72,7 +77,7 @@
 			<div class="col-sm-12">
 				<div class="demo">
 	        		<div class="item">  
-	        		<span class="listed">Listed By Developer</span>          
+	        		         
 	            	<div class="clearfix">
 	                <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
 	                    
@@ -203,19 +208,19 @@
    					<hr>
    					<div class="row">
    						<div class="col-xs-8">
-   							<p>Listing provided courtesy of</p>
+   							<p>Listing provided by</p>
    							<div class="row">
    							  <div class="col-sm-2"><img src="https://pbs.twimg.com/profile_images/2020318404/image_400x400.jpg" class="img img-responsive img-circle" width="100"></div>
    							  <div class="col-sm-10">
-   							  	<!-- Contributor Name --><p><a href="#">Abdul Madaki</a><br><strong>AvetiZ Real Estate</strong></p>
+   							  	<!-- Contributor Name --><p style="text-decoration: capitalize"><a href="#">{{property.developer.name}}</a><br><strong style="text-decoration: capitalize">{{property.developer.address}}</strong></p>
    							  	
    							  </div>
    							</div>
    							<div class="row">
-   							   <div class="col-sm-12">
-   							   <p><em>Last updated: 4 weeks ago</em></p>
-   							   </div>
+   								<br>
+   								<p> Listed on {{property.date_added|date:"SHORT_DATE_FORMAT"}}</p>
    							</div>
+   							
    						</div>
    						<div class="col-xs-4 text-right">
    						
@@ -240,7 +245,7 @@
 								  		<div class="col-sm-6 col-sm-offset-2">
 								  		<ul class="list-inline">
 								  		<li class="list-inline-item showBorder"><a  data-toggle="modal" href="#modalmap"><i class="fa fa-arrows-alt" aria-hidden="true"></i>Expand</a></li>
-								  			<li class="list-inline-item showBorder"><a href="https://maps.googleapis.com/maps/api/streetview?size=600x300&location={{result.latitude}},{{result.longitude}}&heading=151.78&pitch=-0.76&key=AIzaSyC8TvKHQ-rUklU5OsD6Oq73pMG1fJO9iR8" id="toggleStreetView"  value="Toggle Street View" ><i class="fa fa-street-view" aria-hidden="true"></i> Street View </a></li>
+								  			<li class="list-inline-item showBorder"><a href="https://maps.googleapis.com/maps/api/streetview?size=600x300&location={{property.latitude}},{{property.longitude}}&heading=151.78&pitch=-0.76&key=AIzaSyC8TvKHQ-rUklU5OsD6Oq73pMG1fJO9iR8" id="toggleStreetView"  value="Toggle Street View" ><i class="fa fa-street-view" aria-hidden="true"></i> Street View </a></li>
 								  			<li class="list-inline-item"><a target="_blank" href="https://www.google.com/maps?saddr&daddr={{result.latitude}},{{result.longitude}}"><i class="fa fa-road" aria-hidden="true"></i> Directions</a></li>
 								  		</ul>
 
@@ -362,7 +367,7 @@
     ), url({{property.thumbnail.url}})"">
 										<div class="row">
 									     <div class="col-sm-5">
-									     <i class="fa fa-home" aria-hidden="true"></i> <span class="hPrice">₦{{property.price}}</span class="hAddress"><br>{{property.city}}, {{property.state}}, {{property.country}}</div>
+									     <i class="fa fa-home" aria-hidden="true"></i> <span class="hPrice">₦{{property.price|intcomma}}</span class="hAddress"><br>{{property.city}}, {{property.state}}, {{property.country}}</div>
 									     <div class="col-sm-7">
 									     	<ul class="list-inline">
 									  			<li class="list-inline-item"><span class="hBeds">{{property.bedroom}}</span><br>Beds</li>
@@ -395,50 +400,39 @@
    									<div class="col-xs-6">
    										<p><strong>Bathroom Information</strong></p>
    											<ul>
-   												<li># of Baths (Full): 2</li>
-   												<li># of Baths (1/2): 1</li>
+   												<li># of Baths : {{property.bathroom}}</li>
+   												<li># of Bedroom : {{property.bedroom}}</li>
    											</ul>
 											
 										<p><strong>Kitchen Information</strong></p>
 											<ul>
-												<li># of Kitchens: 1</li>
-												<li>Eat-in Kitchen</li>
-												<li>1 Stove</li>
+												<li># of Kitchens: {{property.no_of_kitchen}}</li>
+												<li>Eat-in Kitchen: {{property.eat_in_kitchen}}</li>
+												<li>{{property.no_of_stove}} Stove</li>
 											</ul>
 
 										<p><strong>Room Information</strong></p>
 										  <ul>
-											<li># of Rooms: 9</li>
-											<li># of Family Rooms: 1</li>
-											<li>Level 1: Ef, Flr, Fdr, Eik, 1/2 Bath, Enclosed Porch</li>
-											<li>Level 2: 3 Bedrooms, 2Fbths, Roof Top Balcony</li>
-											<li>Level 3: Granny Attic</li>
-											<li>Formal Dining Room</li>
-											<li>Den/Family Room</li>
-											<li>Basement/Subfloor: Garage, Utilities, Laundry, Rec Room</li>
-											<li>Partially Finished Basement</li>
+											<li># of Rooms: {{property.no_of_rooms}}</li>
+											<li># of Family Rooms: {{property.no_of_family_rooms}}</li>
+											
 											</ul>
    									</div>
    									<div class="col-xs-6">
-   										<ul>
-   											<li>Den/Family Room</li>
-											<li>Full Basement</li>
-											<li>Partially Finished Basement</li>
-											<li>Has Attic</li>
-										</ul>
+   										
 										<p><strong>Interior Features</strong></p><ul>
-										<li># of Fireplaces: 1</li>
-										<li>Wood Floors</li>
-										<li>Wall-to-Wall Carpet</li></ul>
+										<li># of Fireplaces: {{property.no_of_fireplace}}</li>
+										<li>{{property.type_of_floor}}</li>
+										
 
 										<p><strong>Equipment</strong></p><ul>
-										<li>1 Refrigerator</li>
-										<li>1 Dishwasher</li>
-										<li>1 Washer</li><li>1 Dryer</li></ul>
+										<li>{{property.no_of_refrigerator}}Refrigerator</li>
+										<li>{{property.no_of_dishwater}} Dishwasher</li>
+										<li>{{property.no_of_washer}} Washer</li><li>{{property.no_of_dryer}} Dryer</li></ul>
 
 										<p><strong>Heating & Cooling</strong></p>
-										<ul><li># of Heating Zones: 2</li>
-										<li>Hot Water/Radiator Heating</li></ul>
+										<ul><li># of Heating Zones:{{property.no_of_heating_zone}}</li>
+										
    									</div>
    								</div>
    							</div>
@@ -450,24 +444,24 @@
    								<div class="row">
    									<div class="col-xs-6">
    									<p><strong>Parking Information</strong></p>
-										<ul><li># of Garage Spaces: 1</li>
-										<li>Garage Type: Att</li>
-										<li>Private Driveway</li></ul>
+										<ul><li># of Garage Spaces: {{property.no_of_garage_space}}</li>
+										<li>Garage Type: {{property.garage_type}}</li>
+										
 
-										<p><strong>School Information</strong></p>
+										<!--p><strong>School Information</strong></p>
 										<ul><li>School District: Community District 29</li>
-										<li>School District Number: 29</li></ul>
+										<li>School District Number: 29</li></ul-->
 
    									</div>
    									<div class="col-xs-6">
    										<p><strong>Utility Information</strong></p>
-										<ul><li>Separate Hot Water Heater: Yes</li>
-										<li>Has Sewer</li>
-										<li>Fuel: Gas</li>
-										<li>Public Water</li>
-										<li>Tax Information</li>
+										<!--ul><li>Separate Hot Water Heater: Yes</li-->
+										<li>Has Sewer : {{property.has_sewer}}</li>
+										<li>Fuel: {{property.fuel}}</li>
+										<li>{{property.water_source}}</li>
+										<!--li>Tax Information</li>
 										<li>Total Tax Amount: 6,735</li>
-										<li>County Tax Amount: 6,735</li></ul>
+										<li>County Tax Amount: 6,735</li--></ul>
    									</div>
    								</div>
    							</div>
@@ -478,16 +472,16 @@
    								<div class="row">
    									<div class="col-xs-6">
    									<p><strong>Building Information</strong></p><ul>
-										<li>Construction: Brick/Stuc</li>
-										<li>Detached</li></ul>
+										<li>Construction: {{property.construction_type}}</li>
+										<li>{{property.building_type}}</li></ul>
 
    									</div>
    									<div class="col-xs-6">
    										
 										<p><strong>Exterior Features</strong></p><ul>
-											<li>Appearance: Good</li>
-											<li>Porch: Enclosed</li>
-											<li>Deck: N</li></ul>
+											<li>Appearance: {{property.apperance}}/li>
+											
+											<li>Deck: {{property.deck}}</li></ul>
    									</div>
    								</div>
    							</div>
@@ -497,15 +491,15 @@
    							<div class="panel-heading"><strong>Property/Lot Details</strong></div>
    							<div class="panel-body">
    								<div class="row">
-   									<div class="col-xs-6">
+   									<div id="question" class="col-xs-6">
    									<p><strong>Lot Information</strong></p><ul>
-											<li>Size: 45 x 107</li></ul>
+											<li>{{property.area}}</li></ul>
 
    									</div>
    									<div class="col-xs-6">
-   										<p><strong>Property Information</strong></p><ul>
+   										<!--p><strong>Property Information</strong></p><ul>
 											<li>Residential</li>
-											<li>Colonial</li><li>Appearance:Good</li></ul>
+											<li>Colonial</li><li>Appearance:Good</li></ul-->
 										
 											
    									</div>
@@ -521,8 +515,8 @@
 		                   </section>
 
 		                  
-
-		                   <section class="questionSection">
+		                   	<div  ></div>
+		                   <section  class="questionSection">
 		                   <div class="container-fluid">
 		                   <div class="row">
 		                    <div class="col-sm-8">
@@ -589,22 +583,17 @@
 
 		                   </div>
 
-				            <div class="col-sm-4 hidden-xs">
+				            <div class="col-sm-4 hidden-xs" style="margin-top: 30px">
 				                <div class="card">
-				                    <img class="card-img-top" src="http://success-at-work.com/wp-content/uploads/2015/04/free-stock-photos.gif">
+				                    <img class="card-img-top"  src="{{property.agent_name.profile.url}}">
 				                    <div class="card-block">
-				                        <h4 class="card-title">Abu Samuel</h4>
-				                        <div class="meta">
-				                            <a href="#">4.6</a>
-				                        </div>
+				                        <h4 class="card-title">{{property.agent_name.name}}</h4>
+				                        
 				                        <div class="card-text">
 				                            AvetiZ Consultant.
 				                        </div>
 				                    </div>
-				                    <div class="card-footer">
-				                      
-				                        <span><i class=""></i>75 Reviews</span>
-				                    </div>
+				                    
 				                </div>
 				            </div>
 		                   </div>
@@ -621,9 +610,9 @@
 		                   	<h3>Activity for House A11, Lugbe</h3>
 		                   	<div class="row">
 			                   	<div class="col-sm-3"><a href="#"><i class="fa fa-eye fa-2x" aria-hidden="true"></i></a><span class="aNumber">{{property.views}}</span> <span class="aDet">Views</span></div>
-			                   	<div class="col-sm-3"><a href="#"><i class="fa fa-heart-o fa-2x" aria-hidden="true"></i></a> <span class="aNumber">{{property.favorites}}</span> <span class="aDet">Favourites</span></div>
+			                   	<div class="col-sm-3"><a class="js-fovorite" href="#"><i class="fa fa-heart-o fa-2x" aria-hidden="true"></i></a> <span class="aNumber">{{property.favorites}}</span> <span class="aDet">Favourites</span></div>
 			                   	
-			                   	<div class="col-sm-3"><a href="#"><i class="fa fa-home fa-2x" aria-hidden="true"></i></a><span class="aNumber">{{property.tours}}</span> <span class="aDet">AvetiZ Tours</span></div>
+			                   	<div class="col-sm-3"><a href="#"><i class="fa fa-home fa-2x" aria-hidden="true"></i></a><span class="aNumber">{{property.tours}}</span> <span class="aDet">Tours Request</span></div>
 		                   	</div>
 		                   	</div>
 
@@ -635,15 +624,15 @@
    					 <!-- End of Column Seven in FourthCol -->
 
 
-   		<div class="col-md-5 schedTour affix text-center" data-offset-top="1000">
+   		<div class="col-md-5  schedTour text-center " data-spy="affix" data-offset-bottom="950" data-offset-top="700">
 	   			<div class="row">
-	   			<div class="col-md-8 col-md-offset-2">
+	   			<div class="col-md-8 col-md-push-4 scheduleaffix" >
 	   			 	<h3>Visit This Property</h3>
 
-	   			 <button class="btn btn-block btn-danger">Schedule Tour</button>
+	   			 <a class="btn btn-block btn-danger">Schedule Tour</a>
 	   			 <p class="colorGrey">It's free, with no obligation — cancel anytime</p>
-	   			 <div class="ContactLinks" data-rf-test-name="contact-links" data-reactid="83"><div class="questions" data-reactid="84"><a  href="#askquestionmodal" data-toggle="modal" >Ask a Question</a><a href="tel:+17189253372" class="phone-number" data-rf-test-name="phone-number" data-reactid="86">(080) 313-3372</a></div></div>
-	   			 <h5><strong>Savings on this property: ₦{{savings}}</strong></h5>
+	   			 <div class="ContactLinks" data-rf-test-name="contact-links" data-reactid="83"><div class="questions" data-reactid="84"><a  href="#question"  >Ask a Question</a><a href="tel:+17189253372" class="phone-number" data-rf-test-name="phone-number" data-reactid="86">(080) 313-3372</a></div></div>
+	   			 <h5><strong>Savings on this property: ₦{{savings|intcomma}}</strong></h5>
 	   			 <p>When you buy through AvetiZ </p>
 	   			 <a class="btn btn-block btn-danger" href="{% url 'main:start_now' %}">Start Now</a>
 	   			 </div>
@@ -656,147 +645,36 @@
 
 	<section class="similarHomes">
 		<div class="container">
-		<h3>Similar properties</h3>
+		
 		<h4><strong>Nearby Properties for Sale</strong></h4>
 			 <!-- begin:product -->
             <div class="row container-realestate">
+            	{% for property in nearby_homes %}
               <div class="col-md-4 col-sm-6 col-xs-12">
                 <div class="property-container">
                   <div class="property-image">
-                    <img src="http://mallorcapropertyhouse.co.uk/wp-content/uploads/2014/10/Beautiful_Luxury_House_with_Swiming_Pool_Wallpapers_for_Desktop.jpg" alt="AvetiZ">
+                    <img src="{{property.thumbnail.url}}" alt="AvetiZ">
                     <div class="property-price">
                       <h4>Land</h4>
-                      <span>₦1,800,000</span>
-                    </div>
-                    <div class="property-status">
-                      <span>For Lease</span>
-                    </div>
-                  </div>
-                  <div class="property-features">
-                    <span><i class="fa fa-home"></i> 5,000 m<sup>2</sup></span>
-                    <span><i class="fa fa-hdd-o"></i> 2 Bed</span>
-                    <span><i class="fa fa-male"></i> 2 Bath</span>
-                  </div>
-                  <div class="property-content">
-                    <h3><a href="#">Pacta 1</a> <small>Ashford Homes</small></h3>
-                  </div>
-                </div>
-              </div>
-              <!-- break -->
-              <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="property-container">
-                  <div class="property-image">
-                    <img src="http://cfile234.uf.daum.net/image/24113A3756ED7450300989" alt="mikha real estate theme">
-                    <div class="property-price">
-                      <h4>Land</h4>
-                      <span>₦2,300,000</span>
+                      <span>₦{{property.price}}</span>
                     </div>
                     <div class="property-status">
                       <span>For Sale</span>
                     </div>
                   </div>
                   <div class="property-features">
-                    <span><i class="fa fa-home"></i> 5,000 m<sup>2</sup></span>
-                    <span><i class="fa fa-hdd-o"></i> 2 Bed</span>
-                    <span><i class="fa fa-male"></i> 2 Bath</span>
+                    <span><i class="fa fa-home"></i>{{property.area}} m<sup>2</sup></span>
+                    <span><i class="fa fa-hdd-o"></i> {{property.bedroom}} Bed</span>
+                    <span><i class="fa fa-male"></i> {{property.bathroom}}Bath</span>
                   </div>
                   <div class="property-content">
-                    <h3><a href="#">Awesome Villa</a> <small>Ashford Homes</small></h3>
+                    <h3><a href="#">{{property.name}}</h3>
                   </div>
                 </div>
               </div>
+              {% endfor %}
               <!-- break -->
-              <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="property-container">
-                  <div class="property-image">
-                    <img src="https://si.wsj.net/public/resources/images/OB-QY906_hotwea_HD_20111212143922.jpg" alt="mikha real estate theme">
-                    <div class="property-price">
-                      <h4>Residential</h4>
-                      <span>₦3,800,000</span>
-                    </div>
-                    <div class="property-status">
-                      <span>For Sale</span>
-                    </div>
-                  </div>
-                  <div class="property-features">
-                    <span><i class="fa fa-home"></i> 5,000 m<sup>2</sup></span>
-                    <span><i class="fa fa-hdd-o"></i> 2 Bed</span>
-                    <span><i class="fa fa-male"></i> 2 Bath</span>
-                  </div>
-                  <div class="property-content">
-                    <h3><a href="#">Land In Central Park</a> <small>Ashford Homes</small></h3>
-                  </div>
-                </div>
-              </div>
-              <!-- break -->
-              <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="property-container">
-                  <div class="property-image">
-                    <img src="http://mallorcapropertyhouse.co.uk/wp-content/uploads/2014/10/Beautiful_Luxury_House_with_Swiming_Pool_Wallpapers_for_Desktop.jpg" alt="mikha real estate theme">
-                    <div class="property-price">
-                      <h4>Residential</h4>
-                      <span>₦1,600,000</span>
-                    </div>
-                    <div class="property-status">
-                      <span>For Lease</span>
-                    </div>
-                  </div>
-                  <div class="property-features">
-                    <span><i class="fa fa-home"></i> 5,000 m<sup>2</sup></span>
-                    <span><i class="fa fa-hdd-o"></i> 2 Bed</span>
-                    <span><i class="fa fa-male"></i> 2 Bath</span>
-                  </div>
-                  <div class="property-content">
-                    <h3><a href="#">Luxury Villa</a> <small>Ashford Homes</small></h3>
-                  </div>
-                </div>
-              </div>
-              <!-- break -->
-              <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="property-container">
-                  <div class="property-image">
-                    <img src="http://www.hdpropertygroup.com.au/wp-content/uploads/2017/02/Magazine-15273_2-8-bunya-lane-Fitzgibbon1601350_138EOS5D_661.jpg" alt="mikha real estate theme">
-                    <div class="property-price">
-                      <h4>Residential</h4>
-                      <span>₦10,100,000</span>
-                    </div>
-                    <div class="property-status">
-                      <span>For Lease</span>
-                    </div>
-                  </div>
-                  <div class="property-features">
-                    <span><i class="fa fa-home"></i> 5,000 m<sup>2</sup></span>
-                    <span><i class="fa fa-hdd-o"></i> 2 Bed</span>
-                    <span><i class="fa fa-male"></i> 2 Bath</span>
-                  </div>
-                  <div class="property-content">
-                    <h3><a href="#">The Urban Life</a> <small>Ashford Homes</small></h3>
-                  </div>
-                </div>
-              </div>
-              <!-- break -->
-              <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="property-container">
-                  <div class="property-image">
-                    <img src="http://mallorcapropertyhouse.co.uk/wp-content/uploads/2014/10/Beautiful_Luxury_House_with_Swiming_Pool_Wallpapers_for_Desktop.jpg" alt="mikha real estate theme">
-                    <div class="property-price">
-                      <h4>Residential</h4>
-                      <span>₦9,100,000</span>
-                    </div>
-                    <div class="property-status">
-                      <span>For Sale</span>
-                    </div>
-                  </div>
-                  <div class="property-features">
-                    <span><i class="fa fa-home"></i> 5,000 m<sup>2</sup></span>
-                    <span><i class="fa fa-hdd-o"></i> 2 Bed</span>
-                    <span><i class="fa fa-male"></i> 2 Bath</span>
-                  </div>
-                  <div class="property-content">
-                    <h3><a href="#">Land In Central Park</a> <small>Ashford Homes</small></h3>
-                  </div>
-                </div>
-              </div>
+             
               <!-- break -->
             </div>
             <!-- end:product -->
@@ -856,7 +734,9 @@
              $(document).ready(function() {
 
              	
-             	
+             	width=$(".scheduleaffix").width()
+             	$(".scheduleaffix").css('width',width )
+
              	 $(".owl-carousel").owlCarousel({
              	 	    items:2,
 					    loop:true,
@@ -1071,7 +951,10 @@ $('#modalmap').on('shown.bs.modal', function () {
         		});
 
 
-
+$('.js-fovorite').click(function(){
+  increase_stat('favorites', $(this).attr('property_id'));
+  return false;
+});
 
 
 

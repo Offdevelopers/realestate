@@ -103,7 +103,10 @@ google.maps.event.addDomListener(window, 'load', initialize);
              if (item.types.indexOf("administrative_area_level_1") > -1) {
             info2 += '<div>State: ' + item.long_name + '</div>';
             $('#state').html(item.long_name);
+            city=sessionStorage.city;
+        
             $('#city').html(item.long_name);
+
              replace_feature(item.long_name);
           }
           if (item.types.indexOf("country")> -1){
@@ -157,12 +160,17 @@ function displayLocation(latitude,longitude){
                     city=value[count-3];
           try{
          // var x=document.getElementById("city");
-          var y=document.getElementById("state");
-          y.innerHTML = state;
-          x.innerHTML = state;
+          //var y=document.getElementById("state");
+          //y.innerHTML = state;
+          //x.innerHTML = state;
+          $('#state').text(state);
+          sessionStorage.setItem("state", state);
+          sessionStorage.setItem("country", country);
+          sessionStorage.setItem("city", city);
         }
         catch(err){
-          
+          console.log('bullshit')
+
         }
             replace_feature(state);
           

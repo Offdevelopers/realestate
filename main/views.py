@@ -10,7 +10,7 @@ from django.views import View
 from algoliasearch_django import raw_search
 from django.http import HttpResponse, JsonResponse, Http404
 import pdb
-from .models import Property, Picture, Agent
+from .models import Property, Picture, Agent, Mortage
 from django.db.models import Avg,Count, Q
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
@@ -23,6 +23,12 @@ from django.views.generic import DetailView
 
 class HomeView(TemplateView):
 	template_name='main/index.html'
+
+	def get_context_data(self, *args, **kwargs):
+		context=super(HomeView, self).get_context_data(*args, **kwargs)
+		context['home']=True
+		return context
+
 
 
 class IncreaseStat(View):
@@ -63,7 +69,10 @@ class PropertyDetail(DetailView):
 		context['principal']=(int(house.price)-context['initialdownpayt'])/60
 		context['property_images']=Picture.objects.filter(picture_for=house)
 		context['nearby_similar_homes']=Property.objects.filter(city__icontains=house.city).filter(property_type__icontains=house.property_type)
-		
+		context['nearby_homes']=Property.objects.filter(state__icontains=house.state)[:3]
+		prop=self.get_object()
+		context['savings']=prop.price-prop.developer_price
+		context['nearby']=Property.objects.filter(city__icontains=house.city)
 		property_list=Property.objects.filter(city__icontains=house.city)
 		values=[int(property.price) for property in property_list]
 		context['median']=median(values)
@@ -299,6 +308,19 @@ def median(lst):
 
 
 
-class MortageView(TemplateView):
+class MortageView(View):
 	template_name='main/lenders.html'
+
+	def post(self, request, *args, **kwargs):
+		context=dict()
+		mortage_query=request.POST.get('mortage_query')
+		params = { "hitsPerPage": 50}
+		a=raw_search(Mortage,mortage_query, params)
+		mortage_list=Mortage.objects.filter(id__in=[int(w.get('objectID')) for w in a.get('hits')])
+		if mortage_list.exists():
+			context['mortages']=mortage_list
+		return 	render(request, 'main/lenders.html', context)
+
+
+
 	

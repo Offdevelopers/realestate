@@ -1,0 +1,28 @@
+<ul class="nav navbar-nav navbar-right">
+        {% if user.is_authenticated %}
+       <li><a class="js_logout" href="">Logout</a></li>
+        {% else %}
+         <!--li><a href="#">Sign Up    {% url 'login:logout' %}</a></li-->
+        <li><a data-toggle="modal"  href="#loginmodal">Login</a></li>
+        
+        
+        {% endif %}
+         <li><a href="#">Help</a></li>
+         {% if home %}
+
+          {% else %}
+        <li>
+            <form class="navbar-form" id="form-buscar" action="{% url 'main:search' %}" wtx-context="A96EE01C-B5DB-4F36-9E87-92232CCFF9BE">
+              <div class="form-group" style="display:inline;">
+                <div class="input-group">
+                  <input type="text" name="address" class="form-control" placeholder="Search" id="base_search" aria-describedby="basic-addon2" style="width:300px;">
+                  <span class="input-group-addon" id="basic-addon2"><span class="glyphicon glyphicon-search"></span></span>
+                </div>
+              </div>
+            </form>
+          </li>
+          {% endif %}
+          
+          
+          <li style="margin-left: 50px;"><a href="#" data-toggle="modal" data-target="#search" ><i class="fa fa-map-marker fa-2x locator" aria-hidden="true"></i></a></li>
+</ul>

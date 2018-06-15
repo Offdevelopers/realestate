@@ -1,7 +1,9 @@
 {% extends 'main/base.html' %}
 
 {% block inlinestyle %}
+ {% load humanize %}
 	<style>
+
 
     div.affix {
         top: 80px;
@@ -80,20 +82,22 @@
         <select class="js-price-filter form-control" name='min-price' >
           <option value='' selected="selected">No Min</option>
           <option value="100000">₦100K</option>
-          <option value="200000">₦200K</option>
-          <option value="300000">₦300K</option>
-          <option value="400000">₦400K</option>
-          <option vale="500000">₦500K</option>
+          <option value="1000000">₦1M</option>
+          <option value="10000000">₦10M</option>
+          <option value="100000000">₦100M</option>
+          <option vale="1000000000">₦1B</option>
+          <option vale="10000000000">₦10B</option>
         </select>
         <span class="hidden-xs">to</span>
 
         <select class="js-price-filter form-control" name='max-price' >
           <option value='' selected="selected">No Max</option>
           <option value="100000">₦100K</option>
-          <option value="200000">₦200K</option>
-          <option value="300000">₦300K</option>
-          <option value="400000">₦400K</option>
-          <option vale="500000">₦500K</option>
+          <option value="1000000">₦1M</option>
+          <option value="10000000">₦10M</option>
+          <option value="100000000">₦100M</option>
+          <option vale="1000000000">₦1B</option>
+          <option vale="10000000000">₦10B</option>
         </select>
 
       </form>
@@ -448,7 +452,7 @@
         <div class="col-md-6"><p>Total Properties for Sale: </p></div> <div class="col-md-6"><strong>{{no_of_properties_for_sales}}</strong></div>
       </div>
       <div class="row">
-        <div class="col-md-6"><p>Median Property Value Estimate: </p></div> <div class="col-md-6"><strong>₦{{median}}</strong></div>
+        <div class="col-md-6"><p>Median Property Value Estimate: </p></div> <div class="col-md-6"><strong>₦{{median|intcomma}}</strong></div>
       </div>
       <div class="row">
         <!--div class="col-md-6"><p>Property Value Forecast: </p></div> <div class="col-md-6"><strong>0.1%</strong></div-->
@@ -458,7 +462,7 @@
       <h4>Average Home Value By City in {{state}}</h4>
        {% for value in state_average %} 
       <div class="row">
-        <div class="col-md-6"><p>{{value.city}} </p></div> <div class="col-md-6"><strong>₦{{value.price__avg|floatformat:"0"}}</strong></div>
+        <div class="col-md-6"><p>{{value.city}} </p></div> <div class="col-md-6"><strong>₦{{value.price__avg|floatformat:"0"|intcomma}}</strong></div>
       </div>
       {% endfor %}
 
@@ -468,7 +472,7 @@
       <h4>Average Home Value By State in {{country}}</h4>
       {% for value in country_average %} 
       <div class="row">
-        <div class="col-md-6"><p>{{value.state}} </p></div> <div class="col-md-6"><strong>₦{{value.price__avg|floatformat:"0"}}</strong></div>
+        <div class="col-md-6"><p>{{value.state}} </p></div> <div class="col-md-6"><strong>₦{{value.price__avg|floatformat:"0"|intcomma}}</strong></div>
       </div>
       {% endfor %}
 
@@ -517,7 +521,7 @@
                <span class="cListed">Listed Around:</span>
               </div>
               <div class="col-xs-12 priceBlock">
-              <span class="cpropertyPrice">₦{{one_bedroom_avergae_price.price__avg|default:'0'}}</span>
+              <span class="cpropertyPrice">₦{{one_bedroom_avergae_price.price__avg|default:'0'|intcomma}}</span>
               <button class="btn btn-default btn-block">See {{one_bedroom_count|default:'0'}} Homes</button>
               </div>
             </div>
@@ -531,7 +535,7 @@
                  <span class="cListed">Listed Around:</span>
                 </div>
                 <div class="col-xs-12 priceBlock">
-                <span class="cpropertyPrice">₦{{two_bedroom_avergae_price.price__avg|default:'0'}}</span>
+                <span class="cpropertyPrice">₦{{two_bedroom_avergae_price.price__avg|default:'0'|intcomma}}</span>
                 <button class="btn btn-default btn-block">See {{two_bedroom_count|default:'0'}} Homes</button>
                 </div>
           </div>
@@ -544,7 +548,7 @@
              <span class="cListed">Listed Around:</span>
             </div>
             <div class="col-xs-12 priceBlock">
-            <span class="cpropertyPrice">₦{{three_bedroom_avergae_price.price__avg|default:'0'}}</span>
+            <span class="cpropertyPrice">₦{{three_bedroom_avergae_price.price__avg|default:'0'|intcomma}}</span>
             <button class="btn btn-default btn-block">See {{three_bedroom_count|default:'0'}} Homes</button>
             </div>
           </div>
@@ -566,7 +570,7 @@
             <tbody>
               <tr>
                 <td class="noborderTop">Median List Price</td>
-                <td class="text-right noborderTop"><strong>₦{{median}}</strong></td>
+                <td class="text-right noborderTop"><strong>₦{{median|intcomma}}</strong></td>
               </tr>
               <!--tr>
                 <td>Median List ₦/Sq Ft</td>
@@ -659,15 +663,15 @@
               </div>
             </div>
             
-            <div class="col-sm-6" style="padding-left: 40px;">
-               <h3>Our Developer</h3>
+            <div class="col-sm-6" style="padding-left: 40px;font-family: 'Montserrat', sans-serif;">
+               <h3>Developers Network </h3>
               <div class=" developer" style="background-image: url(https://ssl.cdn-redfin.com/vLATEST/corvstatic/customer-pages/e2e050825592a2b5b786391fe6cae159.jpg);position: relative;padding: 20px;padding-bottom: 80px; background-position: 50%; background-repeat: none; background-size: cover;">
                 
                 <!-- position: relative; top: 60px; left: 30px; -->
                  <div class="row"> 
         
-                <div class="col-sm-8">
-                  <h2 style="text-align: left;">AvetiZ Real Estate Agents in {{city}}</h2>
+                <div class="col-sm-12">
+                  <h2 style="text-align: center;">AvetiZ Partners <br> <span style="font-size:15px;">in</span> <br> {{city}}</h2>
                   </div>
                 </div>
 
@@ -715,10 +719,10 @@
                   
                  
                 <div class="row">
-                  <div class="col-sm-8">
-                    <a href="{% url 'main:agent_list' %}?city={{city}}&state={{state}}&country={{country}}" class="btn btn-default btn-lg">Find an AvetiZ Real Estate Agent</a>
+                  <div class="col-sm-12">
+                    <a href="{% url 'main:agent_list' %}?city={{city}}&state={{state}}&country={{country}}" class="btn btn-default btn-lg">Find an AvetiZ Real Estate Partner</a>
                   </div>
-                  <div class="col-sm-8">
+                  <div class="col-sm-12">
                     <p class="agentsnum">{{no_of_agent}} active AvetiZ agents in {{city}}.</p>
                   </div>
                
@@ -857,7 +861,7 @@
             if (status == google.maps.places.PlacesServiceStatus.OK) {
               $.each(place.photos, function(i, photo){
                 url=photo.getUrl({'maxWidth': 600, 'maxHeight': 600})
-                string_slide="<div class='swiper-slide'><img style='height:400px; width:100% ' class='img-responsive' src='"+url+"'><div class='overlay'><div class='text'><h3>Aso Rock </h3><br><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu</p></div></div></div>";
+                string_slide="<div class='swiper-slide'><img style='height:400px; width:100% ' class='img-responsive' src='"+url+"'></div>";
                  
                  $('.swiper-wrapper').append(string_slide);
               })

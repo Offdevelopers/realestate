@@ -219,13 +219,14 @@
         <p>Finance tools and information</p>
         <h2>Mortgage Lenders</h2>
         <p>Get current mortgage rates, connect with lenders in your area, and stay informed.</p>
-        <form action=/lenders/ id="lenderform">
+        <form action=/lenders/ id="lenderform" method="post">
+          {% csrf_token %}
         <div class="input-group">
-          <input type="text" class="form-control" id="lender" placeholder="City or Zip Code" aria-describedby="basic-addon2">
+          <input type="text" class="form-control" name="mortage_query" id="lender" placeholder="City or Zip Code" aria-describedby="basic-addon2">
           
-          <span class="input-group-btn ">
+          <span class="input-group-btn">
            <button class="btn btn-lg lenderBtn" type="submit">Find a Lender</button>
-              </span>
+         </span>
         </div>
       </form>
         </div>

@@ -66,7 +66,29 @@ class Property(models.Model):
 	tours=models.IntegerField(default=0)
 	avetiz_agent=models.CharField(max_length=200, default='Faith')
 	feature=models.BooleanField(default=False)
-	
+	no_of_kitchen=models.IntegerField(default=1)
+	eat_in_kitchen=models.BooleanField(default=False)
+	no_of_stove=models.IntegerField(default=1)
+	no_of_fireplace=models.IntegerField(default=1)
+	type_of_floor=models.CharField(default='Wood Floors', max_length=200)
+	no_of_rooms=models.IntegerField(default=2)
+	no_of_family_rooms=models.IntegerField(default=0, max_length=200)
+	no_of_refrigerator=models.IntegerField(default=1, max_length=200)
+	no_of_dishwater=models.IntegerField(default=0)
+	no_of_washer=models.IntegerField(default=2)
+	no_of_dryer=models.IntegerField(default=1)
+	no_of_heating_zone=models.IntegerField(default=0)
+	no_of_garage_space=models.IntegerField(default=2)
+	garage_type=models.CharField(default='N/A', max_length=200)
+	has_sewer=models.BooleanField(default=False)
+	fuel=models.CharField(default='Gas', max_length=200)
+	water_source=models.CharField(default='Public Water', max_length=200)
+	construction_type=models.CharField(default='Cement', max_length=200)
+	building_type=models.CharField(default='Detached', max_length=200)
+	apperance=models.CharField(default='Good', max_length=200)
+	deck=models.CharField(default='Y', max_length=200)
+
+
 	def __str__(self):
 		return self.name
 
@@ -82,6 +104,20 @@ class Picture(models.Model):
 	picture_for=models.ForeignKey(Property)
 	picture=models.ImageField(upload_to='media')
 	description=models.TextField()
+
+
+class Mortage(models.Model):
+	name=models.CharField(max_length=200)
+	street_address=models.TextField()
+	city=models.CharField(max_length=200)
+	state=models.CharField(max_length=200)
+	description=models.TextField()
+	phone=models.CharField(max_length=200)
+	website=models.URLField()
+	logo=models.ImageField(null=True)
+
+	def __str__(self):
+		return self.name
 
 
 

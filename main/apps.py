@@ -12,4 +12,7 @@ class MainConfig(AppConfig):
 
     def ready(self):
         Property = self.get_model('Property')
+        Mortage=self.get_model('Mortage')
         algoliasearch.register(Property)
+        algoliasearch.register(Mortage)
+        

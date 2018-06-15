@@ -26,10 +26,11 @@
  
    <link rel="stylesheet" type="text/css" href="http://test.sagecapitals.com/css/property.css">
    <link rel="stylesheet" href="http://test.sagecapitals.com/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="http://test.sagecapitals.com/css/owl.theme.default.min.css">
-     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-      <link rel="stylesheet" type="text/css" href="http://test.sagecapitals.com/css/lightslider.css">
-
+  <link rel="stylesheet" href="http://test.sagecapitals.com/css/owl.theme.default.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="http://test.sagecapitals.com/css/lightslider.css">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <meta name="google-signin-client_id" content="618038693955-g1h7eesekhfh2fqn3v0c64q4g8saiij3.apps.googleusercontent.com">
   {% block styles %}{% endblock %}
   <link href="{% static '/css/mine.css' %}" rel="stylesheet">
   <script type="text/javascript" src="{% static '/js/money.js' %}"></script>
@@ -54,24 +55,10 @@
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
     
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Sign Up</a></li>
-         <li><a href="#">Help</a></li>
-        <li>
-            <form class="navbar-form" id="form-buscar" action="{% url 'main:search' %}" wtx-context="A96EE01C-B5DB-4F36-9E87-92232CCFF9BE">
-              <div class="form-group" style="display:inline;">
-                <div class="input-group">
-                  <input type="text" name="address" class="form-control" placeholder="Search" id="base_search" aria-describedby="basic-addon2" style="width:300px;">
-                  <span class="input-group-addon" id="basic-addon2"><span class="glyphicon glyphicon-search"></span></span>
-                </div>
-              </div>
-            </form>
-          </li>
-          <li style="margin-left: 50px;"><a href="#" data-toggle="modal" data-target="#search" ><i class="fa fa-map-marker fa-2x locator" aria-hidden="true"></i></a></li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
+      {% include 'main/includes/nav.html' %}
+          </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 
@@ -82,6 +69,47 @@
 <!-- Footer Section built by a backender -->
 <div class="divider-5"></div>
 <hr>
+
+<div class="modal" id="loginmodal">
+  <div class="modal-dialog" style="width:350px; margin: 20% auto;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Sign In</h4>
+      </div>
+      <div class="modal-body">
+        
+        <div class="row">
+          <div class="col-md-12">
+            <button class="btn-primary form-control" onclick="fblogin()" style="background-color: #3b5998; border-color: #3b5998">Continue With Facebook</button>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-12">
+            <!--button class="btn btn-primary form-control" onclick="glogin()" style="background-color: #4285f4; border-color: #4285f4">Continue With Google</button-->
+            <div class="g-signin2" data-width="320" data-onsuccess="onSignIn"  data-longtitle="true">
+          </div>
+          <br>
+        </div>
+      </div>
+        
+        <!--div class="row">
+          <div class="col-md-12">
+            <button class="btn btn-primary form-control" style="background-color: #f5f5f5; border-color: #f5f5f5; color: #000;">Continue With Email</button>
+          </div>
+        </div-->
+        <!--div class="row">
+          <br>
+          <div class="col-md-12 text-center">
+           <h4> <a href="#" style="text-decoration: none;">Join Avetiz</a></h4>
+          </div>
+        </div-->
+      </div>
+    </div>
+
+  </div>
+</div>
+
 
 <div class="container"> 
 <div class="footer">
@@ -165,7 +193,7 @@
             <li class="list-group-item">About</li>
             <li class="list-group-item">Help</li>
             <li class="list-group-item">Investors</li>
-            <li class="list-group-item">Partners</li>
+            <li class="list-group-item"><a class="js-partner" href="{% url 'main:agent_list' %}">Partners</a></li>
             <li class="list-group-item">Cities</li>
             <li class="list-group-item">Policies</li>
             <li class="list-group-item">Countries</li>
@@ -285,9 +313,160 @@
 <script type="text/javascript" src="{% static 'js/realestate.js' %}"></script>
 <script>
 
-      
+      $('.js-partner').click(function(e){
+        e.preventDefault();
+        city=sessionStorage.city;
+        state=sessionStorage.state;
+        country=sessionStorage.country;
+        url=$(this).attr('href');
+        window.location=url+'?city='+city+'&state='+state+'&country='+country;
+        return false;
+      })
       
 </script>
+
+
+<script>
+  // This is called with the results from from FB.getLoginStatus().
+  function statusChangeCallback(response) {
+    //console.log('statusChangeCallback');
+    //console.log(response);
+    // The response object is returned with a status field that lets the
+    // app know the current login status of the person.
+    // Full docs on the response object can be found in the documentation
+    // for FB.getLoginStatus().
+
+    if (response.status === 'connected') {
+      // Logged into your app and Facebook.
+      //loginApp();
+    } else {
+      // The person is not logged into your app or we are unable to tell.
+      //document.getElementById('status').innerHTML = 'Please log ' +
+        //'into this app.';
+    }
+  }
+
+  // This function is called when someone finishes with the Login
+  // Button.  See the onlogin handler attached to it in the sample
+  // code below.
+  function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  }
+ 
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '127616518099874',
+      cookie     : true,  // enable cookies to allow the server to access 
+                          // the session
+      xfbml      : true,  // parse social plugins on this page
+      version    : 'v2.8' // use graph api version 2.8
+    });
+
+    // Now that we've initialized the JavaScript SDK, we call 
+    // FB.getLoginStatus().  This function gets the state of the
+    // person visiting this page and can return one of three states to
+    // the callback you provide.  They can be:
+    //
+    // 1. Logged into your app ('connected')
+    // 2. Logged into Facebook, but not your app ('not_authorized')
+    // 3. Not logged into Facebook and can't tell if they are logged into
+    //    your app or not.
+    //
+    // These three cases are handled in the callback function.
+
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+
+  };
+
+   function fblogin(){
+    
+
+  FB.login(function(response) {
+  if (response.status === 'connected') {
+     loginApp();
+  } else {
+    alert('Invalid login');
+  }
+}, {scope: 'public_profile,email'});
+
+}
+
+  // Load the SDK asynchronously
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+  // Here we run a very simple test of the Graph API after login is
+  // successful.  See statusChangeCallback() for when this call is made.
+  function loginApp() {
+    console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me', function(response) {
+      //console.log(response)
+      if (response.email){
+
+      
+        loginToApp(response.email, response.name,response.id, 'facebook')
+
+
+     }
+     else{
+       console.log(response)
+      loginToApp('abiodun.toluwanii@gmail.com', response.name, response.id, 'facebook')
+      //alert('Email not found. Please register with another account')
+     }
+      console.log('Successful login for: ' + response.name);
+    });
+      ////document.getElementById('status').innerHTML =
+       //'Thanks for logging in, ' + response.name + '!';
+  }
+
+  function loginToApp(email, name, id, method){
+    $.get('/account/login/' , {'email':email, 'name':name, 'id':id , 'method':method}).done(function(data){
+
+      //location.reload()
+      $('#bs-example-navbar-collapse-1').html(data.data);
+      $('#loginmodal').modal('hide');
+
+
+      })
+  }
+
+
+
+function onSignIn(googleUser) {
+  var profile = googleUser.getBasicProfile();
+  loginToApp(profile.getEmail(), profile.getName(), profile.getId(), 'google' )
+  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+  console.log('Name: ' + profile.getName());
+  //console.log('Image URL: ' + profile.getImageUrl());
+  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+}
+
+$('.js_logout').click(function(e){
+  e.preventDefault();
+  console.log('fuck sit')
+  signOut()
+  window.location="{% url 'login:logout' %}"
+})
+
+function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+  }
+ 
+
+</script>
+
 
 {% block scripts %}{% endblock %}
 
